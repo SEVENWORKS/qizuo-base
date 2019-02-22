@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!-- ************************springmvc配置************************ -->
+    <import resource="classpath:config/springmvc/springmvc.xml" />
+
+    <!-- ************************扫描需要注入到容器中的类(mvc模块)************************ -->
+    <!--<context:component-scan base-package="org.qizuo.cm.modules"/>-->
+    <!-- 扫描数据接口的@Controller注解 -->
+    <!-- spring配置中的use-default-filters用来指示是否自动扫描带有@Component、@Repository、@Service和@Controller的类。默认为true，即默认扫描。 -->
+    <context:component-scan base-package="org.qizuo.cm.modules" use-default-filters="false">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <!-- 跳转controller扫描 -->
+    <context:component-scan base-package="org.qizuo.cm.jump"/>
+    <!-- 异常扫描 -->
+    <context:component-scan base-package="org.qizuo.cm.interceptor.exception"/>
+
+
+    <!-- ************************视图解析器，只有mvc拦截进入的请求，在返回相应视图的时候，都会在原来视图资源String上加上一下配置信息：前缀+String+后缀************************ -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>
+
+    <!-- 静态资源映射 -->
+    <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler />
+
+    <!-- 静态资源映射(因为springmvc将所有请求访问资源都拦截了，静态资源会无法进行进行请求的，这个配置就是让核心分发器不会拦截这个路径下面的所有请求) -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <!-- 自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean -->
+    <!-- 如果配置静态资源映射就必须加上这样一句，要不然controller中是映射是无法访问的 -->
+    <!-- 自己理解：原来是有一个默认的视图解析器的，但是加上静态资源解析器后，默认的解析器就不存在了，这时候要对controller访问进行解析就必须加上这样一句。
+         这一句的功能如第一句话所说的那样的。 -->
+    <mvc:annotation-driven />
+
+    <!-- ************************自定义拦截器：作用于三个方面(controller方法前,方法后,视图渲染后)************************ -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 匹配的访问路径 -->
+            <!-- 替代web.xml中默认跳转 -->
+            <mvc:mapping path="/"/>
+            <!-- 用户未登录拦截 -->
+            <mvc:mapping path="/jump/**"/>
+            <!-- 重复登录拦截 -->
+            <mvc:mapping path="/**/loginCheck"/>
+            <!-- 静态资源拦截 -->
+            <!--<mvc:exclude-mapping path="/static/**"/>-->
+            <!-- 拦截器所在的项目位置 -->
+            <bean class="org.qizuo.cm.interceptor.springmvc.SpringmvcInterceptor">
+                <!-- 排除不拦截的url,注入参数 -->
+                <property name="exceptUrls">
+                    <list>
+                        <value>/base/login</value>
+                        <value>/login/loginCheck</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- ************************内容协商管理器************************  -->
+    <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
+    <!--<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        &lt;!&ndash; 扩展名至mimeType的映射,即 /user.json => application/json &ndash;&gt;
+        <property name="favorPathExtension" value="true"/>
+        &lt;!&ndash; 用于开启 /userinfo/123?format=json 的支持 &ndash;&gt;
+        <property name="favorParameter" value="true"/>
+        <property name="parameterName" value="format"/>
+        &lt;!&ndash; 是否忽略Accept Header &ndash;&gt;
+        <property name="ignoreAcceptHeader" value="false"/>
+
+        <property name="mediaTypes"> &lt;!&ndash;扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  &ndash;&gt;
+            <value>
+                json=application/json
+                xml=application/xml
+                html=text/html
+            </value>
+        </property>
+        &lt;!&ndash; 默认的content type &ndash;&gt;
+        <property name="defaultContentType" value="text/html"/>
+    </bean>-->
+</beans>

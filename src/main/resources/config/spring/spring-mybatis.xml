@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!-- ************************扫描除了controller的其它dao层和service(mybatis模块专用)************************ -->
+    <!-- 注意这个地方要去掉use-default-filters="false" -->
+    <context:component-scan base-package="org.qizuo.cm.modules">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- ************************配置数据源 ，使用的alibba的druid数据库************************-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="driverClassName" value="${mysql_driverClassName}"/>
+        <property name="url" value="${mysql_url}"/>
+        <property name="username" value="${mysql_name}"/>
+        <property name="password" value="${mysql_password}"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="10"/>
+        <property name="minIdle" value="10"/>
+        <property name="maxActive" value="50"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。-->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="wall,stat" />
+
+        <!-- 拦截器 -->
+        <property name="proxyFilters">
+            <list>
+                <ref bean="druidFilter" />
+            </list>
+        </property>
+    </bean>
+    <!-- druidfilters拦截器 -->
+    <bean id="druidFilter" class="org.qizuo.cm.interceptor.druid.Druid"></bean>
+
+    <!-- ************************spring和MyBatis完美整合，不需要mybatis的配置映射文件************************ -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- **基本配置文件 -->
+        <property name="configLocation" value="classpath:config/mybatis/mybatis.xml"></property>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mybatisxml/*/*.xml"></property>
+        <!-- mybatis拦截器配置(或者在mybatis.xml中配置plugins) -->
+        <!--<property name="plugins">
+            <array>
+                <bean class="com.example.mybatis.plugins.XXXPlugin">                                                                                                          <property name="properties">                                                                                                                                          <value>  property-key=property-value </value>
+                </bean>
+            </array>
+        </property>-->
+    </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 ,自动扫描了所有的XxxxMapper.xml对应的mapper接口文件,只要Mapper接口类和Mapper映射文件对应起来就可以了-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.qizuo.cm.modules" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- ************************(事务管理)************************ -->
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!-- 配置事务的传播特性(注解性事物配置完后，这个事物配置就无须配置) -->
+    <!--<tx:advice id ="txAdvice" transaction-manager="transactionManager">
+        &lt;!&ndash;<tx:attributes >&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="find*" read-only="true" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="list*" read-only="true" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="page*" read-only="true" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="get*" read-only="true" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="query*" read-only="true" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="save*" propagation="REQUIRED" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="insert*" propagation="REQUIRED" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="add*" propagation="REQUIRED" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="update*" propagation="REQUIRED" />&ndash;&gt;
+        &lt;!&ndash;<tx:method name ="delete*" propagation="REQUIRED" />&ndash;&gt;
+        &lt;!&ndash;</tx:attributes >&ndash;&gt;
+    </tx:advice >
+    &lt;!&ndash; 配置AOP &ndash;&gt;
+    <aop:config >
+        &lt;!&ndash; 切点 多包配置 execution(* com.raising.*.service..*.*(..)) or execution(* com.company.*.service..*.*(..)) &ndash;&gt;
+        <aop:pointcut id= "pointcut" expression ="execution(* org.qizuo.cm.modules.*.service..*.*(..))" />
+        <aop:advisor advice-ref ="txAdvice" pointcut-ref="pointcut" />
+        &lt;!&ndash; 关键配置，切换数据源一定要比持久层代码更先执行（事务也算持久层代码）暂时用不着 &ndash;&gt;
+        &lt;!&ndash;<aop:advisor advice-ref="dataSourceExchange" pointcut-ref="pointcut" order="1"/>&ndash;&gt;
+    </aop:config >-->
+
+</beans>

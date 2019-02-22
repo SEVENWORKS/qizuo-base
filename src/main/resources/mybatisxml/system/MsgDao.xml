@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.qizuo.cm.modules.system.dao.MsgDao">
+    <!-- 修改org.qizuo.cm.modules.system.dao.UserDao和sys_msg和org.qizuo.cm.modules.system.pojo.MsgPoJo -->
+    <!-- 专属字段 -->
+    <sql id="exclusiveColumns">
+        <include refid="CommonColumns.commonColumns"/>,
+        a.TITLE as "title",
+        a.CONTENT as "content",
+        a.TYPE as "type",
+        a.JUMP_URL as "jumpUrl",
+        a.SEND_TYPE_ID as "sendTypeId",
+        a.SEND_USER_ID as "sendUserId",
+        a.IS_READ as "isRead"
+    </sql>
+    <!-- 插入 -->
+    <insert id="insert">
+        insert into sys_msg
+            (
+                BASE_ID,
+                BASE_CREATE_USER_ID,
+                BASE_CREATE_TM,
+                BASE_STATUS,
+                BASE_REMARKS,
+                BASE_CREATE_IP,
+                TITLE,
+                CONTENT,
+                TYPE,
+                JUMP_URL,
+                SEND_TYPE_ID,
+                SEND_USER_ID
+            )
+        values
+            (
+                #{baseId},
+                #{baseCreateUserId},
+                now(),
+                #{baseStatus},
+                #{baseRemarks},
+                #{baseCreateIp},
+                #{title},
+                #{content},
+                #{type},
+                #{jumpUrl},
+                #{sendTypeId},
+                #{sendUserId}
+            )
+    </insert>
+    <!-- 修改 -->
+    <update id="update">
+        update sys_msg set
+            BASE_UPDATE_USER_ID=#{baseUpdateUserId},
+            BASE_UPDATE_TM=now(),
+            BASE_REMARKS=#{baseRemarks},
+            BASE_UPDATE_IP=#{baseUpdateIp},
+            TITLE=#{title},
+            CONTENT=#{content},
+            TYPE=#{type},
+            JUMP_URL=#{jumpUrl},
+            SEND_TYPE_ID=#{sendTypeId},
+            SEND_USER_ID=#{sendUserId}
+        where BASE_ID=#{baseId}
+    </update>
+    <!-- 删除 -->
+    <delete id="delete">
+        delete from sys_msg where BASE_ID=#{baseId}
+    </delete>
+    <!-- 查找单个 -->
+    <select id="query" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
+        select
+            <include refid="exclusiveColumns"/>
+        from sys_msg a
+        <where>
+            a.BASE_ID=#{baseId}
+            and a.BASE_STATUS=0
+        </where>
+        limit 1
+    </select>
+    <!-- 查找列表 -->
+    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
+        select
+            <include refid="exclusiveColumns"/>
+        from sys_msg a
+        <where>
+            and a.BASE_STATUS=0
+            <if test="sendUserId != null and sendUserId != ''">
+                and a.SEND_USER_ID=#{sendUserId} and (a.SEND_TYPE_ID is null or a.SEND_TYPE_ID = '')
+            </if>
+        </where>
+        order by a.IS_READ
+    </select>
+    <!-- 查找分页 -->
+    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
+        select
+            <include refid="exclusiveColumns"/>
+        from sys_msg a
+        <where>
+            and a.BASE_STATUS=0
+            <if test="entity != null">
+
+            </if>
+        </where>
+    </select>
+    <!-- ********************************************************************************************************************** -->
+    <!-- 更新状态 -->
+    <update id="uStatus">
+        update sys_msg set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
+    </update>
+    <!-- 更新已读 -->
+    <update id="uRead">
+        update sys_msg set IS_READ=#{isRead} where BASE_ID=#{baseId}
+    </update>
+    <!-- 批量插入 -->
+    <insert id="ibatch">
+        insert into sys_msg
+            (
+                BASE_ID,
+                BASE_CREATE_USER_ID,
+                BASE_CREATE_TM,
+                BASE_STATUS,
+                BASE_REMARKS,
+                BASE_CREATE_IP,
+                TITLE,
+                CONTENT,
+                TYPE,
+                JUMP_URL,
+                SEND_TYPE_ID,
+                SEND_USER_ID
+            )
+        values
+        <foreach collection="msgPoJos" item="item" separator=",">
+            (
+            #{item.baseId},
+            #{baseCreateUserId},
+            now(),
+            #{baseStatus},
+            #{baseRemarks},
+            #{baseCreateIp},
+            #{item.title},
+            #{item.content},
+            #{item.type},
+            #{item.jumpUrl},
+            #{item.sendTypeId},
+            #{item.sendUserId}
+            )
+        </foreach>
+    </insert>
+</mapper>

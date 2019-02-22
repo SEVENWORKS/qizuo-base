@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+  <display-name>qizuo</display-name>
+
+  <!-- 启动首页 -->
+  <!--<welcome-file-list>
+    <welcome-file>jump</welcome-file>
+  </welcome-file-list>-->
+
+  <!-- 日志文件 -->
+  <!--<context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:config/log/log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>-->
+  <context-param>
+    <param-name>logbackConfigLocation</param-name>
+    <param-value>classpath:config/log/logback.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+  </listener>
+
+
+  <!-- jsp设置 -->
+  <!--
+    1.<description>：设定的说明
+    2.<display-name>：设定名称
+    3.<url-pattern>：设定值所影响的范围，如： /CH2 或 /*.jsp
+    4.<el-ignored>：若为 true，表示不支持 EL 语法
+    5.<scripting-invalid>：若为 true，表示不支持 <% scripting %>语法
+    6.<page-encoding>：设定 JSP 网页的编码
+    7.<include-prelude>：设置 JSP 网页的抬头，扩展名为 .jspf
+    8.<include-coda>：设置 JSP 网页的结尾，扩展名为 .jspf
+  -->
+  <jsp-config>
+    <!--<taglib>
+      <taglib-uri>Taglib</taglib-uri>
+      <taglib-location>/WEB-INF/tlds/MyTaglib.tld</taglib-location>
+    </taglib>-->
+    <jsp-property-group>
+      <description>Special property group for JSP Configuration JSP example.</description>
+      <display-name>JSPConfiguration</display-name>
+      <url-pattern>*.jsp</url-pattern>
+      <!--<el-ignored>true</el-ignored>-->
+      <page-encoding>UTF-8</page-encoding>
+      <!--<scripting-invalid>true</scripting-invalid>
+      <include-prelude>/include/prelude.jspf</include-prelude>
+      <include-coda>/include/coda.jspf</include-coda>-->
+    </jsp-property-group>
+  </jsp-config>
+</web-app>
+        
