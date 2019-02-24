@@ -39,11 +39,16 @@ public class Start implements WebApplicationInitializer {
 
         //spring启动项
         servletContext.setInitParameter("contextConfigLocation","classpath:config/spring/applicationContext.xml");
-        ContextLoaderListener contextLoaderListener=new ContextLoaderListener();
-        contextLoaderListener.initWebApplicationContext(servletContext);
+
+        //日志打印
+        servletContext.setInitParameter("logbackConfigLocation","classpath:config/log/logback.xml");
 
         //单个用户登录监听
         servletContext.addListener(SessionListener.class);
+
+        //listener加载
+        ContextLoaderListener logbackConfigLocation=new ContextLoaderListener();
+        logbackConfigLocation.initWebApplicationContext(servletContext);
 
         //url重写
         /*UrlRewriteFilter urlRewriteFilter=new UrlRewriteFilter();
