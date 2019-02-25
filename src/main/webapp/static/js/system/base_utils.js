@@ -1,7 +1,7 @@
 /** 弹出窗(重写，基于layer) */
 window.alert=function(msg,func){
 	//弹
-	layer.msg(msg,func);
+	layer.msg(msg,{time:1*1000},func);
 }
 
 /** 模态框(基于layer,只针对于普通和frame) */
