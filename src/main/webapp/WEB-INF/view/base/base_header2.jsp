@@ -2,7 +2,7 @@
 <div id="messages" class="tile drawer animated">
     <div class="listview narrow">
         <div class="media">
-            <a href="#" onclick="pjaxFunc('${pageContext.request.contextPath}/jump/system/sys/msgDo',global$frameContainer);">Send a New Message</a>
+            <a href="#" onclick="pjaxFunc('${pageContext.request.contextPath}/jump/system/sys/msgDo');">Send a New Message</a>
             <span class="drawer-close">&times;</span>
             
         </div>

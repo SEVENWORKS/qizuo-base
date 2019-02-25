@@ -42,7 +42,7 @@
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
 	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/menuDo?baseId={{$value.baseId}}\')','删除',
-			'deleteDataReload({baseId:{{$value.baseId}}},\'${modulePath}system/menu/delete\',\'${jumpPath}system/sys/menu\')');">
+			'deleteDataReload({baseId:{{$value.baseId}}},\'${modulePath}system/menu/delete\')');">
 		<td>{{$index+1}}</td>
 		<td>{{$value.name}}</td>
 		<td>{{$value.url}}</td>
@@ -62,7 +62,7 @@
         //新增按钮(这个函数第二个参数可以传入复杂函数)
         buttonOne('新增',function(){
             if(curLevel==0){
-                pjaxFunc('${jumpPath}system/sys/menuDo?parentId='+baseId,global$frameContainer);
+                pjaxFunc('${jumpPath}system/sys/menuDo?parentId='+baseId);
 			}else{
                 alert('暂时菜单只允许存在二级');
             }

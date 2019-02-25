@@ -62,7 +62,7 @@
             iuFunc();
         },'45%');
         buttonOne('返回',function(){
-            pjaxFunc('${jumpPath}system/sys/user',global$frameContainer);
+            pjaxFunc('${jumpPath}system/sys/user');
         },'55%');
         /** ************************************************************ */
         qData();
@@ -87,7 +87,8 @@
             if(formValid()){
                 $.post('${modulePath}system/user/iuDo',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(data){
-                        pjaxFunc('${jumpPath}system/sys/user',global$frameContainer);
+                        //刷新
+                        f5();
                     })
                 })
             }

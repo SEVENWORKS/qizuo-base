@@ -53,7 +53,7 @@
         /** ************************************************************ */
         //新增按钮(这个函数第二个参数可以传入复杂函数)
         buttonOne('新增',function(){
-            pjaxFunc('${jumpPath}system/sys/roleDo',global$frameContainer);
+            pjaxFunc('${jumpPath}system/sys/roleDo');
         });
         /** ************************************************************ */
         //分页(传入获取分页数据的方法,可传分页size和分页no)

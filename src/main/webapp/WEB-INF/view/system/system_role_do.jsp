@@ -53,7 +53,7 @@
             iuFunc();
         },'45%');
         buttonOne('返回',function(){
-            pjaxFunc('${jumpPath}system/sys/role',global$frameContainer);
+            pjaxFunc('${jumpPath}system/sys/role');
         },'55%');
         /** ************************************************************ */
         qData();
@@ -115,7 +115,8 @@
 			    //保存
 				$.post('${modulePath}system/role/iuDo',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(){
-                        pjaxFunc('${jumpPath}system/sys/role',global$frameContainer);
+                        //刷新
+                        f5();
                     })
 				})
             }

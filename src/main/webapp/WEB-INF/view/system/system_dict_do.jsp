@@ -75,7 +75,7 @@
             iuFunc();
         },'45%');
         buttonOne('返回',function(){
-            pjaxFunc('${jumpPath}system/sys/dict',global$frameContainer);
+            pjaxFunc('${jumpPath}system/sys/dict');
         },'55%');
         /** ************************************************************ */
         qData();
@@ -103,7 +103,8 @@
                 //保存
                 $.post('${modulePath}system/dict/iuDo',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(data){
-                        pjaxFunc('${jumpPath}system/sys/dict',global$frameContainer);
+                        //刷新
+                        f5();
                     })
                 })
             }

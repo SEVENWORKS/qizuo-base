@@ -21,6 +21,8 @@ var global$urlPostType=1;
 var global$openWindow='windowOpen/';
 /** 标识全局容器(对立于iframe) */
 var global$frameContainer='#baseFrame';
+/** 标识当前跳转主题页路径 */
+var global$frameUrl='';
 /** 用户菜单配置 */
 var userMenus=[
     {

@@ -168,6 +168,9 @@
                 baseHeader2_pageTitle(title,level,title2);
                 //跳转
                 if(isNotBlank(url)){
+                    //菜单url存储
+                    global$frameUrl=url;
+                    //跳转判断
                     if(-1!=url.indexOf(global$openWindow)){
                         url=url.split(global$openWindow).join("");
                         //框架页面

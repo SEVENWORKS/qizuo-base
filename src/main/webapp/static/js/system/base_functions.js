@@ -70,6 +70,7 @@ function getRootPath() {
 /** *************************************异步获取html片段********************************** */
 /** pjax封装(push必须赋值为false,否则无法使用,应该算个bug) */
 function pjaxFunc(url,container){
+    container=isNotBlank(container)?container:global$frameContainer;
     //去掉上个页面多余的元素
     buttonRemove();
     //异步加载
@@ -246,15 +247,15 @@ function deleteData(data,url,dom){
         })
     })
 }
-//刷新
-function deleteDataReload(data,url,url2){
+//删除后刷新
+function deleteDataReload(data,url){
     //先关闭层
     layerClose();
     //再执行操作
     layer.confirm('<span style="color: red">确认删除？</span>',{icon: 3, title:'提示'},function(){
         $.post(url,data,function(data){
             backResultAlert(data,function(){
-                pjaxFunc(url2,global$frameContainer);
+                f5();
             })
         })
     })
@@ -264,7 +265,7 @@ function updateDate(url){
     //先关闭层
     layerClose();
     //再获取模板
-    pjaxFunc(url,global$frameContainer);
+    pjaxFunc(url);
 }
 /** 去除buttonOne */
 function buttonRemove(){
@@ -274,5 +275,9 @@ function buttonRemove(){
 function layerClose(){
     //先关闭层
     layer.close(layer.index);
+}
+/** 返回到当前主页面 */
+function f5(){
+    pjaxFunc(global$frameUrl);
 }
 /** iframe操作 */
