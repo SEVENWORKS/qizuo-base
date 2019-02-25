@@ -227,6 +227,6 @@
     /** 消息点击事件 */
     function baseHeader2_msglist_click(url,baseId,id){
         buttonPanel('阅读','updateDate(\''+url+'\')','删除',
-            'deleteData({baseId:'+baseId+'},\'${pageContext.request.contextPath}/admin/system/msg/delete\',\''+id+'\')');
+            'deleteData({baseId:'+baseId+'},\'${pageContext.request.contextPath}/module/system/msg/delete\',\''+id+'\')');
     }
 </script>

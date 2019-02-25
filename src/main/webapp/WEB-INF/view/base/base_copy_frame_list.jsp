@@ -36,7 +36,7 @@
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
 	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/userDo?baseId={{$value.baseId}}\')','删除',
-			'deleteData({baseId:{{$value.baseId}}},\'${adminPath}system/user/delete\',\'#tr{{$index+1}}\')');">
+			'deleteData({baseId:{{$value.baseId}}},\'${modulePath}system/user/delete\',\'#tr{{$index+1}}\')');">
 		<td>{{$index+1}}</td>
 		<td>{{$value.name}}</td>
 		<td>{{$value.sexCd}}</td>
@@ -60,7 +60,7 @@
         pageHtml(qPage,10,1);
         //分页数据查询(都默认一个函数)
         function qPage(func,pageNo,pageSize){
-            $.post('${adminPath}system/user/page',{pageNo:pageNo,pageSize:pageSize},function(data){
+            $.post('${modulePath}system/user/page',{pageNo:pageNo,pageSize:pageSize},function(data){
                 backResult(data,function(data){
                     //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
                     tplFuncTable(data.entitys);

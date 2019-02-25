@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Description: 常用插件使用跳转
  * @Date: 18:01 2018/10/30
  */
-@RequestMapping(value = "/jump/system/study/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_jump}/system/study/",method = RequestMethod.POST)
 @Controller
 public class SystemStudyJump {
 

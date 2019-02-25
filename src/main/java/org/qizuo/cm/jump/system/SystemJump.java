@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Description: 系统跳转控制器
  * @Date: 18:01 2018/10/30
  */
-@RequestMapping(value = "/jump/system/sys/",method = RequestMethod.GET)
+@RequestMapping(value = "${url_jump}/system/sys/",method = RequestMethod.GET)
 @Controller
 public class SystemJump {
     /**

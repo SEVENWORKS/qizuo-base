@@ -24,7 +24,7 @@ import java.util.List;
  * @description: 菜单控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/menu/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/menu/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class MenuController {

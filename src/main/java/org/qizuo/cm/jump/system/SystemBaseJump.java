@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Description: 系统基本跳转控制器
  * @Date: 18:01 2018/10/30
  */
-@RequestMapping(value = "/jump/system/base/",method = RequestMethod.GET)
+@RequestMapping(value = "${url_jump}/system/base/",method = RequestMethod.GET)
 @Controller
 public class SystemBaseJump {
     /**
@@ -19,7 +19,7 @@ public class SystemBaseJump {
      */
     @RequestMapping("login")
     public String login(){
-        return "/base/qizuo";
+        return "/base/base_login";
     }
 
     /**

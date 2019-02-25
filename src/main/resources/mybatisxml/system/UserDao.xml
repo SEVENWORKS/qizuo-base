@@ -152,14 +152,14 @@
         select
         <include refid="org.qizuo.cm.modules.system.dao.RoleDao.exclusiveColumns"/>
         from sys_role a
-        where a.BASE_STATUS=0 and a.id in (#{value})
+        where a.BASE_STATUS=0 and a.base_id in (#{value})
     </select>
     <!-- 根据用户权限拼接查询菜单信息 -->
     <select id="qMenusByString" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         select
         <include refid="org.qizuo.cm.modules.system.dao.MenuDao.exclusiveColumns"/>
         from sys_menu a
-        where a.BASE_STATUS=0and a.id in
-        (select group_concat(b.MENU_IDS) from sys_role b where b.BASE_STATUS=0 and b.id in (#{value}))
+        where a.BASE_STATUS=0 and a.base_id in
+        (select group_concat(b.MENU_IDS) from sys_role b where b.BASE_STATUS=0 and b.base_id in (#{value}))
     </select>
 </mapper>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description: 用户控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/user/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/user/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class UserController {

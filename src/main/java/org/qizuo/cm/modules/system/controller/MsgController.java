@@ -25,7 +25,7 @@ import java.util.List;
  * @description: 消息控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/msg/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/msg/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class MsgController {

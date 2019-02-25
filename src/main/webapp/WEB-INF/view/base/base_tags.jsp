@@ -5,7 +5,7 @@
 <c:set var="gobalPath" value="${pageContext.request.contextPath}/"/>
 <c:set var="staticPath" value="${pageContext.request.contextPath}/static/"/>
 <c:set var="jumpPath" value="${pageContext.request.contextPath}/jump/"/>
-<c:set var="adminPath" value="${pageContext.request.contextPath}/admin/"/>
+<c:set var="modulePath" value="${pageContext.request.contextPath}/module/"/>
 
 <!-- css base -->
 

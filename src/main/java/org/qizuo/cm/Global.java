@@ -20,7 +20,7 @@ public class Global {
     /** 无效 */
     public static final String STATUS_NO="1";
     /** 树形菜单首节点配置 */
-    public static final String TREE_FIRST="-1";
+    public static final String TREE_FIRST="0";
 
     /** ***********************登录配置*************************** */
     /** 是否单个登录 */

@@ -61,7 +61,7 @@
         function qData(){
             //只有更新的时候才去查找数据
             if(isNotBlank('${baseId}')){
-                $.post('${adminPath}system/role/query',{baseId:'${baseId}'},function(data){
+                $.post('${modulePath}system/role/query',{baseId:'${baseId}'},function(data){
                     backResult(data,function(data){
                         if(isNotBlank(data)){
                             //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
@@ -113,7 +113,7 @@
                     }
                 }
 			    //保存
-				$.post('${adminPath}system/role/iuDo',$('#dataContainer').serialize(),function(data){
+				$.post('${modulePath}system/role/iuDo',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(){
                         pjaxFunc('${jumpPath}system/sys/role',global$frameContainer);
                     })
@@ -127,7 +127,7 @@
         /** ************************************************************ */
         //ztree
 		function ztree(dataString){
-            $.post('${adminPath}system/menu/list',{},function(data){
+            $.post('${modulePath}system/menu/list',{},function(data){
                 backResult(data,function(data){
                     if(isNotBlank(data)){
                         var setting = {

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description: 字典表控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/dict/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/dict/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class DictController {

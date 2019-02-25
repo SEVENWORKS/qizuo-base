@@ -6,6 +6,7 @@ import org.qizuo.cm.frame.listener.session.SessionListener;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;
 import org.qizuo.cm.modules.system.pojo.MenuPoJo;
 import org.qizuo.cm.modules.system.pojo.MsgPoJo;
+import org.qizuo.cm.modules.system.pojo.RolePoJo;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;
 import org.qizuo.cm.modules.system.service.MenuService;
 import org.qizuo.cm.modules.system.service.MsgService;
@@ -29,7 +30,7 @@ import java.util.*;
  * @description: 登录控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/login/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/login/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class LoginController {
@@ -64,6 +65,7 @@ public class LoginController {
      */
     @RequestMapping("loginCheck")
     public BackResultPoJo loginCheck(HttpServletRequest httpServletRequest,String username, String password, String type)throws Exception{
+        String jumpUrl="";
         //登录
         if(StringUtils.isNotBlank(type) && Global.YES.equals(type)){
             //截取
@@ -85,8 +87,9 @@ public class LoginController {
                 userPoJo.setUserName(username);
                 userPoJo.setName("七作");
                 userPoJo.setRoleIds(Global.ADMIN_ROLEIDS);
+                //菜单
                 MenuPoJo menuPoJo=new MenuPoJo();
-                menuPoJo.setParentId(Global.TREE_FIRST);
+                menuPoJo.setBaseId(Global.TREE_FIRST);
                 userPoJo.setMenuPoJos(menuService.qEachList(menuPoJo));
 
                 //放入session中
@@ -150,6 +153,9 @@ public class LoginController {
 
                 //当前登录人放入map中
                 SessionListener.LOGIN_USER_MAP.put(username,login);
+
+                //跳转路径
+                jumpUrl=Global.LOGIN_CHANGE_URL;
             }else{
                 return new BackResultPoJo(BackResultPoJo.FAILURE,"密码或者用户名不正确");
             }
@@ -178,12 +184,19 @@ public class LoginController {
                     }
                     //当前登录人放入map中
                     SessionListener.LOGIN_USER_MAP.put(username,login);
+
+                    //跳转路径
+                    List<RolePoJo> rolePoJos=userPoJo.getRolePoJos();
+                    if(null!=rolePoJos&&rolePoJos.size()>0){
+                        //取第一个跳转路径
+                        jumpUrl=rolePoJos.get(0).getJumpUrl();
+                    }
                 }
             }else{
                 return new BackResultPoJo(BackResultPoJo.FAILURE,"密码或者用户名不正确");
             }
         }
-        return new BackResultPoJo(BackResultPoJo.SUCCESS,"登录成功");
+        return new BackResultPoJo(BackResultPoJo.SUCCESS,"登录成功",jumpUrl);
     }
 
     /**

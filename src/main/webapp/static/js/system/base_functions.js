@@ -37,7 +37,7 @@ function backResultAlert(data,func){
     backResult(data,function(data,dt){
         alert(dt.backMsg,function(){
             if(isFunction(func)){
-                func();
+                func(data,dt);
             }
         })
     })

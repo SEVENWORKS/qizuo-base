@@ -8,7 +8,7 @@
 		<%@ include file="base_tags.jsp"%>
 		<!--css-->
 		<link rel="stylesheet" href="${staticPath}css/base/bootstrap.min.css" />
-		<link rel="stylesheet" href="${staticPath}css/system/qizuo.css" />
+		<link rel="stylesheet" href="${staticPath}css/system/base_login.css" />
 	</head>
 	<body>
 		<header>
@@ -69,9 +69,9 @@
 				    //图片验证码验证
 
 					//密码验证
-					$.post('${adminPath}system/login/loginCheck',{"username":value,"type":global$yes},function(data){
-                        backResultAlert(data,function(){
-                            window.location='${jumpPath}system/base/container';
+					$.post('${modulePath}system/login/loginCheck',{"username":value,"type":global$yes},function(data){
+                        backResultAlert(data,function(dt){
+                            window.location='${gobalPath}'+dt;
                         });
 					})
 				}

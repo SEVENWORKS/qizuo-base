@@ -1,10 +1,9 @@
-package org.qizuo.cm.modules.base.copy;
+package org.qizuo.cm.modules.qizuo.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;
 import org.qizuo.cm.modules.base.pojo.PagePoJo;
 import org.qizuo.cm.modules.system.pojo.RolePoJo;
-import org.qizuo.cm.modules.system.pojo.UserPoJo;
 import org.qizuo.cm.modules.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: fangl
- * @description:
- * 路径：基本+文件夹+controller
+ * @description: QIZUO
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "${url_module}/xxxx/copy/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/qizuo/qizuo/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
-public class CopyController {
+public class QizuoController {
     @Autowired
     private RoleService roleService;
 

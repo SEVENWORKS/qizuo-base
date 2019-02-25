@@ -11,6 +11,12 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
+    <!-- 参数注入：
+        注意1：这个地方的注入和applicationContext.xml中注入不同，那个地方注入并不能在mvc中使用
+        注意2：使用方式可以直接用${}获取；还有一种用@value标签获取其中的值
+     -->
+    <context:property-placeholder location="classpath:config/properties/base.properties"/>
+
     <!-- ************************springmvc配置************************ -->
     <import resource="classpath:config/springmvc/springmvc.xml" />
 

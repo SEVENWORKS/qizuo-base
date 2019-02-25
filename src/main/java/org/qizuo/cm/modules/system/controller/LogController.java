@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * @description: 日志控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/log/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/log/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class LogController {

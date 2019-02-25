@@ -9,9 +9,10 @@
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
   <!-- ************************1.基本配置文件************************ -->
-  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <context:property-placeholder location="classpath:config/properties/base.properties"/>
+  <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations" value="classpath:config/properties/base.properties"/>
-  </bean>
+  </bean>-->
 
   <!-- ************************2.mybatis配置(一般加载这个时候，spring-mvc.xml也会被加载的)************************ -->
   <import resource="classpath:config/spring/spring-mybatis.xml" />

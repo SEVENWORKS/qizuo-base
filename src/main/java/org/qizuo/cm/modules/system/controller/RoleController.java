@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description: 角色控制器
  * @date: 14:09 2018/10/29
  */
-@RequestMapping(value = "/admin/system/role/",method = RequestMethod.POST)
+@RequestMapping(value = "${url_module}/system/role/",method = RequestMethod.POST)
 @Controller
 @ResponseBody
 public class RoleController {

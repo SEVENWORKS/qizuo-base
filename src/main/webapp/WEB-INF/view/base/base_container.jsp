@@ -113,7 +113,7 @@
     <!-- 框架基本函数执行 -->
     <script>
         $(function(){
-            $.post('${adminPath}system/login/frameData',{},function(data){
+            $.post('${modulePath}system/login/frameData',{},function(data){
                 backResult(data,function(data){
                     //头
                     baseHeader_msg(data.baseHeader_msgList);

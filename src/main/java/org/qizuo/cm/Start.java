@@ -12,7 +12,7 @@ import java.util.EnumSet;
 
 /**
  * @Author: fangl
- * @Description: 初始化
+ * @Description: 初始化(无需改动)
  * @Date: 17:24 2018/10/25
  */
 public class Start implements WebApplicationInitializer {

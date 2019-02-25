@@ -26,7 +26,7 @@ var userMenus=[
     {
         title:'退出登录',
         type:1,//type=0为跳转方法,type=1为ajax方法
-        url:'admin/system/login/loginOut',
+        url:'module/system/login/loginOut',
         func:function(){
             window.location.href=getRootPath()+'jump/system/base/login';
         }

@@ -70,7 +70,7 @@
         function qData(){
             //只有更新的时候才去查找数据
             if(isNotBlank('${baseId}')){
-                $.post('${adminPath}system/user/query',{baseId:'${baseId}'},function(data){
+                $.post('${modulePath}system/user/query',{baseId:'${baseId}'},function(data){
                     backResult(data,function(data){
                         if(isNotBlank(data)){
                             //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
@@ -85,7 +85,7 @@
         //添加或者修改
         function iuFunc(){
             if(formValid()){
-                $.post('${adminPath}system/user/iuDo',$('#dataContainer').serialize(),function(data){
+                $.post('${modulePath}system/user/iuDo',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(data){
                         pjaxFunc('${jumpPath}system/sys/user',global$frameContainer);
                     })
