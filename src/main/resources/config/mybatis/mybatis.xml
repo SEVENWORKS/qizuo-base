@@ -28,6 +28,6 @@
     </settings>
     <!-- 拦截器 -->
     <plugins>
-        <plugin interceptor="org.qizuo.cm.interceptor.mybatis.MybatisPage"></plugin>
+        <plugin interceptor="org.qizuo.cm.frame.filter.mybatis.MybatisPage"></plugin>
     </plugins>
 </configuration>

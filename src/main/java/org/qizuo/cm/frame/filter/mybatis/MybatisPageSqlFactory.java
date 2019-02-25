@@ -1,4 +1,4 @@
-package org.qizuo.cm.interceptor.mybatis;
+package org.qizuo.cm.frame.filter.mybatis;
 
 import org.apache.ibatis.session.RowBounds;
 

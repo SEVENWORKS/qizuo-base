@@ -1,4 +1,4 @@
-package org.qizuo.cm.interceptor.druid;
+package org.qizuo.cm.frame.filter.druid;
 
 import com.alibaba.druid.filter.FilterEventAdapter;
 

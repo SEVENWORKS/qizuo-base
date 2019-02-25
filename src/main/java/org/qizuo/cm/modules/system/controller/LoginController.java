@@ -2,7 +2,7 @@ package org.qizuo.cm.modules.system.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
-import org.qizuo.cm.listener.session.SessionListener;
+import org.qizuo.cm.frame.listener.session.SessionListener;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;
 import org.qizuo.cm.modules.system.pojo.MenuPoJo;
 import org.qizuo.cm.modules.system.pojo.MsgPoJo;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 

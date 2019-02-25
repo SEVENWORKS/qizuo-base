@@ -1,17 +1,13 @@
 package org.qizuo.cm;
 
 import ch.qos.logback.ext.spring.web.LogbackConfigListener;
-import org.qizuo.cm.interceptor.springmvc.SpringmvcDispatcherServlet;
-import org.qizuo.cm.listener.session.SessionListener;
-import org.springframework.context.ApplicationListener;
+import org.qizuo.cm.frame.filter.springmvc.SpringmvcDispatcherServlet;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.*;
-import javax.servlet.descriptor.JspConfigDescriptor;
-import javax.servlet.descriptor.JspPropertyGroupDescriptor;
 import java.util.EnumSet;
 
 /**

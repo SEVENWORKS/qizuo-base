@@ -1,4 +1,4 @@
-package org.qizuo.cm.listener.session;
+package org.qizuo.cm.frame.listener.session;
 
 import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;

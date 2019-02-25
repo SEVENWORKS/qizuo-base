@@ -17,12 +17,12 @@
 
 	<div class="row m-b-10">
 		<h3 class="block-title m-b-5">菜单跳转路径</h3>
-		<input type="text" class="form-control" name="url" value="{{url==null?'':url}}" placeholder="填写...">
+		<input type="text" class="form-control" name="url" value="{{url==null?'':url}}" placeholder="举例:jump/system/sys/role">
 	</div>
 
 	<div class="row m-b-10">
 		<h3 class="block-title m-b-5">菜单主题</h3>
-		<input type="text" class="form-control" name="theme" value="{{theme==null?'':theme}}" placeholder="填写...">
+		<input type="text" class="form-control" name="theme" value="{{theme==null?'':theme}}" placeholder="举例:sa-side-home/sa-side-typography/sa-side-widget/sa-side-table/sa-side-form/sa-side-ui/sa-side-chart/sa-side-folder/sa-side-calendar/sa-side-page">
 	</div>
 </script>
 <!-- 执行js -->

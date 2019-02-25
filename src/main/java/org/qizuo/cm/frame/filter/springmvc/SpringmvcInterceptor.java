@@ -1,11 +1,10 @@
-package org.qizuo.cm.interceptor.springmvc;
+package org.qizuo.cm.frame.filter.springmvc;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.system.pojo.RolePoJo;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

@@ -1,4 +1,4 @@
-package org.qizuo.cm.interceptor.springmvc;
+package org.qizuo.cm.frame.filter.springmvc;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;

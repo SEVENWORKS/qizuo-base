@@ -1,4 +1,4 @@
-package org.qizuo.cm.servlet;
+package org.qizuo.cm.frame.commonservlet;
 
 /**
  * @Author :fangl

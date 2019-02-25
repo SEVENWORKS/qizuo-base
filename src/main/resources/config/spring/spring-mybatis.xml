@@ -55,7 +55,7 @@
         </property>
     </bean>
     <!-- druidfilters拦截器 -->
-    <bean id="druidFilter" class="org.qizuo.cm.interceptor.druid.Druid"></bean>
+    <bean id="druidFilter" class="org.qizuo.cm.frame.filter.druid.Druid"></bean>
 
     <!-- ************************spring和MyBatis完美整合，不需要mybatis的配置映射文件************************ -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

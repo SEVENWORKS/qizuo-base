@@ -1,4 +1,4 @@
-package org.qizuo.cm.interceptor.exception;
+package org.qizuo.cm.frame.filter.exception;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
@@ -8,11 +8,9 @@ import org.qizuo.cm.utils.HttpUtil;
 import org.qizuo.cm.utils.JsonUtil;
 import org.qizuo.cm.utils.LogUtil;
 import org.qizuo.cm.utils.MobileUtil;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
