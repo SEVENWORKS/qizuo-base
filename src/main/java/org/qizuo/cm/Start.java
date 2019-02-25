@@ -41,8 +41,7 @@ public class Start implements WebApplicationInitializer {
         CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("utf-8");
         FilterRegistration.Dynamic encoding =servletContext.addFilter("characterEncodingFilter",characterEncodingFilter);
-        EnumSet<DispatcherType> dispatcherTypes = EnumSet
-                .allOf(DispatcherType.class);
+        EnumSet<DispatcherType> dispatcherTypes = EnumSet.allOf(DispatcherType.class);
         dispatcherTypes.add(DispatcherType.REQUEST);
         dispatcherTypes.add(DispatcherType.FORWARD);
         encoding.addMappingForUrlPatterns(dispatcherTypes,true,"/");
@@ -53,6 +52,5 @@ public class Start implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new SpringmvcDispatcherServlet(appContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-
     }
 }
