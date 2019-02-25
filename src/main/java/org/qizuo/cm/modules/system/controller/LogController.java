@@ -43,6 +43,7 @@ public class LogController {
      */
     @RequestMapping("page")
     public BackResultPoJo page(PagePoJo<LogPoJo> pagePoJo,LogPoJo logPoJo){
+        logPoJo.setOrderBy("a.BASE_CREATE_TM desc");
         pagePoJo.setEntity(logPoJo);
         return new BackResultPoJo(BackResultPoJo.SUCCESS,"成功",logService.qPageFL(pagePoJo));
     }

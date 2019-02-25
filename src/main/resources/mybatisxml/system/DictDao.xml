@@ -81,6 +81,9 @@
         <where>
             and a.BASE_STATUS=0
         </where>
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
     </select>
     <!-- 查找分页 -->
     <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
@@ -93,6 +96,9 @@
 
             </if>
         </where>
+        <if test="entity.orderBy != null and entity.orderBy != ''">
+            order by ${entity.orderBy}
+        </if>
     </select>
     <!-- ********************************************************************************************************************** -->
     <!-- 更新状态 -->

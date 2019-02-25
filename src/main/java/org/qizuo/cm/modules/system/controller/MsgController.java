@@ -41,6 +41,7 @@ public class MsgController {
         //获取当前登录人
         UserPoJo userPoJo = UserUtil.qUser(httpServletRequest);
         msgPoJo.setSendUserId(userPoJo.getBaseId());
+        msgPoJo.setOrderBy("a.IS_READ");
         List<MsgPoJo> msgPoJos=msgService.qList(msgPoJo);
         //如果需要别的类型消息，请自行添加查询列表msgPoJos中，当前只查询关联人消息
         return new BackResultPoJo(BackResultPoJo.SUCCESS,"成功",msgPoJos);
