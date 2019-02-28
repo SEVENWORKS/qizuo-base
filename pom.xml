@@ -16,6 +16,7 @@
     <mysql.version>5.1.35</mysql.version>
   </properties>
   <dependencies>
+    <!-- ****************************框架基本***************************************** -->
     <!-- Spring依赖 -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -90,7 +91,39 @@
       <version>${mysql.version}</version>
     </dependency>
 
-    <!-- logback start(如果用logback,请将) -->
+    <!-- alibaba data source druid 相关jar包-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>0.2.23</version>
+    </dependency>
+
+    <!-- 添加servlet3.0核心包 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.2-b01</version>
+    </dependency>
+
+    <!-- jstl -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <!-- 防止jdk配置错误 -->
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>7.0</version>
+    </dependency>
+
+    <!-- 日志工具包 -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -118,25 +151,7 @@
       <version>${log4j.version}</version>
     </dependency>-->
 
-    <!-- 添加servlet3.0核心包 -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.2-b01</version>
-    </dependency>
-
-    <!-- jstl -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
-
+    <!-- ******************************************其它工具包****************************************** -->
     <!--spring单元测试依赖 -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -150,13 +165,6 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
-    </dependency>
-
-    <!-- alibaba data source druid 相关jar包-->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>0.2.23</version>
     </dependency>
 
     <!-- alibaba fastjson 格式化对 -->
@@ -180,35 +188,6 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
       <version>2.5.2</version>
-    </dependency>
-
-    <!-- urlrewrite地址重写 -->
-    <dependency>
-      <groupId>org.tuckey</groupId>
-      <artifactId>urlrewritefilter</artifactId>
-      <version>4.0.3</version>
-    </dependency>
-
-    <!-- shiro -->
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-core</artifactId>
-      <version>1.2.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-ehcache</artifactId>
-      <version>1.2.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-web</artifactId>
-      <version>1.2.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-spring</artifactId>
-      <version>1.2.3</version>
     </dependency>
 
     <!-- apache.commons相关 -->
@@ -243,6 +222,100 @@
       <groupId>eu.bitwalker</groupId>
       <artifactId>UserAgentUtils</artifactId>
       <version>1.20</version>
+    </dependency>
+
+    <!-- 外部短信mas包 -->
+    <dependency>
+      <groupId>mas-api</groupId>
+      <!--自定义-->
+      <artifactId>mas</artifactId>
+      <!--自定义-->
+      <version>3.1</version>
+      <!--自定义-->
+      <scope>system</scope>
+      <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/mas-api3.1.jar</systemPath>
+      <!--项目根目录下的lib文件夹下-->
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.lowagie/itext-->
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
+      <version>2.1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.3rd.party</groupId>
+      <artifactId>iTextAsian</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+    <!-- jxl -->
+    <dependency>
+      <groupId>net.sourceforge.jexcelapi</groupId>
+      <artifactId>jxl</artifactId>
+      <version>2.6.12</version>
+    </dependency>
+    <!-- poi 以下两种jar包分别对应两个版本的excel -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.8</version>
+    </dependency>
+    <!-- flying+freemarker -->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.23</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xhtmlrenderer</groupId>
+      <artifactId>flying-saucer-pdf</artifactId>
+      <version>9.1.7</version>
+    </dependency>
+
+    <!-- urlrewrite地址重写 -->
+    <dependency>
+      <groupId>org.tuckey</groupId>
+      <artifactId>urlrewritefilter</artifactId>
+      <version>4.0.3</version>
+    </dependency>
+
+    <!-- shiro -->
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-ehcache</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-spring</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <!-- zxing -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>3.2.1</version>
     </dependency>
 
   </dependencies>

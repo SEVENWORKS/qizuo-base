@@ -28,6 +28,11 @@ public class BackResultPoJo{
         this.backData = backData;
     }
 
+    public BackResultPoJo(int backCode, Object backData) {
+        this.backCode = backCode;
+        this.backData = backData;
+    }
+
     public int getBackCode() {
         return backCode;
     }

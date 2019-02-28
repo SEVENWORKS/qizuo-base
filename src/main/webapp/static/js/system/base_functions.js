@@ -260,6 +260,7 @@ function deleteDataReload(data,url){
         })
     })
 }
+
 /** 更新数据 */
 function updateDate(url){
     //先关闭层
@@ -267,17 +268,21 @@ function updateDate(url){
     //再获取模板
     pjaxFunc(url);
 }
+
 /** 去除buttonOne */
 function buttonRemove(){
     $(".buttonOne").remove();
 }
+
 /** 关闭layer */
 function layerClose(){
     //先关闭层
     layer.close(layer.index);
 }
+
 /** 返回到当前主页面 */
 function f5(){
     pjaxFunc(global$frameUrl);
 }
+
 /** iframe操作 */

@@ -1,6 +1,5 @@
 package org.qizuo.cm.modules.base.pojo;
 
-import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;
 import org.qizuo.cm.utils.HttpUtil;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description: 基本实体类
  * @Date: 10:25 2018/10/30
  */
-public class BasePoJo extends IntOutDatasPoJo {
+public class BasePoJo extends IOPoJo {
     /**id*/
     private String baseId;
     /**创建ip*/

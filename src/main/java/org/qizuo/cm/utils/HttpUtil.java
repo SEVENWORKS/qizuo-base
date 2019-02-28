@@ -1,6 +1,17 @@
 package org.qizuo.cm.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author: fangl
@@ -190,7 +198,50 @@ public class HttpUtil {
         return "";
     }
 
-    /** *****************************************http请求发送***************************************** */
+    /** *****************************************httpclient请求发送***************************************** */
+    /**
+     * @author: fangl
+     * @description: 远程访问http
+     * @date: 14:35 2018/12/25
+     */
+    public HttpEntity sendHttp(String action, String url, String params, List<NameValuePair> nvps, JSONObject jsonObject){
+        HttpEntity entity=null;
+        //发送
+        try {
+            HttpClient client = HttpClients.createDefault();
+            if("get".equals(action)){
+                HttpGet request = new HttpGet(url+params);
+                request.setHeader("Accept", "application/json");
+                HttpResponse response = client.execute(request);
+                entity = response.getEntity();
+            }else if("post".equals(action)) {
+                HttpPost request2 = new HttpPost(url);
+				/*List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+				nvps.add(new BasicNameValuePair("id", "啊啊啊"));
+				nvps.add(new BasicNameValuePair("name", "secret"));*/
+                //UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nvps, "GBK");
+                request2.setEntity(new UrlEncodedFormEntity(nvps,"utf-8"));
+                HttpResponse response2 = client.execute(request2);
+                entity = response2.getEntity();
+            }else if("post2".equals(action)) {
+                HttpPost request2 = new HttpPost(url);
+				/*JSONObject jsonObject = new JSONObject();
+				jsonObject.put("oldPassWord", "df6f0c809af2c96e0cb5a7314de24837");
+				jsonObject.put("username", "super");
+				jsonObject.put("id", "1");*/
+                request2.setEntity(new StringEntity(jsonObject.toString(),"utf-8"));
+                HttpResponse response2 = client.execute(request2);
+                entity = response2.getEntity();
+            }
+            //返回
+            String respContent = EntityUtils.toString(entity,"UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
 
+    /** *****************************************soap***************************************** */
 
+    /** *****************************************websevice***************************************** */
 }
