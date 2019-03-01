@@ -187,15 +187,15 @@ function maskForInput(){
 
 /** select类初始化类 */
 function selectInit(){
-    //slect插件初始化(select.min.js)
+    //slect插件初始化(bootstrap selectpicker)
     if($('.select')[0]) {
         $('.select').selectpicker();
     }
-    //choose插件初始化(chosen.min.js)
+    //choose插件初始化(jquery.chosen.min.js)
     if($('.tag-select')[0]) {
         $('.tag-select').chosen();
     }
-    //choose插件初始化2(chosen.min.js)
+    //choose插件初始化2(jquery.chosen.min.js)
     $(".tag-select-limited").chosen({
         max_selected_options: 5
     });

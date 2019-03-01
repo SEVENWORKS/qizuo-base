@@ -110,6 +110,8 @@
     <!-- ztree -->
     <script src="${staticPath}js/ztree/js/jquery.ztree.core-3.5.min.js"></script>
     <script src="${staticPath}js/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
+    <!-- layui -->
+    <script src="${staticPath}js/layui/layui.js"></script>
     <!-- 框架基本函数执行 -->
     <script>
         $(function(){

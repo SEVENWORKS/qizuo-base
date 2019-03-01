@@ -12,10 +12,8 @@
 <!-- script base -->
 <!-- jQuery -->
 <script src="${staticPath}js/base/jquery.min.js"></script>
-
 <!-- layer.js -->
 <script src="${staticPath}js/layui/layer/layer.js"></script>
-
 <!-- script base system -->
 <script src="${staticPath}js/system/base_Global.js"></script>
 <script src="${staticPath}js/system/base_functions.js"></script>

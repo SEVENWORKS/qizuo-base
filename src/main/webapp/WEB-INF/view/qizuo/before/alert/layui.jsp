@@ -1,12 +1,45 @@
 <%@ include file="../../../base/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="model()">模态框</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="confirm()">询问</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="input()">输入</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="load()">加载</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="msg()">提示</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="tips()">tips</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="photo()">相册</h3>
+    </div>
+
+    <div class="m-b-10 col-lg-3 text-center">
+        <h3 class="block-title m-b-5" onclick="tab()">tab</h3>
+    </div>
 
 </div>
 
 <!-- 执行js -->
 <script>
     $(function(){
+        function alert(){
+
         /** ***************基本使用*************** */
         layui.use('layer', function(){
             var layer = layui.layer;
@@ -62,7 +95,7 @@
                 tips:'',//tips私有参数 tips: [1, '#c00'] 1234四个方向
                 tipsMore: true,//是否同时允许多个tips
 
-                content: '传入任意的文本或html', //url或者html内容
+                content: '<div></div>', //url或者html内容
                 resizing:function(){//拉伸时候触发的函数
 
                 },
@@ -224,5 +257,163 @@
         //手工执行最大小化
         layer.full();layer.min();layer.restore();
 
+        }
     })
+
+    /** 示例 */
+    function model(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                //id:'',//设定该值后，弹出窗只允许同时弹出一个
+                type: 1,//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                title:'model',//title: ['文本', 'font-size:18px;'] title: false
+                //skin:'',//主题样式，该样式指的是外部边框样式
+                icon:'0',//图标0-6
+                time:5000,//自动关闭秒数
+
+                area: ['500px', '300px'],//宽高
+                //maxWidth:'',//最大宽度
+                //maxHeight:'',//最大高度
+                //offset:'',//坐标
+                /**
+                 *   offset: 'auto' 	默认坐标，即垂直水平居中
+                 *   offset: '100px' 	只定义top坐标，水平保持居中
+                 *   offset: ['100px', '50px'] 	同时定义top、left坐标
+                 *   offset: 't' 	快捷设置顶部坐标
+                 *   offset: 'r' 	快捷设置右边缘坐标
+                 *   offset: 'b' 	快捷设置底部坐标
+                 *   offset: 'l' 	快捷设置左边缘坐标
+                 *   offset: 'lt' 	快捷设置左上角
+                 *   offset: 'lb' 	快捷设置左下角
+                 *   offset: 'rt' 	快捷设置右上角
+                 *   offset: 'rb' 	快捷设置右下角
+                 */
+
+                maxmin: true,//是否显示最大化最小化按钮 对type:1和type:2有效
+                resize:true,//是否允许拉伸
+                move:true,//是否允许拖动 move: '.mine-move'只有那个区域能拖动
+                moveOut: true,//是否允许拖动的窗口外面
+                fixed: true,//是否随着鼠标滚动而滚动
+                scrollbar:true,//是否允许浏览器滚动
+                zIndex:'100',//层叠顺序
+
+                btn:['确认','取消'],//按钮 btn: ['按钮1', '按钮2', '按钮3', …] 按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推
+                btnAlign:'c',//按钮排列
+                /**
+                 * btnAlign: 'l' 	按钮左对齐
+                 * btnAlign: 'c' 	按钮居中对齐
+                 * btnAlign: 'r' 	按钮右对齐。默认值，不用设置
+                 */
+                closeBtn: 2,//右上角关闭按钮 0-2 1和2是不同风格，0是不显示
+
+                shade:0.6,//遮光罩 shade: [0.8, '#393D49'] shade:0
+                shadeClose:true,//是否点击遮光罩自动关闭
+
+                anim:'2',//弹出动画 -1-6 -1则是不带动画
+                isOutAnim: false,//默认关闭弹出窗的时候会有一个过渡动画
+
+                //tips:'',//tips私有参数 tips: [1, '#c00'] 1234四个方向
+                //tipsMore: true,//是否同时允许多个tips
+
+                content: '<div>model</div>', //url或者html内容
+                yes: function(index, layero){//确定按钮触发的函数(或者说第一个btn触发的函数)
+
+                },
+                cancel: function(index, layero){//右上角关闭按钮触发函数
+
+                },
+                /*resizing:function(){//拉伸时候触发的函数
+
+                },
+                moveEnd: function(layero){//move结束触发的函数
+
+                },
+                success: function(layero, index){//当前层创建完毕立即执行的函数(layero代表当前层,index代表当前层索引)
+
+                },
+                end: function (){//弹出窗被销毁后触发的函数
+
+                },
+                full: function(){//最大化触发函数
+
+                },
+                min: function(){//最小化触发函数
+
+                },
+                restore: function(){//还原触发函数
+
+                }*/
+            });
+
+        });
+
+    }
+    function confirm(){
+        layer.confirm('is not?', {icon: 3, title:'提示'}, function(index){
+
+        });
+    }
+    function input(){
+        layer.prompt({
+            formType: 2,//输入框类型，支持0（文本）默认1（密码）2（多行文本）
+            value: '初始值',//初始时的值，默认空字符
+            title: '请输入值',//可输入文本的最大长度，默认500
+            area: ['800px', '350px'] //自定义文本域宽高
+        }, function(value, index, elem){
+            alert(value); //得到value
+            layer.close(index);
+        });
+    }
+    function load(){
+        layer.load(2);
+    }
+    function msg(){
+        layer.msg('is not?', {icon: 3, title:'提示'}, function(index){
+
+        });
+    }
+    function tips(){
+        layer.tips('在上面', '#id', {
+            tips: 1
+        });
+    }
+    function tab(){
+        layer.tab({
+            area: ['600px', '300px'],
+            tab: [{
+                title: 'TAB1',
+                content: '内容1'
+            }, {
+                title: 'TAB2',
+                content: '内容2'
+            }, {
+                title: 'TAB3',
+                content: '内容3'
+            }]
+        });
+    }
+    function photo(){
+        //json方式
+        var json={
+            "title": "", //相册标题
+            "id": 123, //相册id
+            "start": 0, //初始显示的图片序号，默认0
+            "data": [   //相册包含的图片，数组格式
+                {
+                    "alt": "图片名",
+                    "pid": 666, //图片id
+                    "src": "", //原图地址
+                    "thumb": "" //缩略图地址
+                }
+            ]
+        }
+        layer.photos({
+            photos: json
+            ,anim: 5, //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            tab: function(pic, layero){
+                console.log(pic) //当前图片的一些信息
+            }
+        });
+    }
 </script>

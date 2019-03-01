@@ -1,7 +1,7 @@
 <%@ include file="../../../base/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
-    <select multiple="" class="form-control m-b-10">
+    <select class="select m-b-10" multiple>
         <option>1</option>
         <option>2</option>
         <option>3</option>

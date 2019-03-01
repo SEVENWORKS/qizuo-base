@@ -9,7 +9,7 @@
 <!-- 执行js -->
 <script>
     $(function() {
-        function ztree(list,treeContainer) {
+        function ztree(list,treeContainer,name) {
             var setting = {
                 data: {
                     simpleData: {
@@ -33,16 +33,19 @@
             for (var o = 0; o < list.length; o++) {
                 //id和pId是setting中data中simpleData的设定，name和open则是treeNode本身的属性设置
                 var html = {id: list[o].baseId, pId: list[o].parentId, name: list[o][name], open: 1};
-                //checked回显专属
-                if (isNotBlank(dataString)) {
-                    if (dataString.indexOf(list[o].baseId) != -1) {
-                        html.checked = true;
-                    }
-                }
                 zNodes.push(html);
             }
             //初始化
             return $.fn.zTree.init($(treeContainer), setting, zNodes);
         }
+
+        //示例
+        var list=[
+            {baseId:1,parentId:1,name:'树'},
+            {baseId:2,parentId:2,name:'树2'},
+            {baseId:3,parentId:3,name:'树3'},
+            {baseId:4,parentId:4,name:'树4'}
+        ]
+        ztree(list,'#tree','name');
     })
 </script>

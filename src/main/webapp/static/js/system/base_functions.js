@@ -74,7 +74,7 @@ function pjaxFunc(url,container){
     //去掉上个页面多余的元素
     buttonRemove();
     //异步加载
-    $.pjax({url: url, container: container,push:false,replace:false});
+    $.pjax({url: url, container: container,push:false,replace:false,timeout:6500});
 }
 /** pjax封装 */
 function pjaxFuncForClick(selector,container,options){

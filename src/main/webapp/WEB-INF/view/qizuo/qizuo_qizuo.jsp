@@ -5,6 +5,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">upload</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/upload_layui">layui</option>
 			<option value="${jumpPath}qizuo/qizuo/upload_jqueryUploadify">jqueryUploadify(flash)</option>
 		</select>
@@ -14,6 +15,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">alert</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/alert_layui">layui</option>
 			<option value="${jumpPath}qizuo/qizuo/alert_artDialog">artDialog</option>
 		</select>
@@ -23,6 +25,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">time</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/time_layui">layui</option>
 		</select>
 	</div>
@@ -31,6 +34,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">select</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/select_bootstrapSelectpicker">bootstrapSelectpicker</option>
 			<option value="${jumpPath}qizuo/qizuo/select_chosen">chosen</option>
 		</select>
@@ -40,6 +44,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">tree</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/tree_ztree">ztree</option>
 		</select>
 	</div>
@@ -48,6 +53,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">map</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/map_baidu">百度</option>
 		</select>
 	</div>
@@ -56,6 +62,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">chart</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/chart_echarts">echarts</option>
 		</select>
 	</div>
@@ -64,6 +71,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">template</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/template_artTemplate">artTemplate</option>
 			<option value="${jumpPath}qizuo/qizuo/template_jqueryTemplate">jqueryTemplate</option>
 		</select>
@@ -73,6 +81,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">slide</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/slide_"></option>
 		</select>
 	</div>
@@ -81,6 +90,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">textarea</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/textarea_autosize">autosize</option>
 			<option value="${jumpPath}qizuo/qizuo/textarea_scroll">scroll</option>
 			<option value="${jumpPath}qizuo/qizuo/textarea_simditor">simditor</option>
@@ -94,6 +104,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">formValidate</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/formValidate_jqueryValidate">jqueryValidate</option>
 		</select>
 	</div>
@@ -102,6 +113,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">css</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/css_css2">css2</option>
 			<option value="${jumpPath}qizuo/qizuo/css_css3">css3</option>
 		</select>
@@ -111,6 +123,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">html</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="${jumpPath}qizuo/qizuo/html_html">html</option>
 			<option value="${jumpPath}qizuo/qizuo/html_html5">html5</option>
 		</select>
@@ -123,6 +136,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">office</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="">pdf</option>
 			<option value="">excel</option>
 			<option value="">word</option>
@@ -133,16 +147,9 @@
     <div class="m-b-10 col-lg-2">
         <h3 class="block-title m-b-5">message</h3>
         <select class="select">
+			<option value="">qizuo</option>
             <option value="">短信</option>
             <option value="">email</option>
-        </select>
-    </div>
-
-    <!-- 二维码 -->
-    <div class="m-b-10 col-lg-2">
-        <h3 class="block-title m-b-5">二维码</h3>
-        <select class="select">
-            <option value="">二维码</option>
         </select>
     </div>
 
@@ -150,6 +157,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">http</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="">http</option>
 			<option value="">socket</option>
 		</select>
@@ -159,6 +167,7 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">file</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="">file</option>
 		</select>
 	</div>
@@ -167,10 +176,19 @@
 	<div class="m-b-10 col-lg-2">
 		<h3 class="block-title m-b-5">json</h3>
 		<select class="select">
+			<option value="">qizuo</option>
 			<option value="">json</option>
 		</select>
 	</div>
 
+	<!-- 二维码 -->
+	<div class="m-b-10 col-lg-2">
+		<h3 class="block-title m-b-5">二维码</h3>
+		<select class="select">
+			<option value="">qizuo</option>
+			<option value="">二维码</option>
+		</select>
+	</div>
 </div>
 
 <!-- 移动端 -->
@@ -186,7 +204,7 @@
 			$('.select').selectpicker();
         }
         //跳转
-		$("option").on("click",function(){
+		$(".select").on("change",function(){
 		    if(isNotBlank($(this).val())){
                 pjaxFunc($(this).val())
 			}

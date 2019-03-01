@@ -1,7 +1,9 @@
 <%@ include file="../../../base/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
+    <div class="col-lg-10" id="allmap" style="height: 100px" >
 
+    </div>
 </div>
 
 <!-- 执行js -->
@@ -17,13 +19,9 @@
         window.onload = loadJScript;
 
         function init() {
-            map= new BMap.Map("allmap");            // 创建Map实例
-            var point ='';
-            if('${business.longitude}'!=''&&'${business.latitude}'!=''){
-                point = new BMap.Point('${business.longitude}', '${business.latitude}');
-            }else{
-                point = new BMap.Point(116.404, 39.915); // 创建点坐标
-            }
+            alert(1);
+            var map= new BMap.Map("allmap");            // 创建Map实例
+            var point =new BMap.Point(116.404, 39.915);
             map.centerAndZoom(point,11);				//初始化并赋予地图等级
             //map.enableScrollWheelZoom();                 //启用滚轮放大缩小
             //版权
@@ -31,7 +29,7 @@
             cr.addCopyright({id:1,content:'七作',bounds:''});
             map.addControl(cr);*/
             //定位
-            if('${business.longitude}'==''||'${business.latitude}'==''){
+            /*if('${business.longitude}'==''||'${business.latitude}'==''){
                 var myCity = new BMap.LocalCity();
                 myCity.get(myFun);
             }
@@ -40,11 +38,11 @@
                 renderOptions:{map: map}
             });
             local.setPageCapacity(2);
-            local.setSearchCompleteCallback(jw);
+            local.setSearchCompleteCallback(jw);*/
 
             //地理位置改变时
-            changeSerach();
-            $('#businessAddr').change(changeSerach);
+            //changeSerach();
+            //$('#businessAddr').change(changeSerach);
             //初始化位置
             /*if($("#businessAddr").val()!=''){
                 local.search($("#businessAddr").val());

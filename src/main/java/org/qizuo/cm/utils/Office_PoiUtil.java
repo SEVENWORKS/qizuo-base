@@ -110,6 +110,11 @@ public class Office_PoiUtil {
      * @return 返回该单元格相应的类型的值
      */
     public static Object imp_getRightTypeCell(Cell cell) {
+        //null
+        if(null==cell){
+            return null;
+        }
+        //非null
         Object object = null;
         switch (cell.getCellType()) {
             case Cell.CELL_TYPE_STRING: {
@@ -148,9 +153,6 @@ public class Office_PoiUtil {
      * @date: 16:12 2019/2/27
      */
     public BackResultPoJo imp_readFinal(Sheet sheet, int rowBegin, int colBegin) {
-        //获得表头
-        Row rowHead = sheet.getRow(0);
-        int rowHeadNum = rowHead.getPhysicalNumberOfCells();
         //获得数据的总行数
         int totalRowNum = sheet.getLastRowNum();
         //外层返回数据
@@ -164,7 +166,7 @@ public class Office_PoiUtil {
             //获得第i行对象(从0开始，但是0行是头)
             Row row = sheet.getRow(i);
             //遍历例
-            for (int j = colBegin; j < rowHeadNum; j++) {
+            for (int j = colBegin; j < row.getPhysicalNumberOfCells(); j++) {
                 //获取第i行对象中第j列对象
                 cell = row.getCell(j);
                 //数据装配
