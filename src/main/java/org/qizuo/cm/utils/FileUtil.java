@@ -17,9 +17,10 @@ import java.net.URL;
  * @date: 16:18 2019/1/11
  */
 public class FileUtil {
+    /**********************read***************************/
     /**
      * @author: fangl
-     * @description: 读取文件内容
+     * @description: 通过流，读取文件内容
      * @date: 17:17 2019/2/26
      */
     public static String readFile(InputStream is) {
@@ -46,7 +47,7 @@ public class FileUtil {
 
     /**
      * @author: fangl
-     * @description: 读取Text文件操作
+     * @description: 读取text文件操作
      * @date: 17:24 2019/2/26
      */
     public static String readText(String filePath) {
@@ -64,111 +65,13 @@ public class FileUtil {
         return lines;
     }
 
-    /**
-     * 通过上一层目录和目录名得到最后的目录层次
-     */
-    public static String getSaveDir(String previousDir, String dirName) {
-        if (StringUtils.isNotBlank(previousDir)) {
-            dirName = previousDir + "/" + dirName + "/";
-        } else {
-            dirName = dirName + "/";
-        }
-        return dirName;
-    }
-
-    /**
-     * 如果目录不存在，就创建文件
-     */
-    public static String mkdirs(String dirPath) {
-        try {
-            File file = new File(dirPath);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return dirPath;
-    }
-
-
-
-    /**
-     * @author: fangl
-     * @description: 写入Text文件操作
-     * @date: 17:25 2019/2/26
-     */
-    public static void writeText(String filePath, String content, boolean isAppend) {
-        FileOutputStream outputStream = null;
-        OutputStreamWriter outputStreamWriter = null;
-        BufferedWriter bufferedWriter = null;
-        try {
-            outputStream = new FileOutputStream(filePath, isAppend);
-            outputStreamWriter = new OutputStreamWriter(outputStream);
-            bufferedWriter = new BufferedWriter(outputStreamWriter);
-            bufferedWriter.write(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-                if (outputStreamWriter != null) {
-                    outputStreamWriter.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    /**
-     * @author: fangl
-     * @description: 判断是否是文件夹
-     * @date: 17:23 2019/2/26
-     */
-    public static boolean isDir(String path) {
-        File file = new File(path);
-        if (file.exists()) {
-            return file.isDirectory();
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * @author: fangl
-     * @description: 判断文件是否存在
-     * @date: 17:17 2019/2/26
-     */
-    public static boolean isFileExist(String fileName) {
-        return new File(fileName).isFile();
-    }
-
-    /**
-     * @author: fangl
-     * @description: 创建指定的目录。 如果指定的目录的父目录不存在则创建其目录书上所有需要的父目录(注意：可能会在返回false的时候创建部分父目录。)
-     * @date: 17:18 2019/2/26
-     */
-    public static boolean makeDirectory(File file) {
-        File parent = file.getParentFile();
-        if (parent != null) {
-            return parent.mkdirs();
-        }
-        return false;
-    }
-
+    /**********************message***************************/
     /**
      * @author: fangl
      * @description: 返回文件的URL地址
      * @date: 17:18 2019/2/26
      */
-    public static URL getURL(File file) throws MalformedURLException {
+    public static URL readGetURL(File file) throws MalformedURLException {
         String fileURL = "file:/" + file.getAbsolutePath();
         URL url = new URL(fileURL);
         return url;
@@ -176,24 +79,23 @@ public class FileUtil {
 
     /**
      * @author: fangl
-     * @description: 从文件路径得到文件名。
-     * @date: 17:18 2019/2/26
-     */
-    public static String getFileName(String filePath) {
-        File file = new File(filePath);
-        return file.getName();
-    }
-
-    /**
-     * @author: fangl
      * @description: 从文件名得到文件绝对路径
      * @date: 17:18 2019/2/26
      */
-    public static String getFilePath(String fileName) {
+    public static String readGetFilePath(String fileName) {
         File file = new File(fileName);
         return file.getAbsolutePath();
     }
 
+    /**
+     * @author: fangl
+     * @description: 从文件路径得到文件名。
+     * @date: 17:18 2019/2/26
+     */
+    public static String readGetFileName(String filePath) {
+        File file = new File(filePath);
+        return file.getName();
+    }
     /**
      * @author: fangl
      * @description: 将DOS/Windows格式的路径转换为UNIX/Linux格式的路径。
@@ -340,44 +242,95 @@ public class FileUtil {
     }
 
     /**
-     * 删除一个文件。
+     * 文件或者目录重命名
      */
-    public static void deleteFile(String filename) throws IOException {
-        File file = new File(filename);
-        if (file.isDirectory()) {
-            throw new IOException("IOException -> BadInputException: not a file.");
+    public static boolean renameTo(String oldFilePath, String newName) {
+        try {
+            //若文件存在
+            File oldFile = new File(oldFilePath);
+            //判断是全路径还是文件名
+            if (oldFile.exists()) {
+                //单文件名，判断是windows还是Linux系统
+                if (newName.indexOf("/") < 0 && newName.indexOf("\\") < 0) {
+                    String absolutePath = oldFile.getAbsolutePath();
+                    //Linux系统
+                    if (newName.indexOf("/") > 0) {
+                        newName = absolutePath.substring(0, absolutePath.lastIndexOf("/") + 1) + newName;
+                    } else {
+                        newName = absolutePath.substring(0, absolutePath.lastIndexOf("\\") + 1) + newName;
+                    }
+                }
+                //判断重命名后的文件是否存在
+                File file = new File(newName);
+                if (file.exists()) {
+                    System.out.println("该文件已存在,不能重命名");
+                } else { //不存在，重命名
+                    return oldFile.renameTo(file);
+                }
+            } else {
+                System.out.println("原该文件不存在,不能重命名");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (!file.exists()) {
-            throw new IOException("IOException -> BadInputException: file is not exist.");
-        }
-        if (!file.delete()) {
-            throw new IOException("Cannot delete file. filename = " + filename);
-        }
+        return false;
     }
 
+
+    /**************************create********************************/
     /**
-     * 删除文件夹及其下面的子文件夹
+     * 如果目录不存在，就创建文件
      */
-    public static void deleteDir(File dir) throws IOException {
-        if (dir.isFile()) throw new IOException("IOException -> BadInputException: not a directory.");
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                if (file.isFile()) {
-                    file.delete();
-                } else {
-                    deleteDir(file);
+    public static String createFile(String dirPath) {
+        try {
+            File file = new File(dirPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dirPath;
+    }
+
+    /**************************write********************************/
+    /**
+     * @author: fangl
+     * @description: 写入Text文件操作
+     * @date: 17:25 2019/2/26
+     */
+    public static void writeText(String filePath, String content, boolean isAppend) {
+        FileOutputStream outputStream = null;
+        OutputStreamWriter outputStreamWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            outputStream = new FileOutputStream(filePath, isAppend);
+            outputStreamWriter = new OutputStreamWriter(outputStream);
+            bufferedWriter = new BufferedWriter(outputStreamWriter);
+            bufferedWriter.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
                 }
+                if (outputStreamWriter != null) {
+                    outputStreamWriter.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        dir.delete();
     }
 
     /**
      * 复制文件
      */
-    public static void copy(File src, File dst) throws Exception {
+    public static void writeCopy(File src, File dst) throws Exception {
         int BUFFER_SIZE = 4096;
         InputStream in = null;
         OutputStream out = null;
@@ -414,7 +367,7 @@ public class FileUtil {
     /**
      * 复制文件，支持把源文件内容追加到目标文件末尾
      */
-    public static void copy(File src, File dst, boolean append) throws Exception {
+    public static void writeCopy(File src, File dst, boolean append) throws Exception {
         int BUFFER_SIZE = 4096;
         InputStream in = null;
         OutputStream out = null;
@@ -448,35 +401,92 @@ public class FileUtil {
         }
     }
 
+    /**********************delete***************************/
     /**
-     * 文件或者目录重命名
+     * 删除一个文件。
      */
-    public static boolean renameTo(String oldFilePath, String newName) {
-        try {
-            File oldFile = new File(oldFilePath); //若文件存在
-            if (oldFile.exists()) { //判断是全路径还是文件名
-                if (newName.indexOf("/") < 0 && newName.indexOf("\\") < 0) { //单文件名，判断是windows还是Linux系统
-                    String absolutePath = oldFile.getAbsolutePath();
-                    if (newName.indexOf("/") > 0) { //Linux系统
-                        newName = absolutePath.substring(0, absolutePath.lastIndexOf("/") + 1) + newName;
-                    } else {
-                        newName = absolutePath.substring(0, absolutePath.lastIndexOf("\\") + 1) + newName;
-                    }
+    public static void deleteFile(String filename) throws IOException {
+        File file = new File(filename);
+        if (file.isDirectory()) {
+            throw new IOException("IOException -> BadInputException: not a file.");
+        }
+        if (!file.exists()) {
+            throw new IOException("IOException -> BadInputException: file is not exist.");
+        }
+        if (!file.delete()) {
+            throw new IOException("Cannot delete file. filename = " + filename);
+        }
+    }
+
+    /**
+     * 删除文件夹及其下面的子文件夹
+     */
+    public static void deleteDir(File dir) throws IOException {
+        if (dir.isFile()) throw new IOException("IOException -> BadInputException: not a directory.");
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (file.isFile()) {
+                    file.delete();
+                } else {
+                    deleteDir(file);
                 }
-                File file = new File(newName); //判断重命名后的文件是否存在
-                if (file.exists()) {
-                    System.out.println("该文件已存在,不能重命名");
-                } else { //不存在，重命名
-                    return oldFile.renameTo(file);
-                }
-            } else {
-                System.out.println("原该文件不存在,不能重命名");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        dir.delete();
+    }
+
+    /**************************is********************************/
+    /**
+     * @author: fangl
+     * @description: 判断文件是否存在
+     * @date: 17:17 2019/2/26
+     */
+    public static boolean isFileExist(String fileName) {
+        return new File(fileName).isFile();
+    }
+
+    /**************************dir********************************/
+    /**
+     * 通过上一层目录和目录名得到最后的目录层次
+     */
+    public static String dirGetSaveDir(String previousDir, String dirName) {
+        if (StringUtils.isNotBlank(previousDir)) {
+            dirName = previousDir + "/" + dirName + "/";
+        } else {
+            dirName = dirName + "/";
+        }
+        return dirName;
+    }
+
+    /**
+     * @author: fangl
+     * @description: 判断是否是文件夹
+     * @date: 17:23 2019/2/26
+     */
+    public static boolean dirIsDir(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            return file.isDirectory();
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @author: fangl
+     * @description: 创建指定的目录。 如果指定的目录的父目录不存在则创建其目录书上所有需要的父目录(注意：可能会在返回false的时候创建部分父目录。)
+     * @date: 17:18 2019/2/26
+     */
+    public static boolean dirMakeDirectory(File file) {
+        File parent = file.getParentFile();
+        if (parent != null) {
+            return parent.mkdirs();
         }
         return false;
     }
+
 
     /** **********************qizuo********************** */
     /**
