@@ -6,11 +6,8 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            $('textarea').autosize();
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        $('textarea').autosize();
+    })
+    /** ********************************************** */
 </script>

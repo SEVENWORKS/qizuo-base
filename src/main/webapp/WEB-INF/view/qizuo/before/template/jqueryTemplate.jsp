@@ -14,12 +14,9 @@
 </script>
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            var users = [{ ID: 'think8848', Name: 'Joseph Chan', Num: '1', Status: 1 }, { ID: 'aCloud', Name: 'Mary Cheung', Num: '2'}];
-            $("#demo").tmpl(users).appendTo('#div_demo');
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        var users = [{ ID: 'think8848', Name: 'Joseph Chan', Num: '1', Status: 1 }, { ID: 'aCloud', Name: 'Mary Cheung', Num: '2'}];
+        $("#demo").tmpl(users).appendTo('#div_demo');
+    })
+    /** ********************************************** */
 </script>

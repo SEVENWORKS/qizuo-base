@@ -6,13 +6,10 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            $('.wysiwye-editor').summernote({
-                height: 200
-            });
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        $('.wysiwye-editor').summernote({
+            height: 200
+        });
+    })
+    /** ********************************************** */
 </script>

@@ -6,11 +6,8 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
+    globalJs(function(){
 
-        })
-    }catch (error){
-        console.log(error);
-    }
+    })
+    /** ********************************************** */
 </script>

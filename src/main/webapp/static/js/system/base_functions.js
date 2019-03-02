@@ -284,4 +284,16 @@ function f5(){
     pjaxFunc(global$frameUrl);
 }
 
+/** 全局js函数 */
+function globalJs(func){
+    try {
+        $(function(){
+            func();
+        })
+    }catch (error){
+        console.log(error);
+        window.location.reload();
+    }
+}
+
 /** iframe操作 */

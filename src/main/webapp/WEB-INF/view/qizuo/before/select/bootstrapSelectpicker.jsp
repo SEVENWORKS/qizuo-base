@@ -12,11 +12,8 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            $('select').selectpicker();
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        $('select').selectpicker();
+    })
+    /** ********************************************** */
 </script>

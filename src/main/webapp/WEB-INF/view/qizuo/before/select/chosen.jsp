@@ -28,11 +28,8 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            $('select').chosen();
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        $('select').chosen();
+    })
+    /** ********************************************** */
 </script>

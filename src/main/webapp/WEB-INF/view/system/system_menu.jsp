@@ -54,72 +54,69 @@
 </script>
 <!-- 执行js -->
 <script>
-    try{
-        $(function(){
-            //父节点
-            var baseId=0;
-            var curLevel=0;
-            /** ************************************************************ */
-            //新增按钮(这个函数第二个参数可以传入复杂函数)
-            buttonOne('新增',function(){
-                if(curLevel==0){
-                    pjaxFunc('${jumpPath}system/sys/menuDo?parentId='+baseId);
-                }else{
-                    alert('暂时菜单只允许存在二级');
-                }
-            });
-            /** ************************************************************ */
-            //分页(传入获取分页数据的方法,可传分页size和分页no)
-            pageHtml(qPage,10,1);
-            //分页数据查询(都默认一个函数)
-            function qPage(func,pageNo,pageSize){
-                $.post('${modulePath}system/menu/page',{pageNo:pageNo,pageSize:pageSize,'baseId':baseId},function(data){
-                    backResult(data,function(data){
-                        //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
-                        tplFuncTable(data.entitys);
-                        //执行分页
-                        func(data);
-                    })
-                })
+    globalJs(function(){
+//父节点
+        var baseId=0;
+        var curLevel=0;
+        /** ************************************************************ */
+        //新增按钮(这个函数第二个参数可以传入复杂函数)
+        buttonOne('新增',function(){
+            if(curLevel==0){
+                pjaxFunc('${jumpPath}system/sys/menuDo?parentId='+baseId);
+            }else{
+                alert('暂时菜单只允许存在二级');
             }
-            /** ************************************************************ */
-            //ztree
-            (function(){
-                $.post('${modulePath}system/menu/list',{},function(data){
-                    backResult(data,function(data){
-                        if(isNotBlank(data)){
-                            var setting = {
-                                data: {
-                                    simpleData: {
-                                        enable: true,//这个开启代表简单参数的搭配，即无需再使用json嵌套形式，直接用数组对象list就行
-                                        rootPId: 0 //根节点代表的数据，默认Null
-                                    }
-                                },
-                                view: {
-                                    fontCss : {color:"#FFFFFF"},//字体颜色
-                                    showIcon: false //设置是否显示图标
-                                },
-                                callback : {
-                                    onClick : function(event, treeId, treeNode) {
-                                        //去掉背景色
-                                        $(".curSelectedNode").removeClass("curSelectedNode");
-                                        //父节点改变
-                                        baseId=treeNode.id;
-                                        //查询数据
-                                        pageHtml(qPage,10,1);
-                                        //当前节点所处等级
-                                        curLevel=treeNode.level;
-                                    }
+        });
+        /** ************************************************************ */
+        //分页(传入获取分页数据的方法,可传分页size和分页no)
+        pageHtml(qPage,10,1);
+        //分页数据查询(都默认一个函数)
+        function qPage(func,pageNo,pageSize){
+            $.post('${modulePath}system/menu/page',{pageNo:pageNo,pageSize:pageSize,'baseId':baseId},function(data){
+                backResult(data,function(data){
+                    //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
+                    tplFuncTable(data.entitys);
+                    //执行分页
+                    func(data);
+                })
+            })
+        }
+        /** ************************************************************ */
+        //ztree
+        (function(){
+            $.post('${modulePath}system/menu/list',{},function(data){
+                backResult(data,function(data){
+                    if(isNotBlank(data)){
+                        var setting = {
+                            data: {
+                                simpleData: {
+                                    enable: true,//这个开启代表简单参数的搭配，即无需再使用json嵌套形式，直接用数组对象list就行
+                                    rootPId: 0 //根节点代表的数据，默认Null
+                                }
+                            },
+                            view: {
+                                fontCss : {color:"#FFFFFF"},//字体颜色
+                                showIcon: false //设置是否显示图标
+                            },
+                            callback : {
+                                onClick : function(event, treeId, treeNode) {
+                                    //去掉背景色
+                                    $(".curSelectedNode").removeClass("curSelectedNode");
+                                    //父节点改变
+                                    baseId=treeNode.id;
+                                    //查询数据
+                                    pageHtml(qPage,10,1);
+                                    //当前节点所处等级
+                                    curLevel=treeNode.level;
                                 }
                             }
-                            //加载树
-                            treeMenu(data,'name',setting);
                         }
-                    })
+                        //加载树
+                        treeMenu(data,'name',setting);
+                    }
                 })
-            })()
-        })
-    }catch (error){
-        console.log(error);
-    }
+            })
+        })()
+    })
+    /** ********************************************** */
 </script>

@@ -7,9 +7,8 @@
 <script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
 <!-- 执行js -->
 <script>
-    try {
+    globalJs(function(){
         var ue = UE.getEditor('container');
-    }catch (error){
-        console.log(error);
-    }
+    })
+    /** ********************************************** */
 </script>

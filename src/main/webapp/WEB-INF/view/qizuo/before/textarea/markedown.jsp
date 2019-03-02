@@ -6,14 +6,11 @@
 
 <!-- 执行js -->
 <script>
-    try {
-        $(function(){
-            $('.markdown-editor').markdown({
-                autofocus:false,
-                savable:false
-            });
-        })
-    }catch (error){
-        console.log(error);
-    }
+    globalJs(function(){
+        $('.markdown-editor').markdown({
+            autofocus:false,
+            savable:false
+        });
+    })
+    /** ********************************************** */
 </script>

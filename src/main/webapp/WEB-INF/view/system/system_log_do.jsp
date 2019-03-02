@@ -29,41 +29,38 @@
 </script>
 <!-- 执行js -->
 <script>
-    try{
-        $(function(){
-            /** ************************************************************ */
-            /** ************************************************************ */
-            qData();
-            //查询数据
-            function qData(){
-                //只有更新的时候才去查找数据
-                if(isNotBlank('${baseId}')){
-                    $.post('${modulePath}system/log/query',{baseId:'${baseId}'},function(data){
-                        backResult(data,function(data){
-                            if(isNotBlank(data)){
-                                //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
-                                tplFunc(data);
-                                //扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
-                                if($('.auto-size')[0]) {
-                                    $('.auto-size').autosize();
-                                }
+    globalJs(function(){
+        /** ************************************************************ */
+        /** ************************************************************ */
+        qData();
+        //查询数据
+        function qData(){
+            //只有更新的时候才去查找数据
+            if(isNotBlank('${baseId}')){
+                $.post('${modulePath}system/log/query',{baseId:'${baseId}'},function(data){
+                    backResult(data,function(data){
+                        if(isNotBlank(data)){
+                            //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
+                            tplFunc(data);
+                            //扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
+                            if($('.auto-size')[0]) {
+                                $('.auto-size').autosize();
                             }
-                        })
+                        }
                     })
-                }else{
-                    tplFunc();
-                    //扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
-                    if($('.auto-size')[0]) {
-                        $('.auto-size').autosize();
-                    }
+                })
+            }else{
+                tplFunc();
+                //扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
+                if($('.auto-size')[0]) {
+                    $('.auto-size').autosize();
                 }
-
             }
-            //添加或者修改
-            //表单验证
-            /** ************************************************************ */
-        })
-    }catch (error){
-        console.log(error);
-    }
+
+        }
+        //添加或者修改
+        //表单验证
+        /** ************************************************************ */
+    })
+    /** ********************************************** */
 </script>

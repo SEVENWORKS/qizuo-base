@@ -52,115 +52,112 @@
 <script src="${staticPath}js/base/toggler.min.js"></script>
 <!-- 执行js -->
 <script>
-    try{
-        $(function(){
-            /** ************************************************************ */
-            //新增按钮(这个函数第二个参数可以传入复杂函数)
-            if(!isNotBlank('${baseId}')){
-                buttonOne('发送',function(){
-                    //选择发送对象
-                    sendObj();
-                },'45%');
-                buttonOne('取消',function(){
-                    //去掉上个页面多余的元素
-                    buttonRemove();
-                    $(global$frameContainer).empty();
-                },'55%');
-            }
-            /** ************************************************************ */
-            qData();
-            //查询数据
-            function qData(){
-                //只有更新的时候才去查找数据
-                if(isNotBlank('${baseId}')){
-                    $.post('${modulePath}system/msg/query',{baseId:'${baseId}'},function(data){
-                        backResult(data,function(data){
-                            if(isNotBlank(data)){
-                                //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
-                                tplFunc(data);
-                                //变成已读
-                                if(data.isRead==0){
-                                    $.post('${modulePath}system/msg/uRead',{baseId:'${baseId}'},function(data){
-                                        backResult(data,function(){
-                                            //数量减一
-                                            $(".drawer-toggle i").eq(1).text(parseInt($(".drawer-toggle i").eq(1).text())-1);
-                                        })
-                                    })
-                                }
-                            }
-                        })
-                    })
-                }else{
-                    tplFunc();
-                    //扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
-                    if($('.auto-size')[0]) {
-                        $('.auto-size').autosize();
-                    }
-                }
+    globalJs(function(){
+		/** ************************************************************ */
+		//新增按钮(这个函数第二个参数可以传入复杂函数)
+		if(!isNotBlank('${baseId}')){
+			buttonOne('发送',function(){
+				//选择发送对象
+				sendObj();
+			},'45%');
+			buttonOne('取消',function(){
+				//去掉上个页面多余的元素
+				buttonRemove();
+				$(global$frameContainer).empty();
+			},'55%');
+		}
+		/** ************************************************************ */
+		qData();
+		//查询数据
+		function qData(){
+			//只有更新的时候才去查找数据
+			if(isNotBlank('${baseId}')){
+				$.post('${modulePath}system/msg/query',{baseId:'${baseId}'},function(data){
+					backResult(data,function(data){
+						if(isNotBlank(data)){
+							//模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
+							tplFunc(data);
+							//变成已读
+							if(data.isRead==0){
+								$.post('${modulePath}system/msg/uRead',{baseId:'${baseId}'},function(data){
+									backResult(data,function(){
+										//数量减一
+										$(".drawer-toggle i").eq(1).text(parseInt($(".drawer-toggle i").eq(1).text())-1);
+									})
+								})
+							}
+						}
+					})
+				})
+			}else{
+				tplFunc();
+				//扩展型(autosize.min.js，这款插件不仅仅在textarea上有体现)
+				if($('.auto-size')[0]) {
+					$('.auto-size').autosize();
+				}
+			}
 
-            }
-            //添加或者修改
-            function iuFunc(){
-                if(formValid()){
-                    $.post('${modulePath}system/msg/iuDo',$('#dataContainer').serialize(),function(data){
-                        backResultAlert(data,function(data){
-                            window.location.reload();
-                        })
-                    })
-                }
-            }
-            //表单验证
-            function formValid(){
-                return true;
-            }
-            /** ************************************************************ */
-            //选择发送对象
-            function sendObj(){
-                modelBase('#sendObj','40%','auto');
-            }
-            //确定发送对象
-            $("#sendObj button").on("click",function(){
-                //塞入数据
-                $('input[name="sendUserIds"]').val($('#sendUserId').val());
-                $('input[name="type"]').val($('#type').val());
-                $('input[name="sendTypeId"]').val($('#sendTypeId').val());
-                //发送
-                iuFunc();
-                //关闭窗口
-                layerClose();
-            })
-            //开关控制
-            checkSwitch('#mySwitch',function(){
-                $(".sendObj_left").show();
-                $(".sendObj_right").hide();
-            },function(){
-                $(".sendObj_left").hide();
-                $(".sendObj_right").show();
-            });
-            //获取人员列表
-            $.post('${modulePath}system/user/list',{},function(data){
-                backResult(data,function(bt){
-                    var html='';
-                    //人员
-                    if(isNotBlank(bt)){
-                        for(var i=0;i<bt.length;i++){
-                            html+='<option value="'+bt[i].baseId+'">'+bt[i].name+'</option>';
-                        }
-                    }else{
-                        html='<option value="">暂无更多人员</option>';
-                    }
-                    $("#sendUserId").html(html);
-                    //slect插件初始化(select.min.js)
-                    if($('.select')[0]) {
-                        $('.select').selectpicker({
-                            //设置没有任何选择时候的文字显示
-                            noneSelectedText:'多选...'
-                        });
-                    }
-                })
-            })
-        })
-    }catch (error){
-        console.log(error);
-    }
+		}
+		//添加或者修改
+		function iuFunc(){
+			if(formValid()){
+				$.post('${modulePath}system/msg/iuDo',$('#dataContainer').serialize(),function(data){
+					backResultAlert(data,function(data){
+						window.location.reload();
+					})
+				})
+			}
+		}
+		//表单验证
+		function formValid(){
+			return true;
+		}
+		/** ************************************************************ */
+		//选择发送对象
+		function sendObj(){
+			modelBase('#sendObj','40%','auto');
+		}
+		//确定发送对象
+		$("#sendObj button").on("click",function(){
+			//塞入数据
+			$('input[name="sendUserIds"]').val($('#sendUserId').val());
+			$('input[name="type"]').val($('#type').val());
+			$('input[name="sendTypeId"]').val($('#sendTypeId').val());
+			//发送
+			iuFunc();
+			//关闭窗口
+			layerClose();
+		})
+		//开关控制
+		checkSwitch('#mySwitch',function(){
+			$(".sendObj_left").show();
+			$(".sendObj_right").hide();
+		},function(){
+			$(".sendObj_left").hide();
+			$(".sendObj_right").show();
+		});
+		//获取人员列表
+		$.post('${modulePath}system/user/list',{},function(data){
+			backResult(data,function(bt){
+				var html='';
+				//人员
+				if(isNotBlank(bt)){
+					for(var i=0;i<bt.length;i++){
+						html+='<option value="'+bt[i].baseId+'">'+bt[i].name+'</option>';
+					}
+				}else{
+					html='<option value="">暂无更多人员</option>';
+				}
+				$("#sendUserId").html(html);
+				//slect插件初始化(select.min.js)
+				if($('.select')[0]) {
+					$('.select').selectpicker({
+						//设置没有任何选择时候的文字显示
+						noneSelectedText:'多选...'
+					});
+				}
+			})
+		})
+    })
+    /** ********************************************** */
 </script>
