@@ -100,7 +100,7 @@
                 var theme=isNotBlank(menuList[i].theme)?menuList[i].theme:"sa-side-form";
                 //html baseContainerIframe(\''+jumpUrl+'\');
                 html+='<li class="dropdown">\n' +
-                    '     <a class="'+theme+'" href="'+jumpUrl+'" level="0">\n' +
+                    '     <a class="'+theme+'" href="#" level="0" onclick="pjax(\''+jumpUrl+'\',this)">\n' +
                     '         <span class="menu-item">'+name+'</span>\n' +
                     '     </a>\n' +
                     '     <ul class="list-unstyled menu-item">\n';
@@ -112,7 +112,7 @@
                         var name2=isNotBlank(menuList[i].menuPoJos[j].name)?menuList[i].menuPoJos[j].name:"";
                         var jumpUrl2=isNotBlank(menuList[i].menuPoJos[j].url)?'${pageContext.request.contextPath}/'+menuList[i].menuPoJos[j].url:"";
                         //html baseContainerIframe(\''+jumpUrl2+'\');
-                        html+='<li><a href="'+jumpUrl2+'" level="1" bname="'+name+'">'+name2+'</a></li>\n';
+                        html+='<li><a href="#" level="1" bname="'+name+'" onclick="pjax(\''+jumpUrl2+'\',this)">'+name2+'</a></li>\n';
                     }
                 }
 
@@ -121,9 +121,6 @@
             }
 
             $(".side-menu").append(html);
-
-            //pjax绑定
-            pjax();
         }
     }
 </script>

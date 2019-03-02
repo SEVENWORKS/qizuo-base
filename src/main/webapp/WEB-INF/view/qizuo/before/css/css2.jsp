@@ -6,7 +6,11 @@
 
 <!-- 执行js -->
 <script>
-    $(function(){
+    try {
+        $(function(){
 
-    })
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

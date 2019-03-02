@@ -9,6 +9,14 @@
 		<!--css-->
 		<link rel="stylesheet" href="${staticPath}css/base/bootstrap.min.css" />
 		<link rel="stylesheet" href="${staticPath}css/system/base_login.css" />
+		<!-- jQuery -->
+		<script src="${staticPath}js/base/jquery.min.js"></script>
+		<!-- script base system -->
+		<script src="${staticPath}js/system/base_Global.js"></script>
+		<script src="${staticPath}js/system/base_functions.js"></script>
+		<script src="${staticPath}js/system/base_utils.js"></script>
+		<!-- layer.js -->
+		<script src="${staticPath}js/layui/layer/layer.js"></script>
 	</head>
 	<body>
 		<header>

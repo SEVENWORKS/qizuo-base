@@ -22,9 +22,13 @@
 </script>
 <!-- 执行js -->
 <script>
-    $(function(){
-        var tplHtml=template(baseTpl, data);
-        //模板添加
-        $(container).append(tplHtml);
-    })
+    try {
+        $(function(){
+            var tplHtml=template(baseTpl, data);
+            //模板添加
+            $(container).append(tplHtml);
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

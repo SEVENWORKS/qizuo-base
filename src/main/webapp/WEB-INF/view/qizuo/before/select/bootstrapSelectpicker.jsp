@@ -12,7 +12,11 @@
 
 <!-- 执行js -->
 <script>
-    $(function(){
-        $('select').selectpicker();
-    })
+    try {
+        $(function(){
+            $('select').selectpicker();
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

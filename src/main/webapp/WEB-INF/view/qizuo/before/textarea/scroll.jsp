@@ -6,7 +6,11 @@
 
 <!-- 执行js -->
 <script>
-    $(function(){
-        $('textarea').niceScroll();
-    })
+    try {
+        $(function(){
+            $('textarea').niceScroll();
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

@@ -47,26 +47,30 @@
 </script>
 <!-- 执行js -->
 <script>
-    $(function(){
-        /** ************************************************************ */
-        //新增按钮(这个函数第二个参数可以传入复杂函数)
-        buttonOne('新增',function(){
-            pjaxFunc('${jumpPath}system/sys/dictDo');
-        });
-        /** ************************************************************ */
-        //分页(传入获取分页数据的方法,可传分页size和分页no)
-        pageHtml(qPage,10,1);
-        //分页数据查询(都默认一个函数)
-        function qPage(func,pageNo,pageSize){
-            $.post('${modulePath}system/dict/page',{pageNo:pageNo,pageSize:pageSize},function(data){
-                backResult(data,function(data){
-					//模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
-                    tplFuncTable(data.entitys);
-					//执行分页
-					func(data);
+    try{
+        $(function(){
+            /** ************************************************************ */
+            //新增按钮(这个函数第二个参数可以传入复杂函数)
+            buttonOne('新增',function(){
+                pjaxFunc('${jumpPath}system/sys/dictDo');
+            });
+            /** ************************************************************ */
+            //分页(传入获取分页数据的方法,可传分页size和分页no)
+            pageHtml(qPage,10,1);
+            //分页数据查询(都默认一个函数)
+            function qPage(func,pageNo,pageSize){
+                $.post('${modulePath}system/dict/page',{pageNo:pageNo,pageSize:pageSize},function(data){
+                    backResult(data,function(data){
+                        //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
+                        tplFuncTable(data.entitys);
+                        //执行分页
+                        func(data);
+                    })
                 })
-            })
-        }
-        /** ************************************************************ */
-    })
+            }
+            /** ************************************************************ */
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

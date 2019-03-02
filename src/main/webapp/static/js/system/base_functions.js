@@ -68,13 +68,16 @@ function getRootPath() {
 }
 
 /** *************************************异步获取html片段********************************** */
-/** pjax封装(push必须赋值为false,否则无法使用,应该算个bug) */
+/** pjax封装(push必须赋值为false,否则无法使用,应该算个bug)
+ * (为什么说pjax最好不要手动调用？因为它的生命周期钩子函数适于某个元素绑定的，a元素是最佳使用对象) */
 function pjaxFunc(url,container){
     container=isNotBlank(container)?container:global$frameContainer;
     //去掉上个页面多余的元素
     buttonRemove();
     //异步加载
-    $.pjax({url: url, container: container,push:false,replace:false,timeout:6500});
+    ajaxHtml(url,container);
+    //$.pjax({url: url, container: container,push:false,replace:false,timeout:6500,cache:false});
+    //$.pjax.reload(global$frameContainer, {url: url,push:false,replace:false})//使用pjax机制发起一个当前URL的请求到服务器，并且通过响应的内容替换容器元素中的内容，同时不添加浏览器历史记录。
 }
 /** pjax封装 */
 function pjaxFuncForClick(selector,container,options){
@@ -83,11 +86,7 @@ function pjaxFuncForClick(selector,container,options){
 /** 异步加载html */
 function ajaxHtml(url,container){
     $.get(url,{},function(data){
-        if(data.indexOf("system/base/container")==-1){
-            $(container).html(data);
-        }else{
-            window.location.reload();
-        }
+        $(container).html(data);
     })
 }
 

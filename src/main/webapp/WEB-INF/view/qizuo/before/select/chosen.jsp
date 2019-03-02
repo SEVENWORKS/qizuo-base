@@ -28,7 +28,11 @@
 
 <!-- 执行js -->
 <script>
-    $(function(){
-        $('select').chosen();
-    })
+    try {
+        $(function(){
+            $('select').chosen();
+        })
+    }catch (error){
+        console.log(error);
+    }
 </script>

@@ -4,7 +4,7 @@
     <title>七作</title>
     <!-- header static tag in -->
     <%@ include file="base_tags.jsp"%>
-    <!-- frame base -->
+    <!-- css base -->
     <link href="${staticPath}css/base/bootstrap.min.css" rel="stylesheet">
     <link href="${staticPath}css/base/animate.min.css" rel="stylesheet">
     <link href="${staticPath}css/base/font-awesome.min.css" rel="stylesheet">
@@ -13,44 +13,20 @@
     <link href="${staticPath}css/base/style.css" rel="stylesheet">
     <link href="${staticPath}css/base/icons.css" rel="stylesheet">
     <link href="${staticPath}css/base/generics.css" rel="stylesheet">
-    <!-- base -->
-    <link href="${staticPath}css/system/base.css" rel="stylesheet">
     <!-- ztree -->
     <link rel="stylesheet" href="${staticPath}js/ztree/css/zTreeStyle.css">
-</head>
-<!-- id代表皮肤 -->
-<body id="skin-tectile">
-    <!-- 头部分 -->
-    <header id="header" class="media">
-        <jsp:include page="base_header.jsp"></jsp:include>
-    </header>
-    <div class="clearfix"></div>
 
-    <!-- 左侧菜单栏和右侧iframe主体 -->
-    <section id="main" class="p-relative" role="main">
-        <!-- 左侧菜单栏 -->
-        <aside id="sidebar">
-            <jsp:include page="base_leftbar.jsp"></jsp:include>
-            <jsp:include page="base_leftbar2.jsp"></jsp:include>
-        </aside>
-        <!-- 头部分2 -->
-        <section id="content" class="container">
-            <jsp:include page="base_header2.jsp"></jsp:include>
-            <!--iframe主体 -->
-            <section id="baseFrame">
-                <%--<iframe id="baseContainerIframe" src="" style="width:100%;height: 91%" scrolling="auto" frameborder="no"></iframe>--%>
-            </section>
-        </section>
-
-    </section>
-
-    <!-- 脚部分 -->
-    <footer>
-
-    </footer>
 
     <!-- script base -->
     <!-- jQuery -->
+    <script src="${staticPath}js/base/jquery.min.js"></script>
+    <!-- layer.js -->
+    <script src="${staticPath}js/layui/layer/layer.js"></script>
+    <!-- script base system -->
+    <script src="${staticPath}js/system/base_Global.js"></script>
+    <script src="${staticPath}js/system/base_functions.js"></script>
+    <script src="${staticPath}js/system/base_utils.js"></script>
+    <!-- jQuery base -->
     <script src="${staticPath}js/base/jquery-ui.min.js"></script>
     <script src="${staticPath}js/base/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
@@ -112,6 +88,42 @@
     <script src="${staticPath}js/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
     <!-- layui -->
     <script src="${staticPath}js/layui/layui.js"></script>
+
+    <!-- css base -->
+    <!-- base -->
+    <link href="${staticPath}css/system/base.css" rel="stylesheet">
+</head>
+<!-- id代表皮肤 -->
+<body id="skin-tectile">
+    <!-- 头部分 -->
+    <header id="header" class="media">
+        <jsp:include page="base_header.jsp"></jsp:include>
+    </header>
+    <div class="clearfix"></div>
+
+    <!-- 左侧菜单栏和右侧iframe主体 -->
+    <section id="main" class="p-relative" role="main">
+        <!-- 左侧菜单栏 -->
+        <aside id="sidebar">
+            <jsp:include page="base_leftbar.jsp"></jsp:include>
+            <jsp:include page="base_leftbar2.jsp"></jsp:include>
+        </aside>
+        <!-- 头部分2 -->
+        <section id="content" class="container">
+            <jsp:include page="base_header2.jsp"></jsp:include>
+            <!--iframe主体 -->
+            <section id="baseFrame">
+                <%--<iframe id="baseContainerIframe" src="" style="width:100%;height: 91%" scrolling="auto" frameborder="no"></iframe>--%>
+            </section>
+        </section>
+
+    </section>
+
+    <!-- 脚部分 -->
+    <footer>
+
+    </footer>
+
     <!-- 框架基本函数执行 -->
     <script>
         $(function(){
@@ -151,11 +163,40 @@
         }
 
         /** pjax使用 */
-        function pjax(){
-            //普通加载
-            //pjaxFuncForClick('.side-menu a',global$frameContainer);
-            //控制在click事件中
-            $(document).on('click', '.side-menu a', function(event) {
+        function pjax(url,dom){
+            //ajax方式
+            var level=$(dom).attr('level');
+            //菜单
+            var title='';
+            var title2='';
+            if(0==level){
+                title=$(dom).find("span").text();
+            }else{
+                title2=$(dom).attr('bname');
+                title=$(dom).text();
+            }
+            baseHeader2_pageTitle(title,level,title2);
+            //跳转
+            if(isNotBlank(url)){
+                //菜单url存储
+                global$frameUrl=url;
+                //跳转判断
+                if(-1!=url.indexOf(global$openWindow)){
+                    url=url.split(global$openWindow).join("");
+                    //框架页面
+                    window.open(url);
+                    return false;
+                }else{
+                    //按钮清除
+                    buttonRemove();
+                    //普通
+                    pjaxFunc(url);
+                }
+            }else{
+                return false;
+            }
+            //pjax方式
+            /*$(document).on('click', '.side-menu a', function(event) {
                 var url=$(this).prop('href');
                 var level=$(this).attr('level');
                 //菜单
@@ -182,13 +223,13 @@
                         //按钮清除
                         buttonRemove();
                         //普通
+                        pjaxFunc(url);
                         $.pjax.click(event, {push:false,replace:false,container: global$frameContainer});
                     }
                 }else{
                     return false;
                 }
-
-            })
+            })*/
         }
     </script>
 </body>

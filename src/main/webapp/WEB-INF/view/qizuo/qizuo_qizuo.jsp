@@ -199,14 +199,14 @@
 <!-- 执行js -->
 <script>
     $(function(){
-        //多选
-        if($('.select')[0]) {
+		//多选
+		if($('.select')[0]) {
 			$('.select').selectpicker();
-        }
-        //跳转
+		}
+		//跳转
 		$(".select").on("change",function(){
-		    if(isNotBlank($(this).val())){
-                pjaxFunc($(this).val())
+			if(isNotBlank($(this).val())){
+				pjaxFunc($(this).val())
 			}
 		})
     })
