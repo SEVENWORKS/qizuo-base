@@ -6,12 +6,12 @@
     <%@ include file="base_tags.jsp"%>
     <!-- css base -->
     <link href="${staticPath}css/base/bootstrap.min.css" rel="stylesheet">
-    <link href="${staticPath}css/base/animate.min.css" rel="stylesheet">
-    <link href="${staticPath}css/base/font-awesome.min.css" rel="stylesheet">
-    <link href="${staticPath}css/base/form.css" rel="stylesheet">
     <link href="${staticPath}css/base/calendar.css" rel="stylesheet">
     <link href="${staticPath}css/base/style.css" rel="stylesheet">
     <link href="${staticPath}css/base/icons.css" rel="stylesheet">
+    <link href="${staticPath}css/base/animate.min.css" rel="stylesheet">
+    <link href="${staticPath}css/base/font-awesome.min.css" rel="stylesheet">
+    <link href="${staticPath}css/base/form.css" rel="stylesheet">
     <link href="${staticPath}css/base/generics.css" rel="stylesheet">
     <!-- ztree -->
     <link rel="stylesheet" href="${staticPath}js/ztree/css/zTreeStyle.css">
@@ -231,6 +231,7 @@
                 }
             })*/
         }
+
     </script>
 </body>
 </html>

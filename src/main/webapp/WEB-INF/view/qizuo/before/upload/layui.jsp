@@ -26,17 +26,17 @@
             //上传对象实例化
             uploadInst = uploadFactory.render({
                 /** **********config配置********** */
-                elem: '#uploadBu' //绑定元素
+                elem: '#upload' //绑定元素
                 ,url: '${ctx}/inf/upload/uploadFile_pd?timeStamp='+new Date().getTime() //上传接口
                 ,size:0//单个文件大小限制(0即不限制)
                 ,multiple:true//是否多选(不管是否多选，传到后台的时候都是单个文件排队)
                 ,number:10 //配合多选来设置,同时上传文件数量，会控制上传前后before等方法进入(0即不限制)
-                ,accept:'file'//文件类型
-                ,acceptMime:''//规定打开窗口后能选择文件的类型
-                ,exts:''//文件类型后缀限制，配合accept来使用
+                ,accept:'images'//文件类型
+                ,acceptMime:'image/jpg, image/png'//规定打开窗口后能选择文件的类型
+                ,exts:'zip|rar|7z'//文件类型后缀限制，配合accept来使用
                 ,auto:false //是否自动上传(就是选中后是否自动上传)
                 ,field:'files'//上传字段(对应后台)
-                ,drag:''//是否接受拖曳上传文件
+                ,drag:true//是否接受拖曳上传文件
                 ,data : {
                     dataType: 'met_meeting',
                 }//上传携带数据
@@ -86,7 +86,7 @@
             });
         });
         /** 手动上传(这个需要把auto设置为false) */
-        uploadInst.upload();
+        //uploadInst.upload();
     })
     /** ********************************************** */
 </script>
