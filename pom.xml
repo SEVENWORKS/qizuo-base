@@ -244,10 +244,22 @@
       <artifactId>itext</artifactId>
       <version>2.1.7</version>
     </dependency>
-    <dependency>
+    <!--这个maven原生仓库中没有<dependency>
       <groupId>com.3rd.party</groupId>
       <artifactId>iTextAsian</artifactId>
       <version>0.0.1</version>
+    </dependency>-->
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <!--自定义-->
+      <artifactId>iTextAsian</artifactId>
+      <!--自定义-->
+      <version>1.0</version>
+      <!--自定义-->
+      <scope>system</scope>
+      <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/iTextAsian-1.0.jar</systemPath>
+      <!--项目根目录下的lib文件夹下-->
     </dependency>
     <!-- jxl -->
     <dependency>
@@ -337,6 +349,17 @@
         </excludes>
       </resource>
     </resources>-->
+
+    <!-- 这个地方设置编译时对相应文件夹中文件过滤，比如java文件夹中如果不设置这个，xml是不会编译到target文件夹中 -->
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
 
     <plugins>
       <!-- 编码和编译和JDK版本 -->
