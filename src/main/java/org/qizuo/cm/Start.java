@@ -2,6 +2,7 @@ package org.qizuo.cm;
 
 import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 import org.qizuo.cm.frame.filter.springmvc.SpringmvcDispatcherServlet;
+import org.qizuo.cm.frame.listener.session.SessionListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -29,9 +30,8 @@ public class Start implements WebApplicationInitializer {
         //listener加载(Listener可以用上述的加载方式，也可以用哦个方式)
         /*ContextLoaderListener logbackConfigLocation=new ContextLoaderListener();
         logbackConfigLocation.initWebApplicationContext(servletContext);*/
-
         //单个用户登录监听
-        //servletContext.addListener(SessionListener.class);
+        servletContext.addListener(SessionListener.class);
 
         //字符集过滤(filter方式加载)
         CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
