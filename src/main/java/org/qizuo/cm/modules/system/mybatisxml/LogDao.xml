@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.qizuo.cm.modules.system.dao.LogDao">
-    <!-- 修改org.qizuo.cm.modules.system.dao.UserDao和sys_log和org.qizuo.cm.modules.system.pojo.LogPoJo -->
-    <!-- 专属字段 -->
+    <!-- 淇敼org.qizuo.cm.modules.system.dao.UserDao鍜宻ys_log鍜宱rg.qizuo.cm.modules.system.pojo.LogPoJo -->
+    <!-- 涓撳睘瀛楁 -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
         a.CONTENT as "content",
         a.TYPE_CD as "typeCd"
     </sql>
-    <!-- 插入 -->
+    <!-- 鎻掑叆 -->
     <insert id="insert">
         insert into sys_log
             (
@@ -33,7 +33,7 @@
                 #{typeCd}
             )
     </insert>
-    <!-- 修改 -->
+    <!-- 淇敼 -->
     <update id="update">
         update sys_log set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
@@ -44,11 +44,11 @@
             TYPE_CD=#{typeCd}
         where BASE_ID=#{baseId}
     </update>
-    <!-- 删除 -->
+    <!-- 鍒犻櫎 -->
     <delete id="delete">
         delete from sys_log where BASE_ID=#{baseId}
     </delete>
-    <!-- 查找单个 -->
+    <!-- 鏌ユ壘鍗曚釜 -->
     <select id="query" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -59,7 +59,7 @@
         </where>
         limit 1
     </select>
-    <!-- 查找列表 -->
+    <!-- 鏌ユ壘鍒楄〃 -->
     <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -71,7 +71,7 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- 查找分页 -->
+    <!-- 鏌ユ壘鍒嗛〉 -->
     <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -87,7 +87,7 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- 更新状态 -->
+    <!-- 鏇存柊鐘舵�� -->
     <update id="uStatus">
         update sys_log set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
