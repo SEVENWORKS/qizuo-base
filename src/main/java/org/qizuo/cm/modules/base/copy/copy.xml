@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.qizuo.cm.modules.system.dao.UserDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_userå’Œorg.qizuo.cm.modules.system.pojo.UserPoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_userºÍorg.qizuo.cm.modules.system.pojo.UserPoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
     </sql>
-    <!-- æ’å…¥(éžè‡ªå¢žä¸»é”®è¯·å°†useGeneratedKeysåŠåŽé¢æ‹¿æŽ‰) -->
+    <!-- ²åÈë(·Ç×ÔÔöÖ÷¼üÇë½«useGeneratedKeys¼°ºóÃæÄÃµô) -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="baseId">
         insert into sys_user
             (
@@ -27,7 +27,7 @@
                 #{baseCreateIp},
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
         update sys_user set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
@@ -36,11 +36,11 @@
             BASE_UPDATE_IP=#{baseUpdateIp},
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
         delete from sys_user where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
+    <!-- ²éÕÒµ¥¸ö -->
     <select id="query" resultType="org.qizuo.cm.modules.system.pojo.UserPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -51,7 +51,7 @@
         </where>
         limit 1
     </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
+    <!-- ²éÕÒÁÐ±í -->
     <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.UserPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -63,7 +63,7 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
+    <!-- ²éÕÒ·ÖÒ³ -->
     <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.UserPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -79,7 +79,7 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
         update sys_user set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>

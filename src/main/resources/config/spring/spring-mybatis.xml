@@ -11,7 +11,7 @@
     <!-- 注意这个地方要去掉use-default-filters="false" -->
     <context:component-scan base-package="org.qizuo.cm.modules">
         <!-- 去除xml文件扫描 -->
-        <context:include-filter type="regex" expression="xml"/>
+        <!--<context:include-filter type="regex" expression="xml"/>-->
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
@@ -57,22 +57,24 @@
         </property>
     </bean>
     <!-- druidfilters拦截器 -->
-    <bean id="druidFilter" class="org.qizuo.cm.frame.filter.druid.Druid"></bean>
+    <bean id="druidFilter" class="org.qizuo.cm.frame.filter.druid.Druid"/>
 
     <!-- ************************spring和MyBatis完美整合，不需要mybatis的配置映射文件************************ -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据源 -->
         <property name="dataSource" ref="dataSource" />
+        <!-- **基本配置文件 -->
+        <property name="configLocation" value="classpath:config/mybatis/mybatis.xml"/>
+
         <!-- 自动扫描mapping.xml文件 -->
         <!--<property name="mapperLocations" value="classpath:mybatisxml/*/*.xml"></property>
         <property name="mapperLocations" value="classpath:org/qizuo/cm/modules/*/mybatisxml/*.xml"></property>-->
         <property name="mapperLocations">
             <array>
-                <value>classpath:mybatisxml/*/*.xml</value>
+                <value>classpath:org/qizuo/cm/modules/*/mybatisxml/*.xml</value>
             </array>
         </property>
-        <!-- **基本配置文件 -->
-        <property name="configLocation" value="classpath:config/mybatis/mybatis.xml"></property>
+
         <!-- mybatis拦截器配置(或者在mybatis.xml中配置plugins) -->
         <!--<property name="plugins">
             <array>
@@ -84,7 +86,7 @@
     <!-- DAO接口所在包名，Spring会自动查找其下的类 ,自动扫描了所有的XxxxMapper.xml对应的mapper接口文件,只要Mapper接口类和Mapper映射文件对应起来就可以了-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="org.qizuo.cm.modules" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
     <!-- ************************(事务管理)************************ -->

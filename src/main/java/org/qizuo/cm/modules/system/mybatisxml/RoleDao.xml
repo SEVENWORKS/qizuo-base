@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.qizuo.cm.modules.system.dao.LogDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_logå’Œorg.qizuo.cm.modules.system.pojo.LogPoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.qizuo.cm.modules.system.dao.RoleDao">
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_roleºÍorg.qizuo.cm.modules.system.pojo.RolePoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
-        a.CONTENT as "content",
-        a.TYPE_CD as "typeCd"
+        a.NAME as "name",
+        a.MENU_IDS as "menuIds",
+        a.DATA_SCOPE_CDS as "dataScopeCds",
+        a.JUMP_URL as "jumpUrl",
+        a.INDEX_URL as "indexUrl"
     </sql>
-    <!-- æ’å…¥ -->
+    <!-- ²åÈë -->
     <insert id="insert">
-        insert into sys_log
+        insert into sys_role
             (
                 BASE_ID,
                 BASE_CREATE_USER_ID,
@@ -18,8 +21,11 @@
                 BASE_STATUS,
                 BASE_REMARKS,
                 BASE_CREATE_IP,
-                CONTENT,
-                TYPE_CD
+                NAME,
+                MENU_IDS,
+                DATA_SCOPE_CDS,
+                JUMP_URL,
+                INDEX_URL
             )
         values
             (
@@ -29,41 +35,47 @@
                 #{baseStatus},
                 #{baseRemarks},
                 #{baseCreateIp},
-                #{content},
-                #{typeCd}
+                #{name},
+                #{menuIds},
+                #{dataScopeCds},
+                #{jumpUrl},
+                #{indexUrl}
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
-        update sys_log set
+        update sys_role set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
             BASE_UPDATE_TM=now(),
             BASE_REMARKS=#{baseRemarks},
             BASE_UPDATE_IP=#{baseUpdateIp},
-            CONTENT=#{content},
-            TYPE_CD=#{typeCd}
+            NAME=#{name},
+            MENU_IDS=#{menuIds},
+            DATA_SCOPE_CDS=#{dataScopeCds},
+            JUMP_URL=#{jumpUrl},
+            INDEX_URL=#{indexUrl}
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
-        delete from sys_log where BASE_ID=#{baseId}
+        delete from sys_role where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
-    <select id="query" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
+    <!-- ²éÕÒµ¥¸ö -->
+    <select id="query" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_log a
+        from sys_role a
         <where>
             a.BASE_ID=#{baseId}
             and a.BASE_STATUS=0
         </where>
         limit 1
     </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
-    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
+    <!-- ²éÕÒÁÐ±í -->
+    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_log a
+        from sys_role a
         <where>
             and a.BASE_STATUS=0
         </where>
@@ -71,11 +83,11 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
+    <!-- ²éÕÒ·ÖÒ³ -->
+    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_log a
+        from sys_role a
         <where>
             and a.BASE_STATUS=0
             <if test="entity != null">
@@ -87,8 +99,8 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
-        update sys_log set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
+        update sys_role set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
 </mapper>

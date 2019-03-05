@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.qizuo.cm.modules.system.dao.MsgDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_msgå’Œorg.qizuo.cm.modules.system.pojo.MsgPoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_msgºÍorg.qizuo.cm.modules.system.pojo.MsgPoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
         a.TITLE as "title",
@@ -13,7 +13,7 @@
         a.SEND_USER_ID as "sendUserId",
         a.IS_READ as "isRead"
     </sql>
-    <!-- æ’å…¥ -->
+    <!-- ²åÈë -->
     <insert id="insert">
         insert into sys_msg
             (
@@ -46,7 +46,7 @@
                 #{sendUserId}
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
         update sys_msg set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
@@ -61,11 +61,11 @@
             SEND_USER_ID=#{sendUserId}
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
         delete from sys_msg where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
+    <!-- ²éÕÒµ¥¸ö -->
     <select id="query" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -76,7 +76,7 @@
         </where>
         limit 1
     </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
+    <!-- ²éÕÒÁÐ±í -->
     <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -91,7 +91,7 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
+    <!-- ²éÕÒ·ÖÒ³ -->
     <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -107,15 +107,15 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
         update sys_msg set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
-    <!-- æ›´æ–°å·²è¯» -->
+    <!-- ¸üÐÂÒÑ¶Á -->
     <update id="uRead">
         update sys_msg set IS_READ=#{isRead} where BASE_ID=#{baseId}
     </update>
-    <!-- æ‰¹é‡æ’å…¥ -->
+    <!-- ÅúÁ¿²åÈë -->
     <insert id="ibatch">
         insert into sys_msg
             (

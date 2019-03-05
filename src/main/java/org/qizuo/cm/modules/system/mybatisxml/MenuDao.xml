@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.qizuo.cm.modules.system.dao.MenuDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_menuå’Œorg.qizuo.cm.modules.system.pojo.MenuPoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_menuºÍorg.qizuo.cm.modules.system.pojo.MenuPoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
         a.NAME as "name",
@@ -10,7 +10,7 @@
         a.PARENT_ID as "parentId",
         a.THEME as "theme"
     </sql>
-    <!-- æ’å…¥ -->
+    <!-- ²åÈë -->
     <insert id="insert">
         insert into sys_menu
             (
@@ -39,7 +39,7 @@
                 #{theme}
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
         update sys_menu set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
@@ -51,11 +51,11 @@
             THEME=#{theme}
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
         delete from sys_menu where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
+    <!-- ²éÕÒµ¥¸ö -->
     <select id="query" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -66,7 +66,7 @@
         </where>
         limit 1
     </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
+    <!-- ²éÕÒÁÐ±í -->
     <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -78,7 +78,7 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
+    <!-- ²éÕÒ·ÖÒ³ -->
     <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         select
             <include refid="exclusiveColumns"/>
@@ -96,11 +96,11 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
         update sys_menu set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
-    <!-- é€’å½’æŸ¥è¯¢èœå•åˆ—è¡¨ -->
+    <!-- µÝ¹é²éÑ¯²Ëµ¥ÁÐ±í -->
     <resultMap id="qEachListMap" type="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         <collection property="menuPoJos" column="baseId" select="qEachList"></collection>
     </resultMap>

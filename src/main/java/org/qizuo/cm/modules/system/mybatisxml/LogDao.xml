@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.qizuo.cm.modules.system.dao.DictDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_dictå’Œorg.qizuo.cm.modules.system.pojo.DictPoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.qizuo.cm.modules.system.dao.LogDao">
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_logºÍorg.qizuo.cm.modules.system.pojo.LogPoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
-        a.VALUE as "value",
-        a.LABEL as "label"
+        a.CONTENT as "content",
+        a.TYPE_CD as "typeCd"
     </sql>
-    <!-- æ’å…¥ -->
+    <!-- ²åÈë -->
     <insert id="insert">
-        insert into sys_dict
+        insert into sys_log
             (
                 BASE_ID,
                 BASE_CREATE_USER_ID,
@@ -18,8 +18,8 @@
                 BASE_STATUS,
                 BASE_REMARKS,
                 BASE_CREATE_IP,
-                VALUE,
-                LABEL
+                CONTENT,
+                TYPE_CD
             )
         values
             (
@@ -29,55 +29,41 @@
                 #{baseStatus},
                 #{baseRemarks},
                 #{baseCreateIp},
-                #{value},
-                #{label}
+                #{content},
+                #{typeCd}
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
-        update sys_dict set
+        update sys_log set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
             BASE_UPDATE_TM=now(),
             BASE_REMARKS=#{baseRemarks},
             BASE_UPDATE_IP=#{baseUpdateIp},
-            VALUE=#{value},
-            label=#{label}
+            CONTENT=#{content},
+            TYPE_CD=#{typeCd}
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
-        delete from sys_dict where BASE_ID=#{baseId}
+        delete from sys_log where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
-    <select id="query" resultMap="queryMap">
+    <!-- ²éÕÒµ¥¸ö -->
+    <select id="query" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_dict a
+        from sys_log a
         <where>
             a.BASE_ID=#{baseId}
             and a.BASE_STATUS=0
         </where>
         limit 1
     </select>
-    <resultMap id="queryMap" type="org.qizuo.cm.modules.system.pojo.DictPoJo">
-        <result column="baseId" property="baseId"></result>
-        <collection property="dictItemPoJos" column="baseId" select="queryMapDictItem"/>
-    </resultMap>
-    <select id="queryMapDictItem" resultType="org.qizuo.cm.modules.system.pojo.DictItemPoJo">
-        select
-            VALUE as "value",
-            LABEL as "label"
-        from sys_dict_item a
-        <where>
-            DICT_ID=#{baseId}
-            and a.BASE_STATUS=0
-        </where>
-    </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
-    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
+    <!-- ²éÕÒÁÐ±í -->
+    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_dict a
+        from sys_log a
         <where>
             and a.BASE_STATUS=0
         </where>
@@ -85,11 +71,11 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
+    <!-- ²éÕÒ·ÖÒ³ -->
+    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.LogPoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_dict a
+        from sys_log a
         <where>
             and a.BASE_STATUS=0
             <if test="entity != null">
@@ -101,8 +87,8 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
-        update sys_dict set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
+        update sys_log set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
 </mapper>

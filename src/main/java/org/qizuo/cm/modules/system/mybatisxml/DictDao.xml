@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.qizuo.cm.modules.system.dao.RoleDao">
-    <!-- ä¿®æ”¹org.qizuo.cm.modules.system.dao.UserDaoå’Œsys_roleå’Œorg.qizuo.cm.modules.system.pojo.RolePoJo -->
-    <!-- ä¸“å±žå­—æ®µ -->
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.qizuo.cm.modules.system.dao.DictDao">
+    <!-- ÐÞ¸Äorg.qizuo.cm.modules.system.dao.UserDaoºÍsys_dictºÍorg.qizuo.cm.modules.system.pojo.DictPoJo -->
+    <!-- ×¨Êô×Ö¶Î -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,
-        a.NAME as "name",
-        a.MENU_IDS as "menuIds",
-        a.DATA_SCOPE_CDS as "dataScopeCds",
-        a.JUMP_URL as "jumpUrl",
-        a.INDEX_URL as "indexUrl"
+        a.VALUE as "value",
+        a.LABEL as "label"
     </sql>
-    <!-- æ’å…¥ -->
+    <!-- ²åÈë -->
     <insert id="insert">
-        insert into sys_role
+        insert into sys_dict
             (
                 BASE_ID,
                 BASE_CREATE_USER_ID,
@@ -21,11 +18,8 @@
                 BASE_STATUS,
                 BASE_REMARKS,
                 BASE_CREATE_IP,
-                NAME,
-                MENU_IDS,
-                DATA_SCOPE_CDS,
-                JUMP_URL,
-                INDEX_URL
+                VALUE,
+                LABEL
             )
         values
             (
@@ -35,47 +29,55 @@
                 #{baseStatus},
                 #{baseRemarks},
                 #{baseCreateIp},
-                #{name},
-                #{menuIds},
-                #{dataScopeCds},
-                #{jumpUrl},
-                #{indexUrl}
+                #{value},
+                #{label}
             )
     </insert>
-    <!-- ä¿®æ”¹ -->
+    <!-- ÐÞ¸Ä -->
     <update id="update">
-        update sys_role set
+        update sys_dict set
             BASE_UPDATE_USER_ID=#{baseUpdateUserId},
             BASE_UPDATE_TM=now(),
             BASE_REMARKS=#{baseRemarks},
             BASE_UPDATE_IP=#{baseUpdateIp},
-            NAME=#{name},
-            MENU_IDS=#{menuIds},
-            DATA_SCOPE_CDS=#{dataScopeCds},
-            JUMP_URL=#{jumpUrl},
-            INDEX_URL=#{indexUrl}
+            VALUE=#{value},
+            label=#{label}
         where BASE_ID=#{baseId}
     </update>
-    <!-- åˆ é™¤ -->
+    <!-- É¾³ý -->
     <delete id="delete">
-        delete from sys_role where BASE_ID=#{baseId}
+        delete from sys_dict where BASE_ID=#{baseId}
     </delete>
-    <!-- æŸ¥æ‰¾å•ä¸ª -->
-    <select id="query" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
+    <!-- ²éÕÒµ¥¸ö -->
+    <select id="query" resultMap="queryMap">
         select
             <include refid="exclusiveColumns"/>
-        from sys_role a
+        from sys_dict a
         <where>
             a.BASE_ID=#{baseId}
             and a.BASE_STATUS=0
         </where>
         limit 1
     </select>
-    <!-- æŸ¥æ‰¾åˆ—è¡¨ -->
-    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
+    <resultMap id="queryMap" type="org.qizuo.cm.modules.system.pojo.DictPoJo">
+        <result column="baseId" property="baseId"></result>
+        <collection property="dictItemPoJos" column="baseId" select="queryMapDictItem"/>
+    </resultMap>
+    <select id="queryMapDictItem" resultType="org.qizuo.cm.modules.system.pojo.DictItemPoJo">
+        select
+            VALUE as "value",
+            LABEL as "label"
+        from sys_dict_item a
+        <where>
+            DICT_ID=#{baseId}
+            and a.BASE_STATUS=0
+        </where>
+    </select>
+    <!-- ²éÕÒÁÐ±í -->
+    <select id="qList" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_role a
+        from sys_dict a
         <where>
             and a.BASE_STATUS=0
         </where>
@@ -83,11 +85,11 @@
             order by ${orderBy}
         </if>
     </select>
-    <!-- æŸ¥æ‰¾åˆ†é¡µ -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
+    <!-- ²éÕÒ·ÖÒ³ -->
+    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
         select
             <include refid="exclusiveColumns"/>
-        from sys_role a
+        from sys_dict a
         <where>
             and a.BASE_STATUS=0
             <if test="entity != null">
@@ -99,8 +101,8 @@
         </if>
     </select>
     <!-- ********************************************************************************************************************** -->
-    <!-- æ›´æ–°çŠ¶æ€ -->
+    <!-- ¸üÐÂ×´Ì¬ -->
     <update id="uStatus">
-        update sys_role set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
+        update sys_dict set BASE_STATUS=#{baseStatus} where BASE_ID=#{baseId}
     </update>
 </mapper>
