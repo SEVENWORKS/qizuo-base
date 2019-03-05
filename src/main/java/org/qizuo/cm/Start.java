@@ -19,6 +19,10 @@ import java.util.EnumSet;
 public class Start implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+        //spring启动项(Listener配置)
+        servletContext.setInitParameter("contextConfigLocation","classpath:config/spring/applicationContext.xml");
+        servletContext.addListener(ContextLoaderListener.class);
+
         //日志打印(Listener配置)
         servletContext.setInitParameter("logbackConfigLocation","classpath:config/log/logback.xml");
         servletContext.addListener(LogbackConfigListener.class);
@@ -44,10 +48,5 @@ public class Start implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new SpringmvcDispatcherServlet(appContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-
-        //spring启动项(Listener配置)
-        servletContext.setInitParameter("contextConfigLocation","classpath:config/spring/applicationContext.xml");
-        servletContext.addListener(ContextLoaderListener.class);
-
     }
 }
