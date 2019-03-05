@@ -4,10 +4,12 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
   <!-- ************************1.基本配置文件************************ -->
   <context:property-placeholder location="classpath:config/properties/base.properties"/>
   <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -20,7 +22,22 @@
   <!-- ************************3.mvc配置************************ -->
   <!--<import resource="classpath:config/spring/spring-mvc.xml" />-->
 
-  <!-- ************************4.Spring工具************************ -->
-  <bean class="org.qizuo.cm.utils.SpringUtils"></bean>
+  <!-- ************************4.其它插件************************ -->
+  <!-- spring工具 -->
+  <bean class="org.qizuo.cm.utils.SpringUtils"/>
+
+  <!-- ehcache缓存 -->
+  <!-- 配置xml加载，初始化工厂bean -->
+  <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation" value="classpath:plugins/ehcache/ehcache.xml"></property>
+  </bean>
+
+  <!-- 根据工厂bean获取一个缓存管理对象 -->
+  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+    <property name="cacheManager" ref="ehcache"></property>
+  </bean>
+
+  <!-- 开启ehcache缓存 -->
+  <cache:annotation-driven cache-manager="cacheManager"/>
 
 </beans>
