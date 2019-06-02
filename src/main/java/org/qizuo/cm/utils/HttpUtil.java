@@ -37,13 +37,13 @@ public class HttpUtil {
     /** *****************************************HttpServletRequest操作***************************************** */
     /**
      * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址,
-     *
+     * <p>
      * 可是，如果通过了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP值，究竟哪个才是真正的用户端的真实IP呢？
      * 答案是取X-Forwarded-For中第一个非unknown的有效IP字符串。
-     *
+     * <p>
      * 如：X-Forwarded-For：192.168.1.110, 192.168.1.120, 192.168.1.130,
      * 192.168.1.100
-     *
+     * <p>
      * 用户真实IP为： 192.168.1.110
      */
     public static String getIpAddress(HttpServletRequest request) {
@@ -104,7 +104,7 @@ public class HttpUtil {
      * @description: 举例
      * @date: 19:48 2019/2/13
      */
-    public void requestForExample(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+    public void requestForExample(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //返回请求行中的资源名称
         String uri = request.getRequestURI();
         //获得客户端发送请求的完整url
@@ -114,10 +114,10 @@ public class HttpUtil {
         //返回请求行中的参数部分
         String params = request.getQueryString();
         //返回发出请求的客户机的主机名
-        String host=request.getRemoteHost();
+        String host = request.getRemoteHost();
         //返回发出请求的客户机的端口号
-        int port =request.getRemotePort();
-     }
+        int port = request.getRemotePort();
+    }
 
     /**
      * 获取所有请求头
@@ -132,6 +132,7 @@ public class HttpUtil {
         }
         return map;
     }
+
     public static String getHeadersChar(HttpServletRequest request) {
         String headers = "";
         Enumeration headerNames = request.getHeaderNames();
@@ -154,17 +155,18 @@ public class HttpUtil {
     /**
      * 获取参数(相当于请求体)
      */
-    public static Map<String,String> getParams(HttpServletRequest request){
+    public static Map<String, String> getParams(HttpServletRequest request) {
         TreeMap<String, String> values = new TreeMap<String, String>();
         Enumeration paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
-            String name =(String) paramNames.nextElement();
+            String name = (String) paramNames.nextElement();
             String value = request.getParameter(name);
             values.put(name, value);
         }
         return values;
     }
-    public static String getParamsChar(HttpServletRequest request){
+
+    public static String getParamsChar(HttpServletRequest request) {
         String params = "";
         Enumeration paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
@@ -183,11 +185,11 @@ public class HttpUtil {
         InputStream requestEntity = null;
         try {
             requestEntity = request.getInputStream();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
         }
         return requestEntity;
     }
+
     /**
      * 请求体字符串读取
      */
@@ -195,11 +197,11 @@ public class HttpUtil {
         try {
             BufferedReader br = request.getReader();
             String str, wholeStr = "";
-            while((str = br.readLine()) != null){
+            while ((str = br.readLine()) != null) {
                 wholeStr += str;
             }
             return wholeStr;
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return "";
@@ -216,44 +218,44 @@ public class HttpUtil {
      * @description: 远程访问http
      * @date: 14:35 2018/12/25
      */
-    public String sendHttp(String action, String url, Map<String,String> map){
-        String respContent="";
+    public String sendHttp(String action, String url, Map<String, String> map) {
+        String respContent = "";
         try {
             //返回对象
-            HttpEntity entity=null;
+            HttpEntity entity = null;
 
             //发送器
             HttpClient client = HttpClients.createDefault();
 
-            if("get".equals(action)){
+            if ("get".equals(action)) {
                 //发送对象+发送对象数据
-                HttpGet request = new HttpGet(url+map.get("get"));
+                HttpGet request = new HttpGet(url + map.get("get"));
                 request.setHeader("Accept", "application/json");
                 //发送
                 HttpResponse response = client.execute(request);
                 //返回
                 entity = response.getEntity();
-            }else if("postForm".equals(action)) {
+            } else if ("postForm".equals(action)) {
                 //发送对象
                 HttpPost request = new HttpPost(url);
                 //发送对象数据
-				List<NameValuePair> nvps = new ArrayList<>();
-                for (Map.Entry<String, String>  me: map.entrySet()) {
+                List<NameValuePair> nvps = new ArrayList<>();
+                for (Map.Entry<String, String> me : map.entrySet()) {
                     nvps.add(new BasicNameValuePair(me.getKey(), me.getValue()));
                 }
                 //发送
                 HttpResponse response2 = client.execute(request);
                 //返回
                 entity = response2.getEntity();
-            }else if("postRaw".equals(action)) {
+            } else if ("postRaw".equals(action)) {
                 //发送对象
                 HttpPost request = new HttpPost(url);
                 //发送对象数据
                 JSONObject jsonObject = new JSONObject();
-                for (Map.Entry<String, String>  me: map.entrySet()) {
+                for (Map.Entry<String, String> me : map.entrySet()) {
                     jsonObject.put(me.getKey(), me.getValue());
                 }
-                request.setEntity(new StringEntity(jsonObject.toString(),"utf-8"));
+                request.setEntity(new StringEntity(jsonObject.toString(), "utf-8"));
                 //发送
                 HttpResponse response2 = client.execute(request);
                 //返回
@@ -261,7 +263,7 @@ public class HttpUtil {
             }
 
             //解析
-            respContent = EntityUtils.toString(entity,"UTF-8");
+            respContent = EntityUtils.toString(entity, "UTF-8");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -271,13 +273,19 @@ public class HttpUtil {
 
     /**************** 简单封装 ******************/
 
-     /** 编码格式。发送编码格式统一用UTF-8 */
+    /**
+     * 编码格式。发送编码格式统一用UTF-8
+     */
     private static final String ENCODING = "UTF-8";
 
-    /** 设置连接超时时间，单位毫秒 */
+    /**
+     * 设置连接超时时间，单位毫秒
+     */
     private static final int CONNECT_TIMEOUT = 6000;
 
-    /** 请求获取数据的超时时间(即响应时间)，单位毫秒 */
+    /**
+     * 请求获取数据的超时时间(即响应时间)，单位毫秒
+     */
     private static final int SOCKET_TIMEOUT = 6000;
 
     /**
@@ -294,7 +302,7 @@ public class HttpUtil {
     /**
      * 发送get请求；带请求参数
      *
-     * @param url 请求地址
+     * @param url    请求地址
      * @param params 请求参数集合
      * @return
      * @throws Exception
@@ -306,9 +314,9 @@ public class HttpUtil {
     /**
      * 发送get请求；带请求头和请求参数
      *
-     * @param url 请求地址
+     * @param url     请求地址
      * @param headers 请求头集合
-     * @param params 请求参数集合
+     * @param params  请求参数集合
      * @return
      * @throws Exception
      */
@@ -365,7 +373,7 @@ public class HttpUtil {
     /**
      * 发送post请求；带请求参数
      *
-     * @param url 请求地址
+     * @param url    请求地址
      * @param params 参数集合
      * @return
      * @throws Exception
@@ -377,9 +385,9 @@ public class HttpUtil {
     /**
      * 发送post请求；带请求头和请求参数
      *
-     * @param url 请求地址
+     * @param url     请求地址
      * @param headers 请求头集合
-     * @param params 请求参数集合
+     * @param params  请求参数集合
      * @return
      * @throws Exception
      */
@@ -435,7 +443,7 @@ public class HttpUtil {
     /**
      * 发送put请求；带请求参数
      *
-     * @param url 请求地址
+     * @param url    请求地址
      * @param params 参数集合
      * @return
      * @throws Exception
@@ -481,7 +489,7 @@ public class HttpUtil {
     /**
      * 发送delete请求；带请求参数
      *
-     * @param url 请求地址
+     * @param url    请求地址
      * @param params 参数集合
      * @return
      * @throws Exception
@@ -499,6 +507,7 @@ public class HttpUtil {
 
     /**
      * Description: 封装请求头(核心)
+     *
      * @param params
      * @param httpMethod
      */
@@ -545,7 +554,7 @@ public class HttpUtil {
      * @throws Exception
      */
     public static String getHttpClientResult(CloseableHttpResponse httpResponse,
-                                                       CloseableHttpClient httpClient, HttpRequestBase httpMethod) throws Exception {
+                                             CloseableHttpClient httpClient, HttpRequestBase httpMethod) throws Exception {
         // 执行请求
         httpResponse = httpClient.execute(httpMethod);
 
@@ -582,17 +591,17 @@ public class HttpUtil {
      * @description: 发送soap请求
      * @date: 10:52 2019/3/1
      */
-    private static String soapSend(Map<String,Object> map) throws Exception{
+    private static String soapSend(Map<String, Object> map) throws Exception {
         //拼接请求报文，这个是根据要发送格式来的
         String sendMsg = soapConcat(map);
-        String respContent="";
+        String respContent = "";
         try {
             //发送容器
             HttpClient client = HttpClients.createDefault();
             //发送对象
-            HttpPost request2 = new HttpPost((String)map.get("url"));
-            request2.setEntity(new StringEntity(sendMsg,"utf-8"));
-            request2.setHeader("Content-Type","application/soap+xml; charset=utf-8");
+            HttpPost request2 = new HttpPost((String) map.get("url"));
+            request2.setEntity(new StringEntity(sendMsg, "utf-8"));
+            request2.setHeader("Content-Type", "application/soap+xml; charset=utf-8");
             //注意这个，和webservice不同的是，这个可能会用上，注意，对应的值是这个接口的名称
             // 这个bug是因为用http的post发送方式引起的，它是用底层协议发送，并没有指定具体要发送服务器和接口
             request2.setHeader("SOAPAction", "http://192.168.1.239:8091/service/sendSms");
@@ -601,7 +610,7 @@ public class HttpUtil {
             //相应
             HttpEntity entity = response2.getEntity();
             if (entity != null) {
-                respContent = EntityUtils.toString(entity,"UTF-8");
+                respContent = EntityUtils.toString(entity, "UTF-8");
                 //System.out.println(respContent);
             }
         } catch (IOException e) {
@@ -609,13 +618,14 @@ public class HttpUtil {
         }
         return respContent;
     }
+
     /**
      * @author: fangl
      * @description: soap请求内容拼接示例(具体的拼接格式webservice接口后面拼接wsdl就会有这个接口的发送文档存在的;
      * 或者使用soapui这个工具来操作一遍，会自动根据文档产生这个接口的发送数据)
      * @date: 10:53 2019/3/1
      */
-    private static String soapConcat(Map<String,Object> map) {
+    private static String soapConcat(Map<String, Object> map) {
         StringBuffer sb = new StringBuffer();
         sb.append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n");
         sb.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:sms=\"http://www.csapi.org/schema/sms\">\n");
@@ -628,7 +638,7 @@ public class HttpUtil {
         sb.append(" <DestinationAddresses>tel:18260093234</DestinationAddresses>\n");
         sb.append(" <DestinationAddresses>tel:18762137837</DestinationAddresses>\n");
         sb.append(" <ExtendCode>18</ExtendCode>\n");
-        sb.append(" <Message>"+map.get("content")+"</Message>\n");
+        sb.append(" <Message>" + map.get("content") + "</Message>\n");
         sb.append(" <MessageFormat>GB2312</MessageFormat>\n");
         sb.append(" <SendMethod>Normal</SendMethod>\n");
         sb.append(" <DeliveryResultRequest>True</DeliveryResultRequest>\n");
@@ -640,25 +650,25 @@ public class HttpUtil {
     }
 
 
-
     /** *****************************************http的websevice请求，俺觉得本质上还是http，只不过内容变成xml而已***************************************** */
 
     /**
      * 发送方法
+     *
+     * @throws IOException
      * @author fangl
      * 2017-11-21 下午11:11:50
-     * @throws IOException
      */
-    public static String postData(Map<String,String> map,String url) throws IOException {
+    public static String postData(Map<String, String> map, String url) throws IOException {
         //发送器
         HttpClient httpclient = HttpClients.createDefault();
         //发送体
         HttpPost httppost = new HttpPost(url);
         //参数封装
         List<NameValuePair> formparams = new ArrayList<>();
-        for (Map.Entry<String,String> me:map.entrySet()){
+        for (Map.Entry<String, String> me : map.entrySet()) {
             //formparams.add(new BasicNameValuePair("XMLStr",(String)map.get("xml")));
-            formparams.add(new BasicNameValuePair(me.getKey(),me.getValue()));
+            formparams.add(new BasicNameValuePair(me.getKey(), me.getValue()));
         }
         UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
         //entity.setContentType("text/xml; charset=GBK");
@@ -669,7 +679,7 @@ public class HttpUtil {
         HttpEntity resEntity = response.getEntity();
 
         //解析
-        String alength = EntityUtils.toString(resEntity,"UTF-8");
+        String alength = EntityUtils.toString(resEntity, "UTF-8");
         /*InputStreamReader reader = new InputStreamReader(resEntity.getContent(), "UTF-8");
         //数据处理
         char[] buff = new char[1024];

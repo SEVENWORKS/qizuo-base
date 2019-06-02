@@ -10,15 +10,25 @@ import java.util.List;
  * @Date: 14:20 2018/10/29
  */
 public class MenuPoJo extends BasePoJo {
-    /** 名称 */
+    /**
+     * 名称
+     */
     private String name;
-    /** 跳转路径 */
+    /**
+     * 跳转路径
+     */
     private String url;
-    /** 父ID */
+    /**
+     * 父ID
+     */
     private String parentId;
-    /** 主题 */
+    /**
+     * 主题
+     */
     private String theme;
-    /** 子菜单集合 */
+    /**
+     * 子菜单集合
+     */
     private List<MenuPoJo> menuPoJos;
 
     public String getName() {

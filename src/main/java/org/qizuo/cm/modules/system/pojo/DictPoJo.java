@@ -10,11 +10,17 @@ import java.util.List;
  * @Date: 14:20 2018/10/29
  */
 public class DictPoJo extends BasePoJo {
-    /** 值 */
+    /**
+     * 值
+     */
     private String value;
-    /** 名称 */
+    /**
+     * 名称
+     */
     private String label;
-    /** 子值集合 */
+    /**
+     * 子值集合
+     */
     private List<DictItemPoJo> dictItemPoJos;
 
     @Override

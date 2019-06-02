@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * @Date: 11:42 2019/1/1
  */
 @Repository
-public interface QizuoDao extends BaseDao<QizuoPoJo>{
-    
+public interface QizuoDao extends BaseDao<QizuoPoJo> {
+
 }

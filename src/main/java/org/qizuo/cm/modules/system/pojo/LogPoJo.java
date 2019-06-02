@@ -8,9 +8,13 @@ import org.qizuo.cm.modules.base.pojo.BasePoJo;
  * @Date: 14:20 2018/10/29
  */
 public class LogPoJo extends BasePoJo {
-    /** 日志内容 */
+    /**
+     * 日志内容
+     */
     private String content;
-    /** 日志类型 */
+    /**
+     * 日志类型
+     */
     private String typeCd;
     private String typeNm;
 

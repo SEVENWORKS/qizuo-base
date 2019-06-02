@@ -92,7 +92,7 @@
         </if>
     </select>
     <!-- 查找分页 -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
+    <select id="qPageQZ" resultType="org.qizuo.cm.modules.system.pojo.MsgPoJo">
         select
             <include refid="exclusiveColumns"/>
         from sys_msg a

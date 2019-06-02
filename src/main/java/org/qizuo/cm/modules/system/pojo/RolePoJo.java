@@ -8,15 +8,25 @@ import org.qizuo.cm.modules.base.pojo.BasePoJo;
  * @Date: 14:20 2018/10/29
  */
 public class RolePoJo extends BasePoJo {
-    /** 名称 */
+    /**
+     * 名称
+     */
     private String name;
-    /** 资源拼接串 */
+    /**
+     * 资源拼接串
+     */
     private String menuIds;
-    /** 数据操作权限拼接串 */
+    /**
+     * 数据操作权限拼接串
+     */
     private String dataScopeCds;
-    /** 首页路径 */
+    /**
+     * 首页路径
+     */
     private String indexUrl;
-    /** 跳转路径 */
+    /**
+     * 跳转路径
+     */
     private String jumpUrl;
 
     public String getName() {

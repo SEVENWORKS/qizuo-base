@@ -41,7 +41,9 @@ public class Office_ItextUtil {
      * @description: itext纯java后端导出
      * @date: 16:21 2019/2/28
      */
-    /** 全局设置字体设置 */
+    /**
+     * 全局设置字体设置
+     */
     public static BaseFont bfChinese;
     public static BaseFont heiti;
     public static Font headfont;
@@ -53,12 +55,15 @@ public class Office_ItextUtil {
     public static Font heiti18;
     public static Font heiti14;
     public static Font huise10;
-    /** 全局宽度示例 */
+    /**
+     * 全局宽度示例
+     */
     public int maxWidth600 = 600;
     public int maxWidth520 = 520;
     public int maxWidth400 = 400;
     public int maxWidth200 = 200;
     public int maxWidth150 = 150;
+
     /** 字体初始化 */
     static {
         try {
@@ -89,7 +94,7 @@ public class Office_ItextUtil {
      * @description: 主要调用方法
      * @date: 17:53 2019/2/28
      */
-    public static void mainPdf(Map<String, Object> dataMap, HttpServletResponse response,String name) {
+    public static void mainPdf(Map<String, Object> dataMap, HttpServletResponse response, String name) {
         try {
             //返回信息
             response.setContentType("application/x-msdownload");
@@ -98,12 +103,12 @@ public class Office_ItextUtil {
 
             //导出pdf核心方法调用
             //1.获取两个对象
-            Document document=getDocument(null,null);
-            PdfWriter pdfWriter=getPdfWriter(document,response.getOutputStream());
+            Document document = getDocument(null, null);
+            PdfWriter pdfWriter = getPdfWriter(document, response.getOutputStream());
             //2.设置每页样式(事件)
             pageView(pdfWriter);
             //3.主要页面生成
-            document_main(null,document);
+            document_main(null, document);
             //结束
             response.flushBuffer();
         } catch (IOException e) {
@@ -115,23 +120,23 @@ public class Office_ItextUtil {
 
     /**
      * @author: fangl
-     * @description: 创建一个Document对象,并赋予基本信息
+     * @description: 创建一个Document对象, 并赋予基本信息
      * @date: 17:45 2019/2/28
      */
-    public static Document getDocument(Rectangle size,Map<String,Object> map){
-        Document document=new Document();
+    public static Document getDocument(Rectangle size, Map<String, Object> map) {
+        Document document = new Document();
         //纸张大小
-        document.setPageSize(null==size?PageSize.A4:size);
+        document.setPageSize(null == size ? PageSize.A4 : size);
         //margin
         document.setMargins(30, 30, 30, 30);
         //其它信息
-        document.addTitle((String)map.get("title"));
-        document.addAuthor((String)map.get("author"));
-        document.addSubject((String)map.get("subject"));
+        document.addTitle((String) map.get("title"));
+        document.addAuthor((String) map.get("author"));
+        document.addSubject((String) map.get("subject"));
         //文档关键字信息
-        document.addKeywords((String)map.get("keywords"));
+        document.addKeywords((String) map.get("keywords"));
         //应用程序名称
-        document.addCreator((String)map.get("creator"));
+        document.addCreator((String) map.get("creator"));
         return new Document();
     }
 
@@ -140,10 +145,10 @@ public class Office_ItextUtil {
      * @description: 主要页面生成(通过每页单独的PdfPTable)
      * @date: 18:17 2019/2/28
      */
-    public static void document_main(List<PdfPTable> pdfPTables,Document document){
+    public static void document_main(List<PdfPTable> pdfPTables, Document document) {
         try {
             //生成
-            for(PdfPTable pdfPTable:pdfPTables){
+            for (PdfPTable pdfPTable : pdfPTables) {
                 document.add(pdfPTable);
             }
             //关闭
@@ -154,13 +159,13 @@ public class Office_ItextUtil {
     }
 
     /**
+     * @param document     pdf主容器
+     * @param outputStream 返回流
      * @author: fangl
      * @description: 创建一个PdfWriter对象
-     * @param document pdf主容器
-     * @param outputStream 返回流
      * @date: 17:45 2019/2/28
      */
-    public static PdfWriter getPdfWriter(Document document,OutputStream outputStream){
+    public static PdfWriter getPdfWriter(Document document, OutputStream outputStream) {
         PdfWriter pdfWriter = null;
         try {
             //根据返回流和document主体获取其对象
@@ -180,7 +185,7 @@ public class Office_ItextUtil {
      * @description: 设定每页事件
      * @date: 18:08 2019/2/28
      */
-    public static void pageView(PdfWriter pdfWriter){
+    public static void pageView(PdfWriter pdfWriter) {
         //通过PDF页面事件模式添加页头和页脚信息功能
         //pdfWriter.setPageEvent(new HeadFootInfoPdfPageEvent());
         //设定水印
@@ -206,22 +211,24 @@ public class Office_ItextUtil {
         return table1;
     }
 
-    /** ************************************************************************************************************************
+    /**
+     * ***********************************************************************************************************************
+     *
      * @author: fangl
-     * @description:  itext常用工具类
+     * @description: itext常用工具类
      * @date: 18:30 2019/2/28
      * 1.不复杂的表格可以直接用table，复杂的用pdfptable，pdftable相当于table的上一层
      * 2.Table的Rowspan方法可以合并行，缺点是，每行的高度是根据内容自动调整的．PdfPTable的MinimumHeight方法可以设置行的高度，但是不能合并行．
      * /
-    /**
+     * /**
      * @author: fangl
      * @description: 创建PDF表格
      * @date: 21:04 2019/2/28
      */
-    public static PdfPTable createTable(int colNumber,float [] widthArr,int width,int alignment){
+    public static PdfPTable createTable(int colNumber, float[] widthArr, int width, int alignment) {
         PdfPTable table = new PdfPTable(colNumber);
-        try{
-            if(widthArr != null && widthArr.length == colNumber){
+        try {
+            if (widthArr != null && widthArr.length == colNumber) {
                 table.setWidths(widthArr);
             }
             table.setTotalWidth(width);
@@ -229,16 +236,19 @@ public class Office_ItextUtil {
             table.setHorizontalAlignment(alignment);
             table.getDefaultCell().setBorder(0);
             table.setKeepTogether(true);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return table;
     }
-    /**需要固定第rows行，同时最后一行填充整页*/
-    public static PdfPTable createExtendLastRowTable(int colNumber,float [] widthArr,int width,int alignment,int row){
+
+    /**
+     * 需要固定第rows行，同时最后一行填充整页
+     */
+    public static PdfPTable createExtendLastRowTable(int colNumber, float[] widthArr, int width, int alignment, int row) {
         PdfPTable table = new PdfPTable(colNumber);
-        try{
-            if(widthArr != null && widthArr.length == colNumber){
+        try {
+            if (widthArr != null && widthArr.length == colNumber) {
                 table.setWidths(widthArr);
             }
             table.setTotalWidth(width);
@@ -251,13 +261,13 @@ public class Office_ItextUtil {
             //固定标题行
             table.setHeaderRows(row);
             table.getDefaultCell().setBorder(0);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return table;
     }
 
-    public static Table createBaseTable(int colNumber,float [] widthArr, float width){
+    public static Table createBaseTable(int colNumber, float[] widthArr, float width) {
         Table table = null;
         try {
             table = new Table(colNumber);
@@ -271,83 +281,99 @@ public class Office_ItextUtil {
     }
 
     /*************************************创建单元格方法*******************************************/
-    /**创建带有边框上下居中的单元格*/
-    public static PdfPCell createBorderCell(String value,Font font,int align,float height, int colspan){
+    /**
+     * 创建带有边框上下居中的单元格
+     */
+    public static PdfPCell createBorderCell(String value, Font font, int align, float height, int colspan) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         cell.setMinimumHeight(height);
         cell.setPaddingBottom(5.0f);
         cell.setPaddingLeft(5f);
         return cell;
     }
-    /**创建没有边框上下居中的单元格*/
-    public static PdfPCell createNoBorderCell(String value,Font font,int align,float height, int colspan){
+
+    /**
+     * 创建没有边框上下居中的单元格
+     */
+    public static PdfPCell createNoBorderCell(String value, Font font, int align, float height, int colspan) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         cell.setMinimumHeight(height);
         cell.setBorder(0);
         return cell;
     }
-    /**靠底部对齐，主要是用于下划线*/
-    public static PdfPCell createBototmCell(String value,Font font,int align,float height, int colspan,boolean bottomFlag){
+
+    /**
+     * 靠底部对齐，主要是用于下划线
+     */
+    public static PdfPCell createBototmCell(String value, Font font, int align, float height, int colspan, boolean bottomFlag) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         cell.setMinimumHeight(height);
         cell.setBorder(0);
         cell.setPaddingBottom(5.0f);
         cell.setPaddingLeft(5f);
-        if(bottomFlag){
+        if (bottomFlag) {
             cell.setBorderWidthBottom(1f);
         }
         return cell;
     }
-    /**靠底部对齐，主要是用于下划线*/
-    public static PdfPCell createTopCell(String value,Font font,int align,float height, int colspan,boolean borderFlag){
+
+    /**
+     * 靠底部对齐，主要是用于下划线
+     */
+    public static PdfPCell createTopCell(String value, Font font, int align, float height, int colspan, boolean borderFlag) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_TOP);
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         cell.setMinimumHeight(height);
         cell.setPaddingBottom(5.0f);
         cell.setPaddingLeft(5f);
-        if(!borderFlag){
+        if (!borderFlag) {
             cell.setBorder(0);
         }
         return cell;
     }
 
-    /**创建上下左右居中的单元格*/
-    public static PdfPCell createCellTitle(String value,Font font, float miniHeight, int colspan){
+    /**
+     * 创建上下左右居中的单元格
+     */
+    public static PdfPCell createCellTitle(String value, Font font, float miniHeight, int colspan) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setPhrase(new Phrase(value,font));
-        cell.setMinimumHeight(miniHeight==0?120:miniHeight);
+        cell.setPhrase(new Phrase(value, font));
+        cell.setMinimumHeight(miniHeight == 0 ? 120 : miniHeight);
         cell.setBorder(0);
         cell.setColspan(colspan);
         return cell;
     }
-    /**配合下面这个√号一起用的*/
-    public static PdfPCell createBototmCell2(String value,Font font,int align,int colspan,boolean bottomFlag){
+
+    /**
+     * 配合下面这个√号一起用的
+     */
+    public static PdfPCell createBototmCell2(String value, Font font, int align, int colspan, boolean bottomFlag) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cell.setHorizontalAlignment(align);
         cell.setColspan(colspan);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         //cell.setMinimumHeight(25);
         cell.setBorder(0);
@@ -355,18 +381,20 @@ public class Office_ItextUtil {
         cell.setPaddingTop(-5.0f);
         cell.setPaddingLeft(5f);
         cell.setPaddingRight(10f);
-        if(bottomFlag){
+        if (bottomFlag) {
             cell.setBorderWidthBottom(1f);
         }
         return cell;
     }
 
-    /**给√加框子*/
-    public static PdfPCell createCellGou(String value,Font font){
+    /**
+     * 给√加框子
+     */
+    public static PdfPCell createCellGou(String value, Font font) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         cell.setPaddingLeft(-4f);
         cell.setMinimumHeight(0);
@@ -375,7 +403,7 @@ public class Office_ItextUtil {
         return cell;
     }
 
-    public static PdfPCell createTableCell(PdfPTable table){
+    public static PdfPCell createTableCell(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -386,7 +414,7 @@ public class Office_ItextUtil {
         return cell;
     }
 
-    public static Cell createBaseCell(String value, Font font, int align, int rowspan, int colspan) throws Exception{
+    public static Cell createBaseCell(String value, Font font, int align, int rowspan, int colspan) throws Exception {
         Cell cell = new Cell(new Phrase(value, font));
         cell.setRowspan(rowspan);
         cell.setColspan(colspan);
@@ -398,7 +426,7 @@ public class Office_ItextUtil {
         return cell;
     }
 
-    public static Cell createNoBorderBaseCell(String value, Font font, int align, int rowspan, int colspan) throws Exception{
+    public static Cell createNoBorderBaseCell(String value, Font font, int align, int rowspan, int colspan) throws Exception {
         Cell cell = new Cell(new Phrase(value, font));
         cell.setRowspan(rowspan);
         cell.setColspan(colspan);
@@ -410,13 +438,13 @@ public class Office_ItextUtil {
         return cell;
     }
 
-    public static Image createBarcode(String value, PdfWriter pdfWriter, float scaleValue) throws DocumentException{
+    public static Image createBarcode(String value, PdfWriter pdfWriter, float scaleValue) throws DocumentException {
 
         Barcode128 code128 = new Barcode128();
         code128.setCode(value.trim());
         code128.setCodeType(Barcode128.CODE128);
         Image code128Image = code128.createImageWithBarcode(pdfWriter.getDirectContent(), null, null);
-        code128Image.setAbsolutePosition(470,780);
+        code128Image.setAbsolutePosition(470, 780);
         code128Image.scalePercent(scaleValue);
         code128Image.setWidthPercentage(0.50f);
         return code128Image;
@@ -425,11 +453,12 @@ public class Office_ItextUtil {
 
     /**
      * 根据传入的内容生成二维码
-     * @author chenem
+     *
      * @param content
      * @return
+     * @author chenem
      */
-    public static Image createQRCode(String content,float scaleValue,float var1, float var2) {
+    public static Image createQRCode(String content, float scaleValue, float var1, float var2) {
         int width = 100;
         int height = 100;
         //定义二维码的参数
@@ -444,7 +473,7 @@ public class Office_ItextUtil {
             //生成二维码
             BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height);
             //将BufferedImage转化为com.lowagie.text.Image
-            image = com.lowagie.text.Image.getInstance(MatrixToImageWriter.toBufferedImage(bitMatrix) , null);
+            image = com.lowagie.text.Image.getInstance(MatrixToImageWriter.toBufferedImage(bitMatrix), null);
         } catch (WriterException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -453,16 +482,16 @@ public class Office_ItextUtil {
             e.printStackTrace();
         }
         //设置图片在pdf的位置
-        image.setAbsolutePosition(var1,var2);
+        image.setAbsolutePosition(var1, var2);
         image.scalePercent(scaleValue);
         image.setWidthPercentage(0.50f);
         return image;
     }
 
-    public static Image getWaterMarkImage(Image waterMarkImage,float xPosition,float yPosition,boolean needRotation){
+    public static Image getWaterMarkImage(Image waterMarkImage, float xPosition, float yPosition, boolean needRotation) {
         //坐标
         waterMarkImage.setAbsolutePosition(xPosition, yPosition);
-        if(needRotation){
+        if (needRotation) {
             //旋转 弧度
             waterMarkImage.setRotation(-40);
             //旋转 角度
@@ -473,12 +502,14 @@ public class Office_ItextUtil {
         return waterMarkImage;
     }
 
-    /**靠底部对齐，主要是用于下划线*/
-    public static PdfPCell createText(String value, Font font, int valign, int align, float height){
+    /**
+     * 靠底部对齐，主要是用于下划线
+     */
+    public static PdfPCell createText(String value, Font font, int valign, int align, float height) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(valign);
         cell.setHorizontalAlignment(align);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(0.0f);
         //cell.setMinimumHeight(height);
         cell.setBorder(0);
@@ -514,7 +545,7 @@ public class Office_ItextUtil {
      * @description 传入freemarker模板流并有flying进行解析
      * @date: 16:59 2019/2/28
      */
-    public static void makePdf(StringBuffer sb, OutputStream outputStream,String filename) {
+    public static void makePdf(StringBuffer sb, OutputStream outputStream, String filename) {
         OutputStream os = null;
         try {
             //获取渲染对象
@@ -548,7 +579,7 @@ public class Office_ItextUtil {
                 renderer.createPDF(outputStream, true);
             } else {
                 //固定地址输出
-                String outputFile = templateBaseDir + filename +".pdf";
+                String outputFile = templateBaseDir + filename + ".pdf";
                 os = new FileOutputStream(outputFile);
                 renderer.createPDF(os, true);
             }
@@ -571,7 +602,7 @@ public class Office_ItextUtil {
 
     /**
      * @author: fangl
-     * @description: 主调用方法(数据,模板,文件名称)
+     * @description: 主调用方法(数据, 模板, 文件名称)
      * @date: 16:59 2019/2/28
      */
     public static void makePdfInMem(HttpServletResponse response, Map<String, Object> dataMap, String templateFile, String filename) {
@@ -591,7 +622,7 @@ public class Office_ItextUtil {
             StringBuffer sb = dh.createDocString(dataMap, templateFile);
 
             //将freemarker读取流去生成pdf文件
-            Office_ItextUtil.makePdf(sb, response.getOutputStream(),filename);
+            Office_ItextUtil.makePdf(sb, response.getOutputStream(), filename);
 
             //返回信息处理
             response.setContentType("application/pdf");
@@ -608,9 +639,13 @@ public class Office_ItextUtil {
      * @date: 16:56 2019/2/28
      */
     public class DocumentHandler {
-        /** 它存储了常用(全局，应用程序级)的设置，定义了想要在所有模板中可用的变量(称为共享变量)。 而且，它会处理 Template 实例的新建和缓存 */
+        /**
+         * 它存储了常用(全局，应用程序级)的设置，定义了想要在所有模板中可用的变量(称为共享变量)。 而且，它会处理 Template 实例的新建和缓存
+         */
         private Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
-        /** 编码 */
+        /**
+         * 编码
+         */
         private String Encoding = "UTF-8";
 
         public DocumentHandler() {
@@ -631,10 +666,10 @@ public class Office_ItextUtil {
         }
 
         /**
+         * @param dataMap  数据
+         * @param tempPath ftl文件名称
          * @author: fangl
          * @description: 将数据和flt模板进行结合，并返回字节流
-         * @param dataMap 数据
-         * @param tempPath ftl文件名称
          * @date: 17:23 2019/2/28
          */
         public StringBuffer createDocString(Object dataMap, String tempPath) {
@@ -659,14 +694,14 @@ public class Office_ItextUtil {
         }
 
         /**
+         * @param dataMap  数据
+         * @param tempPath ftl文件名称
+         * @param url      最终输出文档路径
          * @author: fangl
          * @description: 直接输出到某个文件中(url是输出地址)
-         * @param dataMap 数据
-         * @param tempPath ftl文件名称
-         * @param url 最终输出文档路径
          * @date: 17:31 2019/2/28
          */
-        public void createDoc(String url,Object dataMap,String tempPath) {
+        public void createDoc(String url, Object dataMap, String tempPath) {
             try {
                 //获取模板对象
                 Template t = configuration.getTemplate(tempPath, Encoding);

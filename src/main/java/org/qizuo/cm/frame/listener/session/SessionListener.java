@@ -11,14 +11,19 @@ import java.util.Map;
 
 /**
  * @author: fangl
- * @description: 单用户登录,监听所有session的创建
+ * @description: 单用户登录, 监听所有session的创建
  * @date: 10:54 2019/1/11
  */
-public class SessionListener implements HttpSessionListener{
-    /** 登入用户 */
+public class SessionListener implements HttpSessionListener {
+    /**
+     * 登入用户
+     */
     public static Map<String, HttpSession> LOGIN_USER_MAP = new HashMap<String, HttpSession>();
-    /** 下线用户 */
+    /**
+     * 下线用户
+     */
     public static Map<String, String> LOGOUT_USER_MAP = new HashMap<String, String>();
+
     /**
      * @author: fangl
      * @description: 监听sessing创建
@@ -38,7 +43,7 @@ public class SessionListener implements HttpSessionListener{
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session = se.getSession();
         UserPoJo userPoJo = (UserPoJo) session.getAttribute(Global.SESSION_USER);
-        if(null != userPoJo){
+        if (null != userPoJo) {
             LOGIN_USER_MAP.remove(userPoJo.getUserName());
         }
     }

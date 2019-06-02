@@ -8,13 +8,21 @@ import org.qizuo.cm.modules.base.pojo.BasePoJo;
  * @Date: 14:20 2018/10/29
  */
 public class DictItemPoJo extends BasePoJo {
-    /** 值 */
+    /**
+     * 值
+     */
     private String value;
-    /** 名称 */
+    /**
+     * 名称
+     */
     private String label;
-    /** 主字典表ID */
+    /**
+     * 主字典表ID
+     */
     private String dictId;
-    /** 主字典表值 */
+    /**
+     * 主字典表值
+     */
     private String dictValue;
 
     @Override

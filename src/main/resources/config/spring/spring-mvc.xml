@@ -24,13 +24,13 @@
     <!--<context:component-scan base-package="org.qizuo.cm.modules"/>-->
     <!-- 扫描数据接口的@Controller注解 -->
     <!-- spring配置中的use-default-filters用来指示是否自动扫描带有@Component、@Repository、@Service和@Controller的类。默认为true，即默认扫描。 -->
-    <context:component-scan base-package="org.qizuo.cm.modules" use-default-filters="false">
+    <!--<context:component-scan base-package="org.qizuo.cm.modules" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+    </context:component-scan>-->
     <!-- 跳转controller扫描 -->
-    <context:component-scan base-package="org.qizuo.cm.jump"/>
+    <context:component-scan base-package="org.qizuo.cm.controller"/>
     <!-- 异常扫描 -->
-    <context:component-scan base-package="org.qizuo.cm.frame.filter.exception"/>
+    <context:component-scan base-package="org.qizuo.cm.frame.filter_interceptor.exception"/>
 
 
     <!-- ************************视图解析器，只有mvc拦截进入的请求，在返回相应视图的时候，都会在原来视图资源String上加上一下配置信息：前缀+String+后缀************************ -->
@@ -63,7 +63,7 @@
             <!-- 静态资源拦截 -->
             <!--<mvc:exclude-mapping path="/static/**"/>-->
             <!-- 拦截器所在的项目位置 -->
-            <bean class="org.qizuo.cm.frame.filter.springmvc.SpringmvcInterceptor">
+            <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptor">
                 <!-- 排除不拦截的url,注入参数 -->
                 <property name="exceptUrls">
                     <list>

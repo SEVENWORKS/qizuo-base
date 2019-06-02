@@ -9,16 +9,26 @@ import java.util.Map;
  * @Date: 14:23 2018/10/29
  */
 public class IOPoJo {
-    /** key */
+    /**
+     * key
+     */
     private String key;
-    /** value */
+    /**
+     * value
+     */
     private String value;
-    /** keys */
+    /**
+     * keys
+     */
     private List<String> keys;
-    /** values */
+    /**
+     * values
+     */
     private List<String> values;
-    /** map */
-    private Map<Object,Object> params;
+    /**
+     * map
+     */
+    private Map<Object, Object> params;
 
     public String getKey() {
         return key;

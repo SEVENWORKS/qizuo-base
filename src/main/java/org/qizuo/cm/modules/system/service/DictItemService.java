@@ -18,13 +18,13 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class DictItemService extends BaseService<DictItemDao,DictItemPoJo>{
+public class DictItemService extends BaseService<DictItemDao, DictItemPoJo> {
     /**
      * @author: fangl
      * @description: 批量插入
      * @date: 10:37 2019/2/12
      */
-    public boolean insert(DictPoJo dictPoJo){
+    public boolean insert(DictPoJo dictPoJo) {
         return dao.insert(dictPoJo);
     }
 
@@ -34,7 +34,7 @@ public class DictItemService extends BaseService<DictItemDao,DictItemPoJo>{
      * @date: 10:41 2019/2/12
      */
     @Override
-    public boolean uStatus(DictItemPoJo dictItemPoJo){
+    public boolean uStatus(DictItemPoJo dictItemPoJo) {
         return dao.uStatus(dictItemPoJo);
     }
 }

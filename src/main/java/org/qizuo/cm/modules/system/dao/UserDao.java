@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @Description: 用户
  * @Date: 11:42 2019/1/1
  */
-public interface UserDao extends BaseDao<UserPoJo>{
+public interface UserDao extends BaseDao<UserPoJo> {
     /**
      * @author: fangl
      * @description: 根据用户名称获取用户信息

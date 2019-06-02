@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 11:42 2019/1/1
  */
 @Repository
-public interface MenuDao extends BaseDao<MenuPoJo>{
+public interface MenuDao extends BaseDao<MenuPoJo> {
 
     /**
      * @author: fangl

@@ -111,7 +111,7 @@
         </if>
     </select>
     <!-- 查找分页 -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.UserPoJo">
+    <select id="qPageQZ" resultType="org.qizuo.cm.modules.system.pojo.UserPoJo">
         select
             <include refid="exclusiveColumns"/>
         from sys_user a

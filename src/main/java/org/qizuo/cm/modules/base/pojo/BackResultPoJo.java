@@ -5,16 +5,24 @@ package org.qizuo.cm.modules.base.pojo;
  * @Description: json专用返回实体类
  * @Date: 14:20 2018/10/29
  */
-public class BackResultPoJo{
-    /** 常用返回码 */
-    public static final int ERROR=-9;
-    public static final int SUCCESS=1;
-    public static final int FAILURE=0;
-    /** 返回码 */
+public class BackResultPoJo {
+    /**
+     * 常用返回码
+     */
+    public static final int ERROR = -9;
+    public static final int SUCCESS = 1;
+    public static final int FAILURE = 0;
+    /**
+     * 返回码
+     */
     private int backCode;
-    /** 返回信息 */
+    /**
+     * 返回信息
+     */
     private String backMsg;
-    /** 返回数据 */
+    /**
+     * 返回数据
+     */
     private Object backData;
 
     public BackResultPoJo(int backCode, String backMsg) {

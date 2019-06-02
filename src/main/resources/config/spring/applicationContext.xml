@@ -31,12 +31,10 @@
   <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
     <property name="configLocation" value="classpath:plugins/ehcache/ehcache.xml"></property>
   </bean>
-
   <!-- 根据工厂bean获取一个缓存管理对象 -->
   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
     <property name="cacheManager" ref="ehcache"></property>
   </bean>
-
   <!-- 开启ehcache缓存 -->
   <cache:annotation-driven cache-manager="cacheManager"/>
 

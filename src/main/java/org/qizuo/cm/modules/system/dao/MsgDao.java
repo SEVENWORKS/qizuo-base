@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 11:42 2019/1/1
  */
 @Repository
-public interface MsgDao extends BaseDao<MsgPoJo>{
+public interface MsgDao extends BaseDao<MsgPoJo> {
     /**
      * @author: fangl
      * @description: 更新成已读状态

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MenuService extends BaseService<MenuDao,MenuPoJo>{
+public class MenuService extends BaseService<MenuDao, MenuPoJo> {
 
     /**
      * @author: fangl

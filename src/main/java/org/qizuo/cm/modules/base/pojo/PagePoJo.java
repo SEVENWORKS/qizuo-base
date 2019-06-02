@@ -4,21 +4,33 @@ import java.util.List;
 
 /**
  * @Author: fangl
- * @Description: 分页实体类(为什么要继承list,因为分页拦截器那边)
+ * @Description: 分页实体类(为什么要继承list, 因为分页拦截器那边)
  * @Date: 10:28 2018/11/19
  */
-public class PagePoJo<P> /*extends ArrayList<P> */{
-    /** 页数 */
-    private int pageNo=1;
-    /** 每页数量 */
-    private int pageSize=10;
-    /** 数据总条数 */
+public class PagePoJo<P> /*extends ArrayList<P> */ {
+    /**
+     * 页数
+     */
+    private int pageNo = 1;
+    /**
+     * 每页数量
+     */
+    private int pageSize = 10;
+    /**
+     * 数据总条数
+     */
     private int totalCount;
-    /** 数据总页数(非必要) */
+    /**
+     * 数据总页数(非必要)
+     */
     private int totalPage;
-    /** 关联实体类 */
+    /**
+     * 关联实体类
+     */
     private P entity;
-    /** 单页实体类集合 */
+    /**
+     * 单页实体类集合
+     */
     private List<P> entitys;
 
     public PagePoJo() {

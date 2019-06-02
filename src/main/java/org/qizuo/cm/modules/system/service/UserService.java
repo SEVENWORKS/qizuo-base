@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserService extends BaseService<UserDao,UserPoJo>{
+public class UserService extends BaseService<UserDao, UserPoJo> {
     /**
      * @author: fangl
      * @description: 根据用户名获取用户信息
      * @date: 15:59 2019/1/10
      */
-    public UserPoJo qPasswordByName(String username){
+    public UserPoJo qPasswordByName(String username) {
         return dao.qPasswordByName(username);
     }
 
@@ -28,7 +28,7 @@ public class UserService extends BaseService<UserDao,UserPoJo>{
      * @description: 查询单个用户所有信息
      * @date: 10:29 2019/1/14
      */
-    public UserPoJo qUserAllMsg(UserPoJo userPoJo){
+    public UserPoJo qUserAllMsg(UserPoJo userPoJo) {
         return dao.qUserAllMsg(userPoJo);
     }
 

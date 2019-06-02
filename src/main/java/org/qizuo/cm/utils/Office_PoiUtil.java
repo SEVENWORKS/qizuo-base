@@ -111,7 +111,7 @@ public class Office_PoiUtil {
      */
     public static Object imp_getRightTypeCell(Cell cell) {
         //null
-        if(null==cell){
+        if (null == cell) {
             return null;
         }
         //非null
@@ -185,7 +185,7 @@ public class Office_PoiUtil {
      * @description: excel导出
      * @date: 12:00 2019/2/27
      */
-    public void exp(Workbook workbook, Map<Integer, Map<Integer, String>> inMap, int index, int beginRow,OutputStream out) {
+    public void exp(Workbook workbook, Map<Integer, Map<Integer, String>> inMap, int index, int beginRow, OutputStream out) {
         /*String fileName = "Excel-" + String.valueOf(System.currentTimeMillis()).substring(4, 13) + ".xls";
         String headStr = "attachment; filename=\"" + fileName + "\"";
         response = getResponse();
@@ -195,15 +195,15 @@ public class Office_PoiUtil {
         try {
 
             /** 样式 */
-            Map<String,CellStyle> mapStyle=exp_style(workbook);
+            Map<String, CellStyle> mapStyle = exp_style(workbook);
 
             /** 创建excel开始 */
             //创建sheet(名称、index)(可以有很多sheet)
             Sheet sheet = workbook.createSheet(inMap.get(0).get(0));
             //表头
-            exp_head(sheet,mapStyle,inMap);
+            exp_head(sheet, mapStyle, inMap);
             //表体
-            exp_body(sheet,mapStyle,inMap,beginRow);
+            exp_body(sheet, mapStyle, inMap, beginRow);
             //写入和关闭
             workbook.write(out);
         } catch (Exception e) {
@@ -229,7 +229,7 @@ public class Office_PoiUtil {
         Row rowHead = sheet.createRow(2);
         for (int n = 0; n < inMap.get(1).size(); n++) {
             //创建列头对应个数的单元格,并设置类型
-            Cell cellRowName = rowHead.createCell(n,Cell.CELL_TYPE_STRING);
+            Cell cellRowName = rowHead.createCell(n, Cell.CELL_TYPE_STRING);
             //设置列头单元格的值
             cellRowName.setCellValue(inMap.get(1).get(n));
 
@@ -249,7 +249,7 @@ public class Office_PoiUtil {
             //创建所需的行数
             Row row = sheet.createRow(beginRow);
             //某一行数据取出
-            Map<Integer,String> body_map=inMap.get(i);
+            Map<Integer, String> body_map = inMap.get(i);
             //遍历列
             for (int j = 0; j < body_map.size(); j++) {
                 //设置单元格的数据类型
@@ -262,13 +262,13 @@ public class Office_PoiUtil {
         }
 
         //让列宽随着导出的列长自动适应(主要针对type为String的格子)
-        for (int colNum = 0; colNum <inMap.get(1).size(); colNum++) {
+        for (int colNum = 0; colNum < inMap.get(1).size(); colNum++) {
             //获取当前列字节宽度
             int columnWidth = sheet.getColumnWidth(colNum) / 256;
             //遍历行
             for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
                 //获取当前行
-                Row currentRow=sheet.getRow(rowNum);
+                Row currentRow = sheet.getRow(rowNum);
                 if (currentRow.getCell(colNum) != null) {
                     //获取当前格
                     Cell currentCell = currentRow.getCell(colNum);
@@ -300,7 +300,7 @@ public class Office_PoiUtil {
      */
     public Map<String, CellStyle> exp_style(Workbook workbook) {
         //样式container
-        Map<String,CellStyle> mapStyle=new HashMap<>();
+        Map<String, CellStyle> mapStyle = new HashMap<>();
 
         //单元格样式
         // 设置字体
@@ -343,7 +343,7 @@ public class Office_PoiUtil {
         // 设置字体
         Font fontTitle = workbook.createFont();
         //设置字体大小
-        fontTitle.setFontHeightInPoints((short)11);
+        fontTitle.setFontHeightInPoints((short) 11);
         //字体加粗
         fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         //设置字体名字
@@ -376,9 +376,9 @@ public class Office_PoiUtil {
         title.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 
         //数据装配
-        mapStyle.put("head",title);
-        mapStyle.put("body",body);
-        mapStyle.put("title",title);
+        mapStyle.put("head", title);
+        mapStyle.put("body", body);
+        mapStyle.put("title", title);
 
         return mapStyle;
     }
@@ -391,7 +391,7 @@ public class Office_PoiUtil {
     public Workbook exp_getWorkbook(int type) {
         //excel book容器
         Workbook workbook;
-        if (type==0) {
+        if (type == 0) {
             //2003版本的excel，用.xls结尾
             workbook = new HSSFWorkbook();
         } else {

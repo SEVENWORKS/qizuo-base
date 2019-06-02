@@ -14,12 +14,13 @@ public class IDUtil {
     private static long lastTime = System.currentTimeMillis();
     private static short lastCount = 0;
     private static int count = 0;
+
     /**
      * @author: fangl
      * @description: 生成唯一主键
      * @date: 16:37 2019/1/10
      */
-    public static String nextId(){
+    public static String nextId() {
         LOCK.lock();
         try {
             if (lastCount == ONE_STEP) {
@@ -41,11 +42,9 @@ public class IDUtil {
                 }
             }
             count = lastCount++;
-        }
-        finally
-        {
+        } finally {
             LOCK.unlock();
-            return lastTime+""+String.format("%03d",count);
+            return lastTime + "" + String.format("%03d", count);
         }
     }
 }

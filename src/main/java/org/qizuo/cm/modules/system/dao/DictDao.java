@@ -12,11 +12,12 @@ import org.springframework.stereotype.Repository;
  * @Date: 11:42 2019/1/1
  */
 @Repository
-public interface DictDao extends BaseDao<DictPoJo>{
+public interface DictDao extends BaseDao<DictPoJo> {
     /**
      * @author: fangl
      * @description: 更新状态
      * @date: 10:40 2019/2/12
      */
+    @Override
     boolean uStatus(DictPoJo dictPoJo);
 }

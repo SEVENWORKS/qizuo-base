@@ -86,7 +86,7 @@
         </if>
     </select>
     <!-- 查找分页 -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
+    <select id="qPageQZ" resultType="org.qizuo.cm.modules.system.pojo.DictPoJo">
         select
             <include refid="exclusiveColumns"/>
         from sys_dict a

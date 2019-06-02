@@ -10,36 +10,64 @@ import java.util.List;
  * @Date: 14:20 2018/10/29
  */
 public class UserPoJo extends BasePoJo {
-    /** 登录名 */
+    /**
+     * 登录名
+     */
     private String userName;
-    /** 密码 */
+    /**
+     * 密码
+     */
     private String passWord;
-    /** 密码盐 */
+    /**
+     * 密码盐
+     */
     private String salt;
-    /** 权限拼接串 */
+    /**
+     * 权限拼接串
+     */
     private String roleIds;
-    /** 名称 */
+    /**
+     * 名称
+     */
     private String name;
-    /** 性别 */
+    /**
+     * 性别
+     */
     private String sexCd;
     private String sexNm;
-    /** 身份证 */
+    /**
+     * 身份证
+     */
     private String idCard;
-    /** 电话 */
+    /**
+     * 电话
+     */
     private String phone;
-    /** 邮件 */
+    /**
+     * 邮件
+     */
     private String email;
-    /** 照片 */
+    /**
+     * 照片
+     */
     private String photo;
-    /** 住址 */
+    /**
+     * 住址
+     */
     private String address;
-    /** 登录时间 */
+    /**
+     * 登录时间
+     */
     private String loginDate;
 
     /** 其它 */
-    /** 权限集合 */
+    /**
+     * 权限集合
+     */
     private List<RolePoJo> rolePoJos;
-    /** 菜单集合 */
+    /**
+     * 菜单集合
+     */
     private List<MenuPoJo> menuPoJos;
 
     public String getUserName() {

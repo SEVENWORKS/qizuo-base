@@ -84,7 +84,7 @@
         </if>
     </select>
     <!-- 查找分页 -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
+    <select id="qPageQZ" resultType="org.qizuo.cm.modules.system.pojo.RolePoJo">
         select
             <include refid="exclusiveColumns"/>
         from sys_role a

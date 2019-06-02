@@ -79,7 +79,7 @@
         </if>
     </select>
     <!-- 查找分页 -->
-    <select id="qPageFL" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
+    <select id="qPageQZ" resultType="org.qizuo.cm.modules.system.pojo.MenuPoJo">
         select
             <include refid="exclusiveColumns"/>
         from sys_menu a

@@ -15,6 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class LogService extends BaseService<LogDao,LogPoJo>{
-    
+public class LogService extends BaseService<LogDao, LogPoJo> {
+
 }

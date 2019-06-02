@@ -15,6 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class RoleService extends BaseService<RoleDao,RolePoJo>{
-    
+public class RoleService extends BaseService<RoleDao, RolePoJo> {
+
 }

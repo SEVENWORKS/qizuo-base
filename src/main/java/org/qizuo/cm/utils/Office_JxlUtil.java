@@ -31,8 +31,8 @@ public class Office_JxlUtil {
      * @date: 12:00 2019/2/27
      */
     public BackResultPoJo imp(Workbook workbook, int index) {
-        if(null==workbook){
-            return new BackResultPoJo(BackResultPoJo.FAILURE,"工作表为空");
+        if (null == workbook) {
+            return new BackResultPoJo(BackResultPoJo.FAILURE, "工作表为空");
         }
         try {
 
@@ -43,14 +43,14 @@ public class Office_JxlUtil {
             //列数
             int columns = sheet.getColumns();
             //判断表头和行数是否合格
-            if( rows == 0 && 0 == columns) {
-                return new BackResultPoJo(BackResultPoJo.FAILURE,"列或者行数为0");
+            if (rows == 0 && 0 == columns) {
+                return new BackResultPoJo(BackResultPoJo.FAILURE, "列或者行数为0");
             }
             //返回数据
             return imp_readFinal(sheet);
         } catch (Exception e) {
             e.printStackTrace();
-            return new BackResultPoJo(BackResultPoJo.ERROR,"异常");
+            return new BackResultPoJo(BackResultPoJo.ERROR, "异常");
         } finally {
             if (workbook != null) {
                 workbook.close();
@@ -63,28 +63,28 @@ public class Office_JxlUtil {
      * @description: 最终执行方法
      * @date: 9:05 2019/2/28
      */
-    public BackResultPoJo imp_readFinal(Sheet sheet){
+    public BackResultPoJo imp_readFinal(Sheet sheet) {
         //行数
         int rows = sheet.getRows();
         //列数
         int columns = sheet.getColumns();
 
         //外层返回数据
-        Map<Integer,Map<Integer,Object>> backMap=new HashMap<>();
+        Map<Integer, Map<Integer, Object>> backMap = new HashMap<>();
 
         // 遍历每行每列的单元格
         for (int i = 0; i < rows; i++) {
             //内层返回数据
-            Map<Integer,Object> map=new HashMap<>();
+            Map<Integer, Object> map = new HashMap<>();
             for (int j = 0; j < columns; j++) {
                 Cell cell = sheet.getCell(j, i);
                 String result = cell.getContents();
                 //数据装配
-                map.put(j,result);
+                map.put(j, result);
             }
         }
         //返回数据
-        return new BackResultPoJo(BackResultPoJo.SUCCESS,backMap);
+        return new BackResultPoJo(BackResultPoJo.SUCCESS, backMap);
     }
 
     /**
@@ -92,12 +92,12 @@ public class Office_JxlUtil {
      * @description: 获取workbook对象
      * @date: 9:05 2019/2/28
      */
-    public Workbook imp_getWorkbook(){
+    public Workbook imp_getWorkbook() {
         try {
             Workbook.getWorkbook(new File(""));
-            Workbook.getWorkbook(new File(""),new WorkbookSettings());
+            Workbook.getWorkbook(new File(""), new WorkbookSettings());
             Workbook.getWorkbook(new FileInputStream(""));
-            Workbook.getWorkbook(new FileInputStream(""),new WorkbookSettings());
+            Workbook.getWorkbook(new FileInputStream(""), new WorkbookSettings());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BiffException e) {
@@ -113,7 +113,7 @@ public class Office_JxlUtil {
      * @description: 导出
      * @date: 12:00 2019/2/27
      */
-    public void exp(WritableWorkbook workbook,Map<Integer,Map<Integer,String>> inMap,int index,int beginRow) {
+    public void exp(WritableWorkbook workbook, Map<Integer, Map<Integer, String>> inMap, int index, int beginRow) {
         /*response.setCharacterEncoding("utf-8");
         response.setContentType("application/vnd.ms-excel");
         fileName = URLEncoder.encode(fileName, "UTF-8");
@@ -125,14 +125,14 @@ public class Office_JxlUtil {
 
         try {
             /** 样式 */
-            Map<String,WritableCellFormat> mapStyle=exp_style();
+            Map<String, WritableCellFormat> mapStyle = exp_style();
             /** 创建excel开始 */
             //创建sheet(名称、index)(可以有很多sheet)
             WritableSheet sheet = workbook.createSheet(inMap.get(0).get(0), index);
             //表头
-            exp_head(sheet,mapStyle,inMap);
+            exp_head(sheet, mapStyle, inMap);
             //表体
-            exp_body(sheet,mapStyle,inMap,beginRow);
+            exp_body(sheet, mapStyle, inMap, beginRow);
             //最后写入和关闭流
             workbook.write();
             workbook.close();
@@ -148,7 +148,7 @@ public class Office_JxlUtil {
      * @description: 表头
      * @date: 10:18 2019/2/28
      */
-    public void  exp_head(WritableSheet sheet,Map<String,WritableCellFormat> mapStyle,Map<Integer,Map<Integer,String>> inMap){
+    public void exp_head(WritableSheet sheet, Map<String, WritableCellFormat> mapStyle, Map<Integer, Map<Integer, String>> inMap) {
         try {
             //第一头（第一行第一列）
             Label labelC = new Label(0, 0, inMap.get(0).get(0), mapStyle.get("title"));
@@ -175,14 +175,14 @@ public class Office_JxlUtil {
      * @description: 表身
      * @date: 10:18 2019/2/28
      */
-    public void exp_body(WritableSheet sheet,Map<String,WritableCellFormat> mapStyle,Map<Integer,Map<Integer,String>> inMap,int beginRow){
+    public void exp_body(WritableSheet sheet, Map<String, WritableCellFormat> mapStyle, Map<Integer, Map<Integer, String>> inMap, int beginRow) {
         try {
             //创建单个cell
             for (int row = beginRow; row < inMap.size(); row++) {
                 //某一行数据取出
-                Map<Integer,String> body_map=inMap.get(row);
+                Map<Integer, String> body_map = inMap.get(row);
                 //循环遍历存储
-                for(int col =0;col<body_map.size();col++){
+                for (int col = 0; col < body_map.size(); col++) {
                     sheet.addCell(new Label(col, row, body_map.get(col), mapStyle.get("body")));
                 }
             }
@@ -196,9 +196,9 @@ public class Office_JxlUtil {
      * @description: 样式
      * @date: 10:26 2019/2/28
      */
-    public Map<String,WritableCellFormat> exp_style(){
+    public Map<String, WritableCellFormat> exp_style() {
         //样式container
-        Map<String,WritableCellFormat> mapStyle=new HashMap<>();
+        Map<String, WritableCellFormat> mapStyle = new HashMap<>();
         try {
             //表头样式
             WritableFont headFont = new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD);
@@ -225,9 +225,9 @@ public class Office_JxlUtil {
             title.setVerticalAlignment(VerticalAlignment.CENTRE);
 
             //数据装配
-            mapStyle.put("head",head);
-            mapStyle.put("body",body);
-            mapStyle.put("title",title);
+            mapStyle.put("head", head);
+            mapStyle.put("body", body);
+            mapStyle.put("title", title);
         } catch (WriteException e) {
             e.printStackTrace();
         }
@@ -239,16 +239,16 @@ public class Office_JxlUtil {
      * @description: 获取workbook对象
      * @date: 9:05 2019/2/28
      */
-    public WritableWorkbook exp_getWorkbook(){
+    public WritableWorkbook exp_getWorkbook() {
         try {
             Workbook.createWorkbook(new File(""));
-            Workbook.createWorkbook(new File(""),new WorkbookSettings());
-            Workbook.createWorkbook(new File(""),Workbook.getWorkbook(new File("")));
-            Workbook.createWorkbook(new File(""),Workbook.getWorkbook(new File("")),new WorkbookSettings());
+            Workbook.createWorkbook(new File(""), new WorkbookSettings());
+            Workbook.createWorkbook(new File(""), Workbook.getWorkbook(new File("")));
+            Workbook.createWorkbook(new File(""), Workbook.getWorkbook(new File("")), new WorkbookSettings());
             Workbook.createWorkbook(new FileOutputStream(""));
-            Workbook.createWorkbook(new FileOutputStream(""),new WorkbookSettings());
-            Workbook.createWorkbook(new FileOutputStream(""),Workbook.getWorkbook(new File("")));
-            Workbook.createWorkbook(new FileOutputStream(""),Workbook.getWorkbook(new File("")),new WorkbookSettings());
+            Workbook.createWorkbook(new FileOutputStream(""), new WorkbookSettings());
+            Workbook.createWorkbook(new FileOutputStream(""), Workbook.getWorkbook(new File("")));
+            Workbook.createWorkbook(new FileOutputStream(""), Workbook.getWorkbook(new File("")), new WorkbookSettings());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BiffException e) {

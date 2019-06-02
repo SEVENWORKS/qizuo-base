@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @Date: 12:13 2019/1/1
  */
 @Service
-@Transactional(rollbackFor = { Exception.class })
-public class QizuoService extends BaseService<QizuoDao,QizuoPoJo>{
-    
+@Transactional(rollbackFor = {Exception.class})
+public class QizuoService extends BaseService<QizuoDao, QizuoPoJo> {
+
 }

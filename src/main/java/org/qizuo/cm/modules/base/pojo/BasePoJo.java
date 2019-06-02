@@ -1,6 +1,7 @@
 package org.qizuo.cm.modules.base.pojo;
 
 import org.qizuo.cm.Global;
+import org.qizuo.cm.GlobalUtil;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;
 import org.qizuo.cm.utils.HttpUtil;
 import org.qizuo.cm.utils.IDUtil;
@@ -9,39 +10,62 @@ import org.qizuo.cm.utils.UserUtil;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * @Author: fangl
  * @Description: 基本实体类
  * @Date: 10:25 2018/10/30
  */
 public class BasePoJo extends IOPoJo {
-    /**id*/
+    /**
+     * id
+     */
     private String baseId;
-    /**创建ip*/
+    /**
+     * 创建ip
+     */
     private String baseCreateIp;
-    /**更新ip*/
+    /**
+     * 更新ip
+     */
     private String baseUpdateIp;
-    /**创建人*/
+    /**
+     * 创建人
+     */
     private String baseCreateUserId;
     private String baseCreateUserNm;
-    /**创建时间*/
+    /**
+     * 创建时间
+     */
     private String baseCreateTime;
-    /**更新人*/
+    /**
+     * 更新人
+     */
     private String baseUpdateUserId;
     private String baseUpdateUserNm;
-    /**更新时间*/
+    /**
+     * 更新时间
+     */
     private String baseUpdateTime;
-    /**状态 1有效 0无效 */
+    /**
+     * 状态 1有效 0无效
+     */
     private String baseStatus;
-    /**备注 数据备注*/
+    /**
+     * 备注 数据备注
+     */
     private String baseRemarks;
-    /** 排序 */
+    /**
+     * 排序
+     */
     private String orderBy;
 
     /** 其它 */
-    /** 创建人信息 */
+    /**
+     * 创建人信息
+     */
     private UserPoJo baseCreateUser;
-    /** 更新人信息 */
+    /**
+     * 更新人信息
+     */
     private UserPoJo baseUpdateUser;
 
     public String getBaseId() {
@@ -156,27 +180,31 @@ public class BasePoJo extends IOPoJo {
         this.baseUpdateUser = baseUpdateUser;
     }
 
-    /** 插入前动作 */
-    public void preIDo(HttpServletRequest httpServletRequest){
+    /**
+     * 插入前动作
+     */
+    public void preIDo() {
         //人员
-        UserPoJo userPoJo=UserUtil.qUser(httpServletRequest);
-        this.baseCreateUserId=userPoJo.getBaseId();
+        UserPoJo userPoJo = UserUtil.qUser();
+        this.baseCreateUserId = userPoJo.getBaseId();
         //状态
-        this.baseStatus= Global.STATUS_YES;
+        this.baseStatus = Global.STATUS_YES;
         //ip
-        String ip= HttpUtil.getIpAddress(httpServletRequest);
-        this.baseCreateIp=ip;
+        String ip = HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest());
+        this.baseCreateIp = ip;
         //id
-        this.baseId=IDUtil.nextId();
+        this.baseId = IDUtil.nextId();
     }
 
-    /** 更新前动作 */
-    public void preUDo(HttpServletRequest httpServletRequest){
+    /**
+     * 更新前动作
+     */
+    public void preUDo() {
         //人员
-        UserPoJo userPoJo=UserUtil.qUser(httpServletRequest);
-        this.baseUpdateUserId=userPoJo.getBaseId();
+        UserPoJo userPoJo = UserUtil.qUser();
+        this.baseUpdateUserId = userPoJo.getBaseId();
         //ip
-        String ip= HttpUtil.getIpAddress(httpServletRequest);
-        this.baseUpdateIp=ip;
+        String ip = HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest());
+        this.baseUpdateIp = ip;
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * @Date: 11:42 2019/1/1
  */
 @Repository
-public interface DictItemDao extends BaseDao<DictItemPoJo>{
+public interface DictItemDao extends BaseDao<DictItemPoJo> {
     /**
      * @author: fangl
      * @description: 批量插入
@@ -28,5 +28,6 @@ public interface DictItemDao extends BaseDao<DictItemPoJo>{
      * @description: 更新状态
      * @date: 10:40 2019/2/12
      */
+    @Override
     boolean uStatus(DictItemPoJo dictItemPoJo);
 }

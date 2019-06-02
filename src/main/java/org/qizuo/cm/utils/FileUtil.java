@@ -96,6 +96,7 @@ public class FileUtil {
         File file = new File(filePath);
         return file.getName();
     }
+
     /**
      * @author: fangl
      * @description: 将DOS/Windows格式的路径转换为UNIX/Linux格式的路径。
@@ -494,7 +495,7 @@ public class FileUtil {
      * @description: MultipartFile和file进行互相转换
      * @date: 15:23 2019/2/27
      */
-    public static File multipartFileToFile(MultipartFile multipartFile){
+    public static File multipartFileToFile(MultipartFile multipartFile) {
         //流转换
         CommonsMultipartFile cFile = (CommonsMultipartFile) multipartFile;
         DiskFileItem fileItem = (DiskFileItem) cFile.getFileItem();
