@@ -35,7 +35,7 @@
 <script id="baseTpl" type="text/html">
     {{if null!=$data&&$data.length>0}}
     {{each $data}}
-    <tr onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/logDo?baseId={{$value.baseId}}\')');">
+    <tr onclick="buttonPanel('查看','updateDate(\'${jumpPath}system/sys/logDo?baseId={{$value.baseId}}\')');">
         <td>{{$value.typeCd}}</td>
         <td>{{$value.baseCreateUserId}}</td>
         <td>{{$value.baseCreateTime}}</td>

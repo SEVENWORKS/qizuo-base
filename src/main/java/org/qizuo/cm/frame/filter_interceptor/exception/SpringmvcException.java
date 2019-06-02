@@ -1,5 +1,6 @@
 package org.qizuo.cm.frame.filter_interceptor.exception;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;
@@ -58,7 +59,9 @@ public class SpringmvcException {
         //判断是否是ajax请求
         String requestedWith = request.getHeader("x-requested-with");
         if (requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest")) {
-            return JsonUtil.renderString(response, new BackResultPoJo(BackResultPoJo.ERROR, "系统错误"));
+            //ajax请求直接返回json串
+            JsonUtil.httpBackJson(response, JSONObject.toJSONString(new BackResultPoJo(BackResultPoJo.ERROR, "系统错误")));
+            return null;
         } else {
             return "/base/404";
         }
