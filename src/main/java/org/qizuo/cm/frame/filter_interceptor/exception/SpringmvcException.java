@@ -60,7 +60,7 @@ public class SpringmvcException {
         String requestedWith = request.getHeader("x-requested-with");
         if (requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest")) {
             //ajax请求直接返回json串
-            JsonUtil.httpBackJson(response, JSONObject.toJSONString(new BackResultPoJo(BackResultPoJo.ERROR, "系统错误")));
+            JsonUtil.httpBackJson(response, JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.ERROR, "系统错误")));
             return null;
         } else {
             return "/base/404";

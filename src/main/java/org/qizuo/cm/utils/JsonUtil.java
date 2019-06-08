@@ -1,6 +1,8 @@
 package org.qizuo.cm.utils;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.ss.formula.functions.T;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,5 +33,23 @@ public class JsonUtil {
             printWriter.close();
         } catch (IOException e) {
         }
+    }
+
+    /**
+     * @author: fangl
+     * @description: json串转换成功对象(jackSon)
+     * @date: 22:13 2019/6/8
+     */
+    public static Object jsonToObject(String json) {
+        return JSONUtils.parse(json);
+    }
+
+    /**
+     * @author: fangl
+     * @description: 对象转换成json串(jackSon)
+     * @date: 22:13 2019/6/8
+     */
+    public static String objectToJson(Object o) {
+        return JSONUtils.toJSONString(o);
     }
 }

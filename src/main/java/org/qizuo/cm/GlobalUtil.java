@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: fangl
@@ -65,5 +66,77 @@ public class GlobalUtil {
      */
     public static HttpServletResponse qHttpServletResponse() {
         return ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
+    }
+
+    /**
+     * @author: fangl
+     * @description: jdbcTemplate 条件拼接
+     * @date: 23:35 2019/6/8
+     */
+    public static String qJdbcTemplateCon(Map<String, String> conditions) {
+        //返回
+        String back = "";
+
+        //拼接
+        for (Map.Entry<String, String> entry : conditions.entrySet()) {
+            back += entry.getKey() + "=" + entry.getValue() + " and ";
+        }
+
+        //去除
+        back=back.substring(0,back.length()-4);
+
+        return back;
+    }
+
+    /**
+     * @author: fangl
+     * @description: jdbcTemplate update拼接参数
+     * @date: 23:36 2019/6/8
+     */
+    public static String qJdbcTemplateUpd(Map<String, String> data) {
+        //返回
+        String back = "";
+
+        //拼接
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            back += entry.getKey() + "=" + entry.getValue() + ",";
+        }
+
+        //去除
+        back=back.substring(0,back.length()-1);
+
+        return back;
+    }
+
+    /**
+     * @author: fangl
+     * @description: jdbcTemplate insert拼接参数
+     * @date: 23:36 2019/6/8
+     */
+    public static String qJdbcTemplateIn(Map<String, String> data) {
+        //返回
+        String back = "(";
+
+        //遍历key
+        for (String key : data.keySet()) {
+            back += key +",";
+        }
+
+        //去除
+        back=back.substring(0,back.length()-1);
+
+        back+=") values (";
+
+        //遍历value
+        for (String value : data.values()) {
+            back += value +",";
+        }
+
+        //去除
+        back=back.substring(0,back.length()-1);
+
+        back+=")";
+
+        return back;
     }
 }
