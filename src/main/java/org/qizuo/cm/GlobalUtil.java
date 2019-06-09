@@ -75,7 +75,7 @@ public class GlobalUtil {
      */
     public static String qJdbcTemplateCon(Map<String, String> conditions) {
         //返回
-        String back = "";
+        String back = " where ";
 
         //拼接
         for (Map.Entry<String, String> entry : conditions.entrySet()) {

@@ -27,6 +27,32 @@ import java.util.Map;
 public class OutMutualController {
     /**
      * @author: fangl
+     * @description: 获取所有数据库表信息
+     * @date: 11:33 2019/6/9
+     */
+    @RequestMapping("qOutMutual")
+    public void qOutMutualDatabase(@PathVariable String mainSQ, @RequestParam Boolean sign) {
+        //组装sql
+        String sql;
+
+        //判断查表信息还是字段信息
+        if (sign) {
+            sql = "select table_name from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA=" + Global.DATABASE_NAME;
+        } else {
+            sql = "select column_name,column_type,column_comment from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA=" + Global.DATABASE_NAME + " and TABLE_NAME=" + mainSQ;
+        }
+
+        //获取数据
+        JdbcTemplate jdbcTemplate = SpringUtils.getBean(JdbcTemplate.class);
+        Map<String, Object> map = jdbcTemplate.queryForMap(sql);
+
+        //返回
+        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(map));
+    }
+
+
+    /**
+     * @author: fangl
      * @description: 获取数据
      * @date: 16:25 2019/1/8
      */
@@ -34,7 +60,7 @@ public class OutMutualController {
     public void qOutMutual(@PathVariable String mainSQ, String pageNo, String pageSize,
                            Map<String, String> conditions) {
         //组装sql
-        String sql = "select * from " + mainSQ + " where ";
+        String sql = "select * from " + mainSQ;
 
         //条件
         if (null != conditions && conditions.size() > 0) {
@@ -60,13 +86,13 @@ public class OutMutualController {
      * @date: 16:25 2019/1/8
      */
     @RequestMapping("iuOutMutual")
-    public void iuOutMutual(@PathVariable String mainSQ, @RequestParam Boolean isId, Map<String, String> dataMap,
+    public void iuOutMutual(@PathVariable String mainSQ, @RequestParam Boolean sign, Map<String, String> dataMap,
                             Map<String, String> conditions) {
         if (null != dataMap && dataMap.size() > 0) {
             //组装sql
             String sql;
 
-            if (isId) {
+            if (sign) {
                 //插入
                 sql = "insert into " + mainSQ + GlobalUtil.qJdbcTemplateIn(dataMap);
             } else {
@@ -101,9 +127,9 @@ public class OutMutualController {
 
         if (really) {
             //删除
-            sql = "delete from " + mainSQ + " where ";
+            sql = "delete from " + mainSQ;
         } else {
-            sql = "update " + mainSQ + "set status = 1 where ";
+            sql = "update " + mainSQ + "set status = 1";
         }
 
         //条件

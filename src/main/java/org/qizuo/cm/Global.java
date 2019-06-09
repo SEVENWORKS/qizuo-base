@@ -120,6 +120,12 @@ public class Global {
      */
     public static final String DATAROLE_UPDATE = "3";
 
+    /** ****************************数据库信息********************** */
+    /**
+     * 当前数据库名称
+     */
+    public static final String DATABASE_NAME = "qizuo";
+
     /** ****************************公共方法区********************** */
     /**
      * 批量生成主键
