@@ -131,4 +131,48 @@ public class SystemJump {
         return "/system/system_msg_do";
     }
 
+    /**
+     * @author: fangl
+     * @description: 消息发送
+     * @date: 8:56 2019/2/18
+     */
+    @RequestMapping("dataBase")
+    public String dataBase() {
+        return "/outMutualControl/dataBase";
+    }
+
+    /**
+     * @author: fangl
+     * @description: 消息发送
+     * @date: 8:56 2019/2/18
+     */
+    @RequestMapping("dataBaseDo")
+    public String dataBaseDo(String tName, Model model) {
+        model.addAttribute("tName", tName);
+        return "/outMutualControl/dataBase_do";
+    }
+
+    /**
+     * @author: fangl
+     * @description: 消息发送
+     * @date: 8:56 2019/2/18
+     */
+    @RequestMapping("dataBaseTable")
+    public String dataBaseTable(String tName, Model model) {
+        model.addAttribute("tName", tName);
+        return "/outMutualControl/dataBase_table";
+    }
+
+    /**
+     * @author: fangl
+     * @description: 消息发送
+     * @date: 8:56 2019/2/18
+     */
+    @RequestMapping("dataBaseTableDo")
+    public String dataBaseTableDo(String baseId, String tName, Model model) {
+        model.addAttribute("baseId", baseId);
+        model.addAttribute("tName", tName);
+        return "/outMutualControl/dataBase_table_do";
+    }
+
 }

@@ -65,27 +65,7 @@ public class GlobalUtil {
      * @date: 13:24 2019/6/2
      */
     public static HttpServletResponse qHttpServletResponse() {
-        return ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
-    }
-
-    /**
-     * @author: fangl
-     * @description: jdbcTemplate 条件拼接
-     * @date: 23:35 2019/6/8
-     */
-    public static String qJdbcTemplateCon(Map<String, String> conditions) {
-        //返回
-        String back = " where ";
-
-        //拼接
-        for (Map.Entry<String, String> entry : conditions.entrySet()) {
-            back += entry.getKey() + "=" + entry.getValue() + " and ";
-        }
-
-        //去除
-        back=back.substring(0,back.length()-4);
-
-        return back;
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
     /**
@@ -99,11 +79,13 @@ public class GlobalUtil {
 
         //拼接
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            back += entry.getKey() + "=" + entry.getValue() + ",";
+            if (StringUtils.isNotBlank(entry.getValue())) {
+                back += entry.getKey() + "=\'" + entry.getValue() + "\',";
+            }
         }
 
         //去除
-        back=back.substring(0,back.length()-1);
+        back = back.substring(0, back.length() - 1);
 
         return back;
     }
@@ -118,24 +100,28 @@ public class GlobalUtil {
         String back = "(";
 
         //遍历key
-        for (String key : data.keySet()) {
-            back += key +",";
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            if (StringUtils.isNotBlank(entry.getValue())) {
+                back += entry.getKey() + ",";
+            }
         }
 
         //去除
-        back=back.substring(0,back.length()-1);
+        back = back.substring(0, back.length() - 1);
 
-        back+=") values (";
+        back += ") values (";
 
         //遍历value
-        for (String value : data.values()) {
-            back += value +",";
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            if (StringUtils.isNotBlank(entry.getValue())) {
+                back += "\'" + entry.getValue() + "\',";
+            }
         }
 
         //去除
-        back=back.substring(0,back.length()-1);
+        back = back.substring(0, back.length() - 1);
 
-        back+=")";
+        back += ")";
 
         return back;
     }

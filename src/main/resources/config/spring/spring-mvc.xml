@@ -24,11 +24,11 @@
     <!--<context:component-scan base-package="org.qizuo.cm.modules"/>-->
     <!-- 扫描数据接口的@Controller注解 -->
     <!-- spring配置中的use-default-filters用来指示是否自动扫描带有@Component、@Repository、@Service和@Controller的类。默认为true，即默认扫描。 -->
-    <!--<context:component-scan base-package="org.qizuo.cm.modules" use-default-filters="false">
+    <context:component-scan base-package="org.qizuo.cm.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>-->
+    </context:component-scan>
     <!-- 跳转controller扫描 -->
-    <context:component-scan base-package="org.qizuo.cm.controller"/>
+    <!--<context:component-scan base-package="org.qizuo.cm.controller"/>-->
     <!-- 异常扫描 -->
     <context:component-scan base-package="org.qizuo.cm.frame.filter_interceptor.exception"/>
 

@@ -124,7 +124,7 @@ public class Global {
     /**
      * 当前数据库名称
      */
-    public static final String DATABASE_NAME = "qizuo";
+    public static final String DATABASE_NAME = "\'qizuo\'";
 
     /** ****************************公共方法区********************** */
     /**

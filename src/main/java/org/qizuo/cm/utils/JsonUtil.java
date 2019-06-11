@@ -1,6 +1,7 @@
 package org.qizuo.cm.utils;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.ss.formula.functions.T;
 
@@ -41,7 +42,7 @@ public class JsonUtil {
      * @date: 22:13 2019/6/8
      */
     public static Object jsonToObject(String json) {
-        return JSONUtils.parse(json);
+        return JSON.parse(json);
     }
 
     /**
@@ -50,6 +51,6 @@ public class JsonUtil {
      * @date: 22:13 2019/6/8
      */
     public static String objectToJson(Object o) {
-        return JSONUtils.toJSONString(o);
+        return JSON.toJSONString(o);
     }
 }
