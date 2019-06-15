@@ -81,7 +81,6 @@ public class MsgController {
             }
         } else {
             //插入准备
-            msgPoJo.preIDo();
             msgService.insert(msgPoJo);
         }
         return new BackResultPoJo(BackResultPoJo.SUCCESS, "操作成功", null);

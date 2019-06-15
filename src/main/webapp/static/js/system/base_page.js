@@ -1,4 +1,4 @@
-/** https://www.cnblogs.com/libo0125ok/p/7815597.html */
+/** 自定义分页插件https://www.cnblogs.com/libo0125ok/p/7815597.html */
 //自定义样式(暂不用)
 var tableStyle =
     ".page {font-size: 14px;background-color: transparent;width: 100%;height: 50px;line-height: 50px;display: none;}"+

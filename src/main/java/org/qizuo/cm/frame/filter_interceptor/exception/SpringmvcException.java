@@ -1,6 +1,5 @@
 package org.qizuo.cm.frame.filter_interceptor.exception;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;

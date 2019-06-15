@@ -67,28 +67,37 @@ public class LoginController {
      */
     @RequestMapping("loginCheck")
     public BackResultPoJo loginCheck(String username, String password, String type) throws Exception {
+        //判断当前session是否存在user
+        if(null!=UserUtil.qUser()){
+            return new BackResultPoJo(BackResultPoJo.FAILURE, "请清除登录或者关掉浏览器重新打开");
+        }
+
+        //首页Url
         String jumpUrl = "";
-        //登录
         if (StringUtils.isNotBlank(type) && Global.YES.equals(type)) {
-            //截取
+            //管理员
+            //用户名密码
             int split = username.indexOf(",");
             if (-1 != split) {
                 password = username.substring(split + 1);
                 username = username.substring(0, split);
             }
-            //特殊登录从配置文件中读取
+
+            //验证信息：特殊登录从配置文件中读取
             String path = Global.class.getClassLoader().getResource("/") + "config/properties/base.properties";
             Map<String, String> backMap = PropertiesUtil.read(path.substring(5));
             String adminUsername = backMap.get("admin_username");
             String adminPassword = backMap.get("admin_password");
+
             //比较
             if (StringUtils.equals(adminUsername, username) && StringUtils.equals(adminPassword, password)) {
-                //特殊用户封装
+                //用户信息
                 UserPoJo userPoJo = new UserPoJo();
                 userPoJo.setBaseId(StringUtils.equals(Global.YES, Global.ADMIN_VIEW) ? "" : Global.ADMIN_ID);
                 userPoJo.setUserName(username);
                 userPoJo.setName("七作");
                 userPoJo.setRoleIds(Global.ADMIN_ROLEIDS);
+
                 //菜单
                 MenuPoJo menuPoJo = new MenuPoJo();
                 menuPoJo.setBaseId(Global.TREE_FIRST);
@@ -97,7 +106,7 @@ public class LoginController {
                 //放入session中
                 HttpSession login = SessionUtil.sessionAdd(Global.SESSION_USER, userPoJo);
 
-                //是否读取配置中的菜单信息
+                //配置中的管理菜单信息
                 if (StringUtils.equals(Global.YES, Global.ADMIN_MENU)) {
                     menuPoJo.setName("系统专用");
                     menuPoJo.setTheme("sa-side-home");
@@ -142,16 +151,7 @@ public class LoginController {
                 }
 
                 //管理员只允许单个登录
-                //当前登录所有人
-                Map<String, HttpSession> loginUser = SessionListener.LOGIN_USER_MAP;
-                //判断用户名是否存在
-                HttpSession loged = loginUser.get(username);
-                if (null != loged) {
-                    //移除
-                    SessionListener.LOGIN_USER_MAP.remove(username);
-                    //销毁
-                    loged.invalidate();
-                }
+                SessionListener.loginSessionClear(username);
 
                 //当前登录人放入map中
                 SessionListener.LOGIN_USER_MAP.put(username, login);
@@ -162,28 +162,22 @@ public class LoginController {
                 return new BackResultPoJo(BackResultPoJo.FAILURE, "密码或者用户名不正确");
             }
         } else {
-            //从数据库匹配
+            //普通
+            //用户信息
             UserPoJo userPoJo = new UserPoJo();
             userPoJo.setUserName(username);
             userPoJo = userService.qUserAllMsg(userPoJo);
             userPoJo.setMenuPoJos(GlobalUtil.treeClean(Global.TREE_FIRST, userPoJo.getMenuPoJos()));
+
             //对比
             if (null != userPoJo && StringUtils.equals(password, userPoJo.getPassWord())) {
                 //放入session中
                 HttpSession login = SessionUtil.sessionAdd(Global.SESSION_USER, userPoJo);
+
                 //判断是否单个登录
                 if (StringUtils.equals(Global.YES, Global.LOGIN_ONLY)) {
                     //清除登录
-                    //当前登录所有人
-                    Map<String, HttpSession> loginUser = SessionListener.LOGIN_USER_MAP;
-                    //判断用户名是否存在
-                    HttpSession loged = loginUser.get(username);
-                    if (null != loged) {
-                        //销毁
-                        loged.invalidate();
-                        //移除
-                        SessionListener.LOGIN_USER_MAP.remove(username);
-                    }
+                    SessionListener.loginSessionClear(username);
                     //当前登录人放入map中
                     SessionListener.LOGIN_USER_MAP.put(username, login);
 
@@ -198,6 +192,7 @@ public class LoginController {
                 return new BackResultPoJo(BackResultPoJo.FAILURE, "密码或者用户名不正确");
             }
         }
+
         return new BackResultPoJo(BackResultPoJo.SUCCESS, "登录成功", jumpUrl);
     }
 
@@ -210,16 +205,7 @@ public class LoginController {
     public BackResultPoJo loginOut() {
         UserPoJo userPoJo = UserUtil.qUser();
         if (null != userPoJo) {
-            //当前登录所有人
-            Map<String, HttpSession> loginUser = SessionListener.LOGIN_USER_MAP;
-            //判断用户名是否存在
-            HttpSession loged = loginUser.get(userPoJo.getUserName());
-            if (null != loged) {
-                //销毁
-                loged.invalidate();
-                //移除
-                SessionListener.LOGIN_USER_MAP.remove(userPoJo.getUserName());
-            }
+            SessionListener.loginSessionClear(userPoJo.getUserName());
         }
         return new BackResultPoJo(BackResultPoJo.SUCCESS, "清除登录");
     }

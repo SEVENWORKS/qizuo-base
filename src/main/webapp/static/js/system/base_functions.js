@@ -1,3 +1,35 @@
+/**
+ * 本js旨在全局的功能性函数，核心
+ * backResult(data,func)/backResultAlert(data,func)/backResultBig(data,func)；ajax数据返回处理函数
+ * formListSer(dataDetailContainer,listDom)：list表单序号自动生成
+ * deleteData(data,url,dom)：js删除数据
+ * deleteDataReload(data,url)：js删除数据后刷新页面
+ * updateDate(url)：js更新数据
+ *
+ *
+ * addDataTr(templateDom,containerDom)：table增加一行数据
+ * removeDataTr(dom,removeDom)：table删除一行数据
+ *
+ * buttonRemove()：去除页面固定定位的单个按钮
+ * layerClose()：关闭模态框
+ * f5()：刷新当前页面
+ * globalJs(func)：全局js函数，一般用于最外层
+ *
+ *
+ * pjaxFunc(url,container)：异步获取jsp页面（另外两个不用理会，pjax弃用）
+ * tplFunc(data,container,tplId)：普通数据模板渲染
+ * tplFuncTable(data,container,tplId)：table专用数据模板函数
+ * pageHtml(pageFunc,pageSize,pageNo)：分页
+ *
+ *
+ * isNotBlank(value)：值判空
+ * isFunction(value)：函数判空
+ * getRootPath()：js获取项目根目录
+ * countDivision(value1,value2,type)：取模或者取余
+ * charViewTimes(char,str)：单个字符出现次数
+ *
+ */
+
 /** 判断值是否能用 */
 function isNotBlank(value){
 	if(typeof(value)=='undefined'||null==value||value.length<=0||''==value){

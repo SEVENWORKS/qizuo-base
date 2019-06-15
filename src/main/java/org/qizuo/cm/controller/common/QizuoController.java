@@ -62,13 +62,9 @@ public class QizuoController {
     @RequestMapping("iuDo")
     public BackResultPoJo iuDo(RolePoJo rolePoJo) {
         if (StringUtils.isBlank(rolePoJo.getBaseId())) {
-            //插入准备
-            rolePoJo.preIDo();
             //插入
             roleService.insert(rolePoJo);
         } else {
-            //更新准备
-            rolePoJo.preUDo();
             //更新
             roleService.update(rolePoJo);
         }

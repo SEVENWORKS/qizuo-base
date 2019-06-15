@@ -5,6 +5,7 @@ import org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcDispatcherServle
 import org.qizuo.cm.frame.listener.session.SessionListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -27,11 +28,11 @@ public class Start implements WebApplicationInitializer {
         servletContext.setInitParameter("logbackConfigLocation", "classpath:config/log/logback.xml");
         servletContext.addListener(LogbackConfigListener.class);
 
-        //listener加载(Listener可以用上述的加载方式，也可以用哦个方式)
-        /*ContextLoaderListener logbackConfigLocation=new ContextLoaderListener();
-        logbackConfigLocation.initWebApplicationContext(servletContext);*/
         //单个用户登录监听
         servletContext.addListener(SessionListener.class);
+
+        //request获取
+        servletContext.addListener(RequestContextListener.class);
 
         //字符集过滤(filter方式加载)
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -48,5 +49,9 @@ public class Start implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new SpringmvcDispatcherServlet(appContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+
+        //listener加载(Listener可以用上述的加载方式，也可以用这个方式)
+        /*ContextLoaderListener logbackConfigLocation=new ContextLoaderListener();
+        logbackConfigLocation.initWebApplicationContext(servletContext);*/
     }
 }

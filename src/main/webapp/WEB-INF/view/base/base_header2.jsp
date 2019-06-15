@@ -175,7 +175,7 @@
 <h4 class="page-title">首页</h4>
 
 <script>
-    /** 目录和标题(暂时只支持三级目录，多了没意思) */
+    /** 目录和标题实时刷新函数(暂时只支持三级目录) */
     function baseHeader2_pageTitle(title,level,title2){
         //空值处理
         title=isNotBlank(title)?title:"";
@@ -195,7 +195,8 @@
         //左侧文字处理
         $(".page-title").text(title);
     }
-    /** 消息列表 */
+
+    /** 消息深度加载(列表)函数 */
     function baseHeader2_msglist(msgs){
         if(isNotBlank(msgs)){
             var html='';
@@ -224,7 +225,7 @@
         }
     }
 
-    /** 消息点击事件 */
+    /** 消息点击处理函数 */
     function baseHeader2_msglist_click(url,baseId,id){
         buttonPanel('阅读','updateDate(\''+url+'\')','删除',
             'deleteData({baseId:'+baseId+'},\'${pageContext.request.contextPath}/module/system/msg/delete\',\''+id+'\')');

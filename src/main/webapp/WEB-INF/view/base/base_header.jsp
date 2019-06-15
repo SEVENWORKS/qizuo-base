@@ -41,7 +41,7 @@
 </div>
 
 <script>
-    /** 图标及其数量 */
+    /** 消息初步加载函数 */
     function baseHeader_msg(msgs){
         if(isNotBlank(msgs)){
             //第一部分：数量
@@ -59,7 +59,8 @@
             baseHeader2_msglist(msgs);
         }
     }
-    /** 主页搜索 */
+
+    /** 头搜索函数 */
     function baseHeader_mainSearch(func){
         var mainSearchVal=$(".main-search").val();
         if(isFunction(func)){

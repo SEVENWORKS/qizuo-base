@@ -20,7 +20,6 @@ public class MsgUtil {
      * @date: 17:37 2019/1/9
      */
     public static boolean insert(MsgPoJo msgPoJo) {
-        msgPoJo.preIDo();
         return msgService.insert(msgPoJo);
     }
 

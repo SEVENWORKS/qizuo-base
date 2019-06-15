@@ -1,3 +1,14 @@
+/**
+ * 本js旨在页面工具渲染
+ * alert(Msg,func)：全局alert重写
+ * modelBase(content,width,height)：模态框弹出
+ * buttonOne(text,func,left,bottom)：单个页面固定定位按钮创建
+ * buttonPanel(name,func...):按钮面板，区别于上
+ * treeMenu(list,name,setting,treeContainer,dataString)：树
+ * checkAndradio()/checkSwitch(dom,trueFunc,falseFunc)/maskForInput()/selectInit()/spinnerInit()/timeInit()/colorInit()/textareaInit()/bigTextArae()/sliderInit()/mediaInit()：框架自带前端插件
+ *
+ */
+
 /** 弹出窗(重写，基于layer) */
 window.alert=function(msg,func){
 	//弹

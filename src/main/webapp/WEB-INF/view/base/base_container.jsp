@@ -126,12 +126,13 @@
 
     <!-- 框架基本函数执行 -->
     <script>
+        /** 核心加载函数(消息/用户信息/菜单列表) */
         $(function(){
             $.post('${modulePath}system/login/frameData',{},function(data){
                 backResult(data,function(data){
-                    //头
+                    //消息
                     baseHeader_msg(data.baseHeader_msgList);
-                    //左侧菜单
+                    //菜单列表
                     baseLeftbar_menu(isNotBlank(data.userMsg)?data.userMsg.menuPoJos:null);
                     //用户信息
                     baseLeftBar2_user(data.userMsg);
@@ -139,30 +140,11 @@
             })
             //头搜索
             baseHeader_mainSearch();
-            //用户菜单
+            //用户信息
             baseLeftBar2_userMenu(userMenus);
-            //目录和标题
-            //baseHeader2_pageTitle(title,level);
         })
 
-        /** 主体iframe跳转(用iframe或者其他异步的时候放开这个方法，同时放开leftbar中这个方法) */
-        function baseContainerIframe(url){
-            //iframe跳转
-            /*if(isNotBlank(url)){
-                if(-1!=url.indexOf(global$openWindow)){
-                    url=url.split(global$openWindow).join("");
-                    //框架页面
-                    window.open(url);
-                }else{
-                    //普通
-                    $("#baseContainerIframe").prop('src',url);
-                }
-            }*/
-            //异步加载跳转
-            //ajaxHtml(url,'#baseFrame');
-        }
-
-        /** pjax使用 */
+        /** 左侧菜单点击，异步获取jsp */
         function pjax(url,dom){
             //ajax方式
             var level=$(dom).attr('level');
@@ -195,7 +177,8 @@
             }else{
                 return false;
             }
-            //pjax方式
+
+            //pjax方式(弃用)
             /*$(document).on('click', '.side-menu a', function(event) {
                 var url=$(this).prop('href');
                 var level=$(this).attr('level');
@@ -230,6 +213,23 @@
                     return false;
                 }
             })*/
+        }
+
+        /** 主体iframe跳转(用iframe或者其他异步的时候放开这个方法，同时放开leftbar中这个方法，暂时弃用) */
+        function baseContainerIframe(url){
+            //iframe跳转
+            /*if(isNotBlank(url)){
+                if(-1!=url.indexOf(global$openWindow)){
+                    url=url.split(global$openWindow).join("");
+                    //框架页面
+                    window.open(url);
+                }else{
+                    //普通
+                    $("#baseContainerIframe").prop('src',url);
+                }
+            }*/
+            //异步加载跳转
+            //ajaxHtml(url,'#baseFrame');
         }
 
     </script>

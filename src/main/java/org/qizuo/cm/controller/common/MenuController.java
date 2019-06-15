@@ -72,13 +72,9 @@ public class MenuController {
     @RequestMapping("iuDo")
     public BackResultPoJo iuDo(MenuPoJo menuPoJo) {
         if (StringUtils.isBlank(menuPoJo.getBaseId())) {
-            //插入准备
-            menuPoJo.preIDo();
             //插入
             menuService.insert(menuPoJo);
         } else {
-            //更新准备
-            menuPoJo.preUDo();
             //更新
             menuService.update(menuPoJo);
         }

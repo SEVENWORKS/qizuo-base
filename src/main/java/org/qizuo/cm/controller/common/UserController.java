@@ -63,13 +63,9 @@ public class UserController {
     @RequestMapping("iuDo")
     public BackResultPoJo iuDo(UserPoJo userPoJo) {
         if (StringUtils.isBlank(userPoJo.getBaseId())) {
-            //插入准备
-            userPoJo.preIDo();
             //插入
             userService.insert(userPoJo);
         } else {
-            //更新准备
-            userPoJo.preUDo();
             //更新
             userService.update(userPoJo);
         }

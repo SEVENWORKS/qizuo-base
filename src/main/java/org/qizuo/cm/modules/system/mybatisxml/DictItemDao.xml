@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.qizuo.cm.modules.system.dao.DictItemDao">
-    <!-- 修改org.qizuo.cm.modules.system.dao.UserDao和sys_dict_item和org.qizuo.cm.modules.system.pojo.DictItemPoJo -->
     <!-- 专属字段 -->
     <sql id="exclusiveColumns">
         <include refid="CommonColumns.commonColumns"/>,

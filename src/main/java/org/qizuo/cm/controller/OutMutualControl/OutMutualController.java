@@ -1,6 +1,5 @@
 package org.qizuo.cm.controller.OutMutualControl;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.GlobalUtil;
@@ -72,7 +71,7 @@ public class OutMutualController {
 
         //获取数据
         JdbcTemplate jdbcTemplate = SpringUtils.getBean(JdbcTemplate.class);
-        List<Map<String, Object>> map = jdbcTemplate.queryForList(sql);
+        List<Map<String, Object>> map=jdbcTemplate.queryForList(sql);
 
         //返回
         JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, map)));

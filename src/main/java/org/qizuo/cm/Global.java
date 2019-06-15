@@ -42,6 +42,10 @@ public class Global {
      */
     public static final String LOGIN_URL = "/jump/system/base/login";
     /**
+     * login check
+     */
+    public static final String LOGIN_CHECK = "system/login/loginCheck";
+    /**
      * 基本login跳转url
      */
     public static final String LOGIN_CHANGE_URL = "/jump/system/base/container";

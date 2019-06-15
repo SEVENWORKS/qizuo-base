@@ -1,9 +1,7 @@
 package org.qizuo.cm.utils;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.poi.ss.formula.functions.T;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -51,6 +49,6 @@ public class JsonUtil {
      * @date: 22:13 2019/6/8
      */
     public static String objectToJson(Object o) {
-        return JSON.toJSONString(o);
+        return JSON.toJSONString(o, SerializerFeature.WriteMapNullValue);
     }
 }

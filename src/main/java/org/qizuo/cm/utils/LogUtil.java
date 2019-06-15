@@ -39,7 +39,6 @@ public class LogUtil {
     public static boolean insert(LogPoJo logPoJo) {
         //先判断开关
         if (StringUtils.equals(Global.YES, Global.LOG_SAVE)) {
-            logPoJo.preIDo();
             return logService.insert(logPoJo);
         } else {
             return true;

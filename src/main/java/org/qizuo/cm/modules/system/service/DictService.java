@@ -28,13 +28,9 @@ public class DictService extends BaseService<DictDao, DictPoJo> {
      */
     public boolean iuBatch(DictPoJo dictPoJo) {
         if (StringUtils.isBlank(dictPoJo.getBaseId())) {
-            //插入准备
-            dictPoJo.preIDo();
             //插入
             dao.insert(dictPoJo);
         } else {
-            //更新准备
-            dictPoJo.preUDo();
             //更新
             dao.update(dictPoJo);
             //先删除所有从表

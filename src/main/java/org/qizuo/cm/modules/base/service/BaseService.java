@@ -23,6 +23,8 @@ public class BaseService<D extends BaseDao<P>, P extends BasePoJo> {
      * 增加(所有增加i开头)
      */
     public boolean insert(P p) {
+        //添加插入基本信息
+        p.preIDo();
         return dao.insert(p);
     }
 
@@ -30,6 +32,8 @@ public class BaseService<D extends BaseDao<P>, P extends BasePoJo> {
      * 更新(所有更新u开头)
      */
     public boolean update(P p) {
+        //添加更新基本信息
+        p.preUDo();
         return dao.update(p);
     }
 

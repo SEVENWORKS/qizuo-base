@@ -54,46 +54,25 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <!-- 匹配的访问路径 -->
-            <!-- 替代web.xml中默认跳转 -->
-            <mvc:mapping path="/"/>
+            <!-- 拦截所有路径 path="/"代表项目根目录的访问，只有**才代表模糊匹配-->
+            <mvc:mapping path="/**"/>
             <!-- 用户未登录拦截 -->
-            <mvc:mapping path="/jump/**"/>
+            <!--<mvc:mapping path="/jump/**"/>-->
             <!-- 重复登录拦截 -->
-            <mvc:mapping path="/**/loginCheck"/>
+            <!--<mvc:mapping path="/**/loginCheck"/>-->
+            <!-- 不拦截第三方接口调用 -->
+            <mvc:exclude-mapping path="/**/outMutual/**" />
             <!-- 静态资源拦截 -->
             <!--<mvc:exclude-mapping path="/static/**"/>-->
             <!-- 拦截器所在的项目位置 -->
             <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptor">
-                <!-- 排除不拦截的url,注入参数 -->
-                <property name="exceptUrls">
+                <!-- 注入拦截器参数 -->
+                <!--<property name="exceptUrls">
                     <list>
-                        <value>/base/login</value>
-                        <value>/login/loginCheck</value>
+                        <value>/outMutual</value>
                     </list>
-                </property>
+                </property>-->
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
-
-    <!-- ************************内容协商管理器************************  -->
-    <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
-    <!--<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        &lt;!&ndash; 扩展名至mimeType的映射,即 /user.json => application/json &ndash;&gt;
-        <property name="favorPathExtension" value="true"/>
-        &lt;!&ndash; 用于开启 /userinfo/123?format=json 的支持 &ndash;&gt;
-        <property name="favorParameter" value="true"/>
-        <property name="parameterName" value="format"/>
-        &lt;!&ndash; 是否忽略Accept Header &ndash;&gt;
-        <property name="ignoreAcceptHeader" value="false"/>
-
-        <property name="mediaTypes"> &lt;!&ndash;扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  &ndash;&gt;
-            <value>
-                json=application/json
-                xml=application/xml
-                html=text/html
-            </value>
-        </property>
-        &lt;!&ndash; 默认的content type &ndash;&gt;
-        <property name="defaultContentType" value="text/html"/>
-    </bean>-->
 </beans>

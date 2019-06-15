@@ -92,7 +92,8 @@
         //姓名
         $("#profile-menu h4").text(name);
     }
-    /** 登录人菜单配置 */
+
+    /** 登录人菜单配置(读取全局配置) */
     function baseLeftBar2_userMenu(userMenus){
         if(isNotBlank(userMenus)){
             var html='';
@@ -108,7 +109,8 @@
             $("#profile-menu ul").append(html);
         }
     }
-    /** 登录人菜单触发 */
+
+    /** 登录人菜单触发(配合上方函数) */
     function baseLeftBar2_userFunc(url,type,func){
         if(isNotBlank(url)&&isNotBlank(type)){
             if(type==global$urlGetType){

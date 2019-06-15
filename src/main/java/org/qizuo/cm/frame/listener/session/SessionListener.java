@@ -1,7 +1,7 @@
 package org.qizuo.cm.frame.listener.session;
 
-import org.qizuo.cm.Global;
 import org.qizuo.cm.modules.system.pojo.UserPoJo;
+import org.qizuo.cm.utils.UserUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -41,10 +41,25 @@ public class SessionListener implements HttpSessionListener {
      */
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        HttpSession session = se.getSession();
-        UserPoJo userPoJo = (UserPoJo) session.getAttribute(Global.SESSION_USER);
+        UserPoJo userPoJo = UserUtil.qUser();
         if (null != userPoJo) {
             LOGIN_USER_MAP.remove(userPoJo.getUserName());
+        }
+    }
+
+    /**
+     * @author: fangl
+     * @description: 清除session
+     * @date: 21:27 2019/6/15
+     */
+    public static void loginSessionClear(String userName) {
+        //判断用户名是否存在
+        HttpSession loged = LOGIN_USER_MAP.get(userName);
+        if (null != loged) {
+            //销毁
+            loged.invalidate();
+            //移除
+            SessionListener.LOGIN_USER_MAP.remove(userName);
         }
     }
 }

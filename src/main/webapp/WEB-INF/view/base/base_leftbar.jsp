@@ -87,7 +87,7 @@
      * 9.sa-side-calendar
      * 10.sa-side-page
      */
-    /** 左侧菜单列表(只支持二级菜单，多了没意思) */
+    /** 左侧菜单列表(只支持二级菜单) */
     function baseLeftbar_menu(menuList){
         if(isNotBlank(menuList)){
             var html='';

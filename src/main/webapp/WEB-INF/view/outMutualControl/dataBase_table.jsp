@@ -4,7 +4,7 @@
 <div class="block-area" id="tableHover">
 	<%--<h3 class="block-title">Table with Hover Style</h3>--%>
 	<div class="table-responsive overflow">
-		<table class="table table-bordered table-hover tile" id="dataContainer" >
+		<table class="table table-bordered table-hover tile" id="dataContainer">
 			<thead>
 				<tr>
 					<th width="5%">序号</th>

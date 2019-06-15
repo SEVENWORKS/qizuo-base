@@ -23,7 +23,7 @@ var global$openWindow='windowOpen/';
 var global$frameContainer='#baseFrame';
 /** 标识当前跳转主题页路径 */
 var global$frameUrl='';
-/** 用户菜单配置 */
+/** 用户菜单配置(图像下方) */
 var userMenus=[
     {
         title:'退出登录',
