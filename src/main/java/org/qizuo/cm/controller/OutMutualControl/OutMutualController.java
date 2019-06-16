@@ -4,12 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
 import org.qizuo.cm.GlobalUtil;
 import org.qizuo.cm.modules.base.pojo.BackResultPoJo;
+import org.qizuo.cm.modules.base.pojo.PagePoJo;
+import org.qizuo.cm.modules.system.pojo.LogPoJo;
 import org.qizuo.cm.utils.JsonUtil;
 import org.qizuo.cm.utils.SpringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +44,24 @@ public class OutMutualController {
 
         //获取数据
         JdbcTemplate jdbcTemplate = SpringUtils.getBean(JdbcTemplate.class);
-        List<Map<String, Object>> map = jdbcTemplate.queryForList(sql);
+        List<Map<String, Object>> back = jdbcTemplate.queryForList(sql);
+
+        //过滤base_
+        if(null!=back&&back.size()>0){
+            for(int i=0;i<back.size();i++){
+                Map<String, Object> map=back.get(i);
+                if(null!=map.get("column_name")){
+                    String columnName=(String)map.get("column_name");
+                    if(columnName.contains(Global.DATABASE_COLUMN)){
+                        back.remove(i);
+                        i--;
+                    }
+                }
+            }
+        }
 
         //返回
-        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, map)));
+        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, back)));
     }
 
 
@@ -71,10 +88,48 @@ public class OutMutualController {
 
         //获取数据
         JdbcTemplate jdbcTemplate = SpringUtils.getBean(JdbcTemplate.class);
-        List<Map<String, Object>> map=jdbcTemplate.queryForList(sql);
+        List<Map<String, Object>> back = jdbcTemplate.queryForList(sql);
+
+        //过滤base_
+        if(null!=back&&back.size()>0){
+            for(int i=0;i<back.size();i++){
+                Map<String, Object> map=back.get(i);
+                Iterator<String> iterator = map.keySet().iterator();
+                while (iterator.hasNext()) {
+                    String key = iterator.next();
+                    if(key.contains(Global.DATABASE_COLUMN)&&!key.equals("BASE_ID")){
+                        iterator.remove();
+                    }
+                }
+            }
+        }
 
         //返回
-        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, map)));
+        BackResultPoJo backResultPoJo;
+        if (null != pageNo && null != pageSize) {
+            //分页封装
+            PagePoJo<Map<String, Object>> pagePoJo = new PagePoJo<>();
+            pagePoJo.setPageNo(pageNo);
+            pagePoJo.setPageSize(pageSize);
+            pagePoJo.setEntitys(back);
+
+            //获取总数
+            String sqlCount = "select count(*) from " + mainSQ;
+
+            //条件
+            if (StringUtils.isNotBlank(conditions)) {
+                sqlCount += " where " + conditions;
+            }
+
+            //查询塞入
+            Integer count=jdbcTemplate.queryForObject(sqlCount,Integer.class);
+            pagePoJo.setTotalCount(count);
+
+            backResultPoJo = new BackResultPoJo(BackResultPoJo.SUCCESS, pagePoJo);
+        } else {
+            backResultPoJo = new BackResultPoJo(BackResultPoJo.SUCCESS, back);
+        }
+        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(backResultPoJo));
     }
 
     /**
@@ -107,7 +162,13 @@ public class OutMutualController {
             int back = jdbcTemplate.update(sql);
 
             //返回
-            JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, back)));
+            BackResultPoJo backResultPoJo;
+            if (back == BackResultPoJo.SUCCESS) {
+                backResultPoJo = new BackResultPoJo(BackResultPoJo.SUCCESS, "成功");
+            } else {
+                backResultPoJo = new BackResultPoJo(BackResultPoJo.FAILURE, "失败");
+            }
+            JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(backResultPoJo));
         }
     }
 
@@ -138,7 +199,14 @@ public class OutMutualController {
         JdbcTemplate jdbcTemplate = SpringUtils.getBean(JdbcTemplate.class);
         int back = jdbcTemplate.update(sql);
 
+
         //返回
-        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(new BackResultPoJo(BackResultPoJo.SUCCESS, back)));
+        BackResultPoJo backResultPoJo;
+        if (back == BackResultPoJo.SUCCESS) {
+            backResultPoJo = new BackResultPoJo(BackResultPoJo.SUCCESS, "删除成功");
+        } else {
+            backResultPoJo = new BackResultPoJo(BackResultPoJo.FAILURE, "删除失败");
+        }
+        JsonUtil.httpBackJson(GlobalUtil.qHttpServletResponse(), JsonUtil.objectToJson(backResultPoJo));
     }
 }

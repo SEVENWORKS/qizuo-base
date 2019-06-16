@@ -27,14 +27,4 @@ public class DictItemService extends BaseService<DictItemDao, DictItemPoJo> {
     public boolean insert(DictPoJo dictPoJo) {
         return dao.insert(dictPoJo);
     }
-
-    /**
-     * @author: fangl
-     * @description: 更新状态
-     * @date: 10:41 2019/2/12
-     */
-    @Override
-    public boolean uStatus(DictItemPoJo dictItemPoJo) {
-        return dao.uStatus(dictItemPoJo);
-    }
 }

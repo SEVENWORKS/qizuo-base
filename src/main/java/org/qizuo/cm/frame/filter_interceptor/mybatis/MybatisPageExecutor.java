@@ -57,7 +57,7 @@ public class MybatisPageExecutor implements Executor {
         //参数判断
         RowBounds rb = rowBounds;
         String msid = ms.getId();
-        //判断是否符合分页条件
+        //判断是否符合分页条件(核心)
         if (msid.contains(pattern) && parameter instanceof PagePoJo) {
             //分页参数设定
             PagePoJo pagePoJo = (PagePoJo) parameter;
@@ -79,6 +79,7 @@ public class MybatisPageExecutor implements Executor {
         return rows;
     }
 
+    /** 以下都是获取count的方式 */
     /**
      * @Author: fangl
      * @Description: 获取count的总条数的首要方法

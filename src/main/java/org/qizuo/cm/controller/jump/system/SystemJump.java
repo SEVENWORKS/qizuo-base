@@ -133,7 +133,7 @@ public class SystemJump {
 
     /**
      * @author: fangl
-     * @description: 消息发送
+     * @description: 库列表
      * @date: 8:56 2019/2/18
      */
     @RequestMapping("dataBase")
@@ -143,7 +143,7 @@ public class SystemJump {
 
     /**
      * @author: fangl
-     * @description: 消息发送
+     * @description: 单表字段信息
      * @date: 8:56 2019/2/18
      */
     @RequestMapping("dataBaseDo")
@@ -154,7 +154,7 @@ public class SystemJump {
 
     /**
      * @author: fangl
-     * @description: 消息发送
+     * @description: 单表数据列表
      * @date: 8:56 2019/2/18
      */
     @RequestMapping("dataBaseTable")
@@ -165,7 +165,7 @@ public class SystemJump {
 
     /**
      * @author: fangl
-     * @description: 消息发送
+     * @description: 添加或者修改
      * @date: 8:56 2019/2/18
      */
     @RequestMapping("dataBaseTableDo")

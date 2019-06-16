@@ -2,6 +2,9 @@ package org.qizuo.cm;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.modules.system.pojo.MenuPoJo;
+import org.qizuo.cm.utils.HttpUtil;
+import org.qizuo.cm.utils.IDUtil;
+import org.qizuo.cm.utils.UserUtil;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -78,14 +81,22 @@ public class GlobalUtil {
         String back = "";
 
         //拼接
+        String baseId = "";
         for (Map.Entry<String, String> entry : data.entrySet()) {
             if (StringUtils.isNotBlank(entry.getValue())) {
-                back += entry.getKey() + "=\'" + entry.getValue() + "\',";
+                if (!"baseId".equals(entry.getKey())) {
+                    back += entry.getKey() + "=\'" + entry.getValue() + "\',";
+                } else {
+                    baseId = entry.getValue();
+                }
             }
         }
 
-        //去除
-        back = back.substring(0, back.length() - 1);
+        //基本参数
+        back += "BASE_UPDATE_USER_ID=" + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",BASE_UPDATE_TM=now(),BASE_UPDATE_IP=\'" + HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + "\'";
+
+        //where
+        back += "where BASE_ID=" + baseId;
 
         return back;
     }
@@ -106,8 +117,8 @@ public class GlobalUtil {
             }
         }
 
-        //去除
-        back = back.substring(0, back.length() - 1);
+        //基本参数
+        back += "BASE_ID,BASE_CREATE_USER_ID,BASE_CREATE_TM,BASE_STATUS,BASE_CREATE_IP";
 
         back += ") values (";
 
@@ -118,8 +129,8 @@ public class GlobalUtil {
             }
         }
 
-        //去除
-        back = back.substring(0, back.length() - 1);
+        //基本参数
+        back += IDUtil.nextId() + "," + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",now(),0,\'" + HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + "\'";
 
         back += ")";
 

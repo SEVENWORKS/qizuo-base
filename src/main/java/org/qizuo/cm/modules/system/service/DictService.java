@@ -29,10 +29,10 @@ public class DictService extends BaseService<DictDao, DictPoJo> {
     public boolean iuBatch(DictPoJo dictPoJo) {
         if (StringUtils.isBlank(dictPoJo.getBaseId())) {
             //插入
-            dao.insert(dictPoJo);
+            this.insert(dictPoJo);
         } else {
             //更新
-            dao.update(dictPoJo);
+            this.update(dictPoJo);
             //先删除所有从表
             DictItemPoJo dictItemPoJo = new DictItemPoJo();
             dictItemPoJo.setDictId(dictPoJo.getBaseId());

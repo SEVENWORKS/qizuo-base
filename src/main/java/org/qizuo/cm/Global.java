@@ -130,6 +130,11 @@ public class Global {
      */
     public static final String DATABASE_NAME = "\'qizuo\'";
 
+    /**
+     * 基础字段模糊
+     */
+    public static final String DATABASE_COLUMN = "BASE_";
+
     /** ****************************公共方法区********************** */
     /**
      * 批量生成主键

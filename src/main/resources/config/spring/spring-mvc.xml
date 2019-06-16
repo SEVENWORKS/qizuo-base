@@ -62,8 +62,8 @@
             <!--<mvc:mapping path="/**/loginCheck"/>-->
             <!-- 不拦截第三方接口调用 -->
             <mvc:exclude-mapping path="/**/outMutual/**" />
-            <!-- 静态资源拦截 -->
-            <!--<mvc:exclude-mapping path="/static/**"/>-->
+            <!-- 不拦截静态资源拦截 -->
+            <mvc:exclude-mapping path="/static/**"/>
             <!-- 拦截器所在的项目位置 -->
             <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptor">
                 <!-- 注入拦截器参数 -->

@@ -35,8 +35,10 @@
 	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/dataBaseTableDo?baseId={{$value.BASE_ID}}&tName=${tName}\')','删除',
 			'deleteData({conditions:\'BASE_ID={{$value.BASE_ID}}\',really:false},\'${modulePath}outMutual/${tName}/dOutMutual\',\'#tr{{$index+1}}\')');">
 		<td>{{$index+1}}</td>
-		{{each $value}}
-			<td>{{$value}}</td>
+		{{each $value as item2 index2}}
+			{{if index2!='BASE_ID'}}
+			<td>{{item2}}</td>
+			{{/if}}
 		{{/each}}
 	</tr>
 	{{/each}}
@@ -74,7 +76,7 @@
                                 $.post('${modulePath}outMutual/${tName}/qOutMutual',{pageNo:pageNo,pageSize:pageSize},function(data){
                                     backResult(data,function(data){
                                         //模板(数据，容器，模板)(当出现不在返回元素中值的时候，可以往对象中添加数据，毕竟从java返回过来后就是一个js对象)
-                                        tplFuncTable(data);
+                                        tplFuncTable(data.entitys);
                                         //执行分页
                                         func(data);
                                     })
