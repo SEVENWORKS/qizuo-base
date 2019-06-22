@@ -49,15 +49,6 @@ public class SpringmvcInterceptor extends HandlerInterceptorAdapter {
             requestUri = requestUri.substring(httpServletRequest.getContextPath().length(), requestUri.length());
         }
 
-        //判断路径是否是白名单
-        /*boolean jump = true;
-        for (String url : exceptUrls) {
-            if (requestUri.contains(url)) {
-                jump = false;
-                break;
-            }
-        }*/
-
         //判断是否存在用户信息
         if (null == userPoJo) {
             //登录过，防止重复登录

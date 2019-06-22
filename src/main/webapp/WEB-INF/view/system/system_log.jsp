@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <!-- 有悬浮效果的表格 -->
 <div class="block-area" id="tableHover">
@@ -35,7 +35,7 @@
 <script id="baseTpl" type="text/html">
     {{if null!=$data&&$data.length>0}}
     {{each $data}}
-    <tr onclick="buttonPanel('查看','updateDate(\'${jumpPath}system/sys/logDo?baseId={{$value.baseId}}\')');">
+    <tr onclick="buttonPanel('查看','updateDate(\'${jumpPath}system/logDo?baseId={{$value.baseId}}\')');">
         <td>{{$value.typeCd}}</td>
         <td>{{$value.baseCreateUserId}}</td>
         <td>{{$value.baseCreateTime}}</td>

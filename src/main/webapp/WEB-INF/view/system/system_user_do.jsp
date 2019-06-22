@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <form class="block-area" id="dataContainer">
 
@@ -72,7 +72,7 @@
             iuFunc();
         },'45%');
         buttonOne('返回',function(){
-            pjaxFunc('${jumpPath}system/sys/user');
+            pjaxFunc('${jumpPath}system/user');
         },'55%');
         /** ************************************************************ */
         qData();

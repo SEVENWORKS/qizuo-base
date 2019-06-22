@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <form class="block-area" id="dataContainer">
 

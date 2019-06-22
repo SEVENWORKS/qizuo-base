@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <!-- 有悬浮效果的表格 -->
 <div class="block-area" id="tableHover">
@@ -35,7 +35,7 @@
 <script id="baseTpl" type="text/html">
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
-	<tr id="tr{{$index+1}}" onclick="buttonPanel('数据列表','updateDate(\'${jumpPath}system/sys/dataBaseTable?tName=${tName}\')')">
+	<tr id="tr{{$index+1}}" onclick="buttonPanel('数据列表','updateDate(\'${jumpPath}system/dataBaseTable?tName=${tName}\')')">
 		<td>{{$index+1}}</td>
 		<td>{{$value.column_name}}</td>
 		<td>{{$value.column_type}}</td>
@@ -52,7 +52,7 @@
         /** ************************************************************ */
         //新增按钮(这个函数第二个参数可以传入复杂函数)
         buttonOne('新增',function(){
-            pjaxFunc('${jumpPath}system/sys/dataBaseTableDo?tName=${tName}');
+            pjaxFunc('${jumpPath}system/dataBaseTableDo?tName=${tName}');
         });
         /** ************************************************************ */
         qData();

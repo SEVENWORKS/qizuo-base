@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <!-- 有悬浮效果的表格 -->
 <div class="block-area" id="tableHover">
@@ -32,7 +32,7 @@
 <script id="baseTpl" type="text/html">
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
-	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/dataBaseTableDo?baseId={{$value.BASE_ID}}&tName=${tName}\')','删除',
+	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/dataBaseTableDo?baseId={{$value.BASE_ID}}&tName=${tName}\')','删除',
 			'deleteData({conditions:\'BASE_ID={{$value.BASE_ID}}\',really:false},\'${modulePath}outMutual/${tName}/dOutMutual\',\'#tr{{$index+1}}\')');">
 		<td>{{$index+1}}</td>
 		{{each $value as item2 index2}}

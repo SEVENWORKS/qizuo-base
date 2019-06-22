@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <!-- 有悬浮效果的表格 -->
 <div class="block-area" id="tableHover" style="width: 75%">
@@ -41,7 +41,7 @@
 <script id="baseTpl" type="text/html">
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
-	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/menuDo?baseId={{$value.baseId}}\')','删除',
+	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/menuDo?baseId={{$value.baseId}}\')','删除',
 			'deleteDataReload({baseId:{{$value.baseId}}},\'${modulePath}system/menu/delete\')');">
 		<td>{{$index+1}}</td>
 		<td>{{$value.name}}</td>
@@ -62,7 +62,7 @@
         //新增按钮(这个函数第二个参数可以传入复杂函数)
         buttonOne('新增',function(){
             if(curLevel==0){
-                pjaxFunc('${jumpPath}system/sys/menuDo?parentId='+baseId);
+                pjaxFunc('${jumpPath}system/menuDo?parentId='+baseId);
             }else{
                 alert('暂时菜单只允许存在二级');
             }

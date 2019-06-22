@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <form class="block-area" id="dataContainer">
 
@@ -49,7 +49,7 @@
 </script>
 
 <!-- 按钮开关 -->
-<script src="${staticPath}js/base/toggler.min.js"></script>
+<script src="${staticPath}js/frame/toggler.min.js"></script>
 <!-- 执行js -->
 <script>
     globalJs(function(){

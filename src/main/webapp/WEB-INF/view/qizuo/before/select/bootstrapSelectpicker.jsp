@@ -1,4 +1,4 @@
-<%@ include file="../../../base/base_tags.jsp"%>
+<%@ include file="../../../frame/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
     <select class="select m-b-10" multiple>

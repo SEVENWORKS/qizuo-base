@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
 	<!-- 上传 -->
@@ -6,8 +6,8 @@
 		<h3 class="block-title m-b-5">upload</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/upload_layui">layui</option>
-			<option value="${jumpPath}qizuo/qizuo/upload_jqueryUploadify">jqueryUploadify(flash)</option>
+			<option value="${jumpPath}qizuo/upload_layui">layui</option>
+			<option value="${jumpPath}qizuo/upload_jqueryUploadify">jqueryUploadify(flash)</option>
 		</select>
 	</div>
 
@@ -16,8 +16,8 @@
 		<h3 class="block-title m-b-5">alert</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/alert_layui">layui</option>
-			<option value="${jumpPath}qizuo/qizuo/alert_artDialog">artDialog</option>
+			<option value="${jumpPath}qizuo/alert_layui">layui</option>
+			<option value="${jumpPath}qizuo/alert_artDialog">artDialog</option>
 		</select>
 	</div>
 
@@ -26,7 +26,7 @@
 		<h3 class="block-title m-b-5">time</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/time_layui">layui</option>
+			<option value="${jumpPath}qizuo/time_layui">layui</option>
 		</select>
 	</div>
 
@@ -35,8 +35,8 @@
 		<h3 class="block-title m-b-5">select</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/select_bootstrapSelectpicker">bootstrapSelectpicker</option>
-			<option value="${jumpPath}qizuo/qizuo/select_chosen">chosen</option>
+			<option value="${jumpPath}qizuo/select_bootstrapSelectpicker">bootstrapSelectpicker</option>
+			<option value="${jumpPath}qizuo/select_chosen">chosen</option>
 		</select>
 	</div>
 
@@ -45,7 +45,7 @@
 		<h3 class="block-title m-b-5">tree</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/tree_ztree">ztree</option>
+			<option value="${jumpPath}qizuo/tree_ztree">ztree</option>
 		</select>
 	</div>
 
@@ -54,7 +54,7 @@
 		<h3 class="block-title m-b-5">map</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/map_baidu">百度</option>
+			<option value="${jumpPath}qizuo/map_baidu">百度</option>
 		</select>
 	</div>
 
@@ -63,7 +63,7 @@
 		<h3 class="block-title m-b-5">chart</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/chart_echarts">echarts</option>
+			<option value="${jumpPath}qizuo/chart_echarts">echarts</option>
 		</select>
 	</div>
 
@@ -72,8 +72,8 @@
 		<h3 class="block-title m-b-5">template</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/template_artTemplate">artTemplate</option>
-			<option value="${jumpPath}qizuo/qizuo/template_jqueryTemplate">jqueryTemplate</option>
+			<option value="${jumpPath}qizuo/template_artTemplate">artTemplate</option>
+			<option value="${jumpPath}qizuo/template_jqueryTemplate">jqueryTemplate</option>
 		</select>
 	</div>
 
@@ -82,7 +82,7 @@
 		<h3 class="block-title m-b-5">slide</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/slide_"></option>
+			<option value="${jumpPath}qizuo/slide_"></option>
 		</select>
 	</div>
 
@@ -91,12 +91,12 @@
 		<h3 class="block-title m-b-5">textarea</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_autosize">autosize</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_scroll">scroll</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_simditor">simditor</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_ueditor">ueditor</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_markedown">markedown</option>
-			<option value="${jumpPath}qizuo/qizuo/textarea_wysiwyeEditor">wysiwyeEditor</option>
+			<option value="${jumpPath}qizuo/textarea_autosize">autosize</option>
+			<option value="${jumpPath}qizuo/textarea_scroll">scroll</option>
+			<option value="${jumpPath}qizuo/textarea_simditor">simditor</option>
+			<option value="${jumpPath}qizuo/textarea_ueditor">ueditor</option>
+			<option value="${jumpPath}qizuo/textarea_markedown">markedown</option>
+			<option value="${jumpPath}qizuo/textarea_wysiwyeEditor">wysiwyeEditor</option>
 		</select>
 	</div>
 
@@ -105,7 +105,7 @@
 		<h3 class="block-title m-b-5">formValidate</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/formValidate_jqueryValidate">jqueryValidate</option>
+			<option value="${jumpPath}qizuo/formValidate_jqueryValidate">jqueryValidate</option>
 		</select>
 	</div>
 
@@ -114,8 +114,8 @@
 		<h3 class="block-title m-b-5">css</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/css_css2">css2</option>
-			<option value="${jumpPath}qizuo/qizuo/css_css3">css3</option>
+			<option value="${jumpPath}qizuo/css_css2">css2</option>
+			<option value="${jumpPath}qizuo/css_css3">css3</option>
 		</select>
 	</div>
 
@@ -124,8 +124,8 @@
 		<h3 class="block-title m-b-5">html</h3>
 		<select class="select">
 			<option value="">qizuo</option>
-			<option value="${jumpPath}qizuo/qizuo/html_html">html</option>
-			<option value="${jumpPath}qizuo/qizuo/html_html5">html5</option>
+			<option value="${jumpPath}qizuo/html_html">html</option>
+			<option value="${jumpPath}qizuo/html_html5">html5</option>
 		</select>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<%@ include file="../../../base/base_tags.jsp"%>
+<%@ include file="../../../frame/base_tags.jsp"%>
 <!-- 前端插件 -->
 <div class="block-area">
     <div id="map" style="height:100%;width: 100%" >
@@ -22,7 +22,6 @@
     }
     //初始化
     function init(){
-        console.log(1);
         //创建Map实例
         var map= new BMap.Map("map");
         //初始化并赋予地图等级

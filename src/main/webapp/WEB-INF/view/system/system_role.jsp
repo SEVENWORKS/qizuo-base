@@ -1,4 +1,4 @@
-<%@ include file="../base/base_tags.jsp"%>
+<%@ include file="../frame/base_tags.jsp"%>
 <!-- 内容区域 -->
 <!-- 有悬浮效果的表格 -->
 <div class="block-area" id="tableHover">
@@ -35,7 +35,7 @@
 <script id="baseTpl" type="text/html">
 	{{if null!=$data&&$data.length>0}}
 	{{each $data}}
-	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/sys/roleDo?baseId={{$value.baseId}}\')','删除',
+	<tr id="tr{{$index+1}}" onclick="buttonPanel('修改','updateDate(\'${jumpPath}system/roleDo?baseId={{$value.baseId}}\')','删除',
 			'deleteData({baseId:{{$value.baseId}}},\'${modulePath}system/role/delete\',\'#tr{{$index+1}}\')');">
 		<td>{{$index+1}}</td>
 		<td>{{$value.name}}</td>
@@ -53,7 +53,7 @@
         /** ************************************************************ */
         //新增按钮(这个函数第二个参数可以传入复杂函数)
         buttonOne('新增',function(){
-            pjaxFunc('${jumpPath}system/sys/roleDo');
+            pjaxFunc('${jumpPath}system/roleDo');
         });
         /** ************************************************************ */
         //分页(传入获取分页数据的方法,可传分页size和分页no)
