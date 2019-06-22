@@ -2,6 +2,7 @@ package org.qizuo.cm.modules.system.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.qizuo.cm.Global;
+import org.qizuo.cm.GlobalUtil;
 import org.qizuo.cm.modules.base.service.BaseService;
 import org.qizuo.cm.modules.system.dao.DictDao;
 import org.qizuo.cm.modules.system.pojo.DictItemPoJo;
@@ -40,7 +41,7 @@ public class DictService extends BaseService<DictDao, DictPoJo> {
         }
         if (null != dictPoJo.getDictItemPoJos()) {
             //主键生成
-            Global.nextIds(dictPoJo.getDictItemPoJos());
+            GlobalUtil.nextIds(dictPoJo.getDictItemPoJos());
             //批量插入从表
             dictItemService.insert(dictPoJo);
         }

@@ -135,15 +135,9 @@ public class Global {
      */
     public static final String DATABASE_COLUMN = "BASE_";
 
-    /** ****************************公共方法区********************** */
     /**
-     * 批量生成主键
+     * 数据库引号
      */
-    public static <P extends BasePoJo> void nextIds(List<P> entitys) {
-        if (null != entitys && entitys.size() > 0) {
-            for (P p : entitys) {
-                p.setBaseId(IDUtil.nextId());
-            }
-        }
-    }
+    public static final String DATABASE_QUOTATION = "\'";
+
 }

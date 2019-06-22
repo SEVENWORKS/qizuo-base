@@ -1,6 +1,7 @@
 package org.qizuo.cm;
 
 import org.apache.commons.lang3.StringUtils;
+import org.qizuo.cm.modules.base.pojo.BasePoJo;
 import org.qizuo.cm.modules.system.pojo.MenuPoJo;
 import org.qizuo.cm.utils.HttpUtil;
 import org.qizuo.cm.utils.IDUtil;
@@ -21,6 +22,17 @@ import java.util.Map;
  * @date: 9:49 2019/1/15
  */
 public class GlobalUtil {
+    /**
+     * 批量生成主键
+     */
+    public static <P extends BasePoJo> void nextIds(List<P> entitys) {
+        if (null != entitys && entitys.size() > 0) {
+            for (P p : entitys) {
+                p.setBaseId(IDUtil.nextId());
+            }
+        }
+    }
+
     /**
      * @author: fangl
      * @description: 树形菜单整理示例
@@ -81,22 +93,17 @@ public class GlobalUtil {
         String back = "";
 
         //拼接
-        String baseId = "";
         for (Map.Entry<String, String> entry : data.entrySet()) {
             if (StringUtils.isNotBlank(entry.getValue())) {
                 if (!"baseId".equals(entry.getKey())) {
-                    back += entry.getKey() + "=\'" + entry.getValue() + "\',";
-                } else {
-                    baseId = entry.getValue();
+                    back += entry.getKey() + "=" + Global.DATABASE_QUOTATION + entry.getValue() + Global.DATABASE_QUOTATION + ",";
                 }
             }
         }
 
         //基本参数
-        back += "BASE_UPDATE_USER_ID=" + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",BASE_UPDATE_TM=now(),BASE_UPDATE_IP=\'" + HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + "\'";
-
-        //where
-        back += "where BASE_ID=" + baseId;
+        back += "BASE_UPDATE_USER_ID=" + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",BASE_UPDATE_TM=now(),BASE_UPDATE_IP=" + Global.DATABASE_QUOTATION +
+                HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + Global.DATABASE_QUOTATION;
 
         return back;
     }
@@ -125,12 +132,13 @@ public class GlobalUtil {
         //遍历value
         for (Map.Entry<String, String> entry : data.entrySet()) {
             if (StringUtils.isNotBlank(entry.getValue())) {
-                back += "\'" + entry.getValue() + "\',";
+                back += Global.DATABASE_QUOTATION + entry.getValue() + Global.DATABASE_QUOTATION + ",";
             }
         }
 
         //基本参数
-        back += IDUtil.nextId() + "," + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",now(),0,\'" + HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + "\'";
+        back += IDUtil.nextId() + "," + (null != UserUtil.qUser() ? UserUtil.qUser().getBaseId() : "") + ",now(),0," + Global.DATABASE_QUOTATION +
+                HttpUtil.getIpAddress(GlobalUtil.qHttpServletRequest()) + Global.DATABASE_QUOTATION;
 
         back += ")";
 

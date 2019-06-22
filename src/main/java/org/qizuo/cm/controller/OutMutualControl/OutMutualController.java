@@ -47,12 +47,12 @@ public class OutMutualController {
         List<Map<String, Object>> back = jdbcTemplate.queryForList(sql);
 
         //过滤base_
-        if(null!=back&&back.size()>0){
-            for(int i=0;i<back.size();i++){
-                Map<String, Object> map=back.get(i);
-                if(null!=map.get("column_name")){
-                    String columnName=(String)map.get("column_name");
-                    if(columnName.contains(Global.DATABASE_COLUMN)){
+        if (null != back && back.size() > 0) {
+            for (int i = 0; i < back.size(); i++) {
+                Map<String, Object> map = back.get(i);
+                if (null != map.get("column_name")) {
+                    String columnName = (String) map.get("column_name");
+                    if (columnName.contains(Global.DATABASE_COLUMN)) {
                         back.remove(i);
                         i--;
                     }
@@ -74,11 +74,11 @@ public class OutMutualController {
     public void qOutMutual(@PathVariable String mainSQ, Integer pageNo, Integer pageSize,
                            String conditions) {
         //组装sql
-        String sql = "select * from " + mainSQ;
+        String sql = "select * from " + mainSQ + " where BASE_STATUS=0 ";
 
         //条件
         if (StringUtils.isNotBlank(conditions)) {
-            sql += " where " + conditions;
+            sql += " AND " + conditions;
         }
 
         //分页
@@ -91,13 +91,13 @@ public class OutMutualController {
         List<Map<String, Object>> back = jdbcTemplate.queryForList(sql);
 
         //过滤base_
-        if(null!=back&&back.size()>0){
-            for(int i=0;i<back.size();i++){
-                Map<String, Object> map=back.get(i);
+        if (null != back && back.size() > 0) {
+            for (int i = 0; i < back.size(); i++) {
+                Map<String, Object> map = back.get(i);
                 Iterator<String> iterator = map.keySet().iterator();
                 while (iterator.hasNext()) {
                     String key = iterator.next();
-                    if(key.contains(Global.DATABASE_COLUMN)&&!key.equals("BASE_ID")){
+                    if (key.contains(Global.DATABASE_COLUMN) && !key.equals("BASE_ID")) {
                         iterator.remove();
                     }
                 }
@@ -122,7 +122,7 @@ public class OutMutualController {
             }
 
             //查询塞入
-            Integer count=jdbcTemplate.queryForObject(sqlCount,Integer.class);
+            Integer count = jdbcTemplate.queryForObject(sqlCount, Integer.class);
             pagePoJo.setTotalCount(count);
 
             backResultPoJo = new BackResultPoJo(BackResultPoJo.SUCCESS, pagePoJo);
@@ -148,6 +148,8 @@ public class OutMutualController {
                 //插入
                 sql = "insert into " + mainSQ + GlobalUtil.qJdbcTemplateIn(dataMap);
             } else {
+                //去除conditions
+                dataMap.remove("conditions");
                 //更新
                 sql = "update " + mainSQ + " set " + GlobalUtil.qJdbcTemplateUpd(dataMap);
             }

@@ -8,6 +8,7 @@
 <script id="baseTpl" type="text/html">
 	<!-- 主键 -->
 	<input type="hidden" name="baseId" value="${baseId}">
+	<input type="hidden" name="conditions" id="conditions" value="">
 	{{each $data}}
 		<div class="row m-b-10">
 			<h3 class="block-title m-b-5">{{$value.column_name}}</h3>
@@ -70,6 +71,11 @@
         //添加或者修改
         function iuFunc(){
             if(formValid()){
+                //更新条件
+				if(isNotBlank('${baseId}')){
+				    $("#conditions").val("BASE_ID=\'${baseId}\'");
+                }
+                //操作
                 $.post('${modulePath}outMutual/${tName}/iuOutMutual',$('#dataContainer').serialize(),function(data){
                     backResultAlert(data,function(data){
                         //刷新
