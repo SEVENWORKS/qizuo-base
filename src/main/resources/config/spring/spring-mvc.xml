@@ -52,6 +52,7 @@
 
     <!-- ************************自定义拦截器：作用于三个方面(controller方法前,方法后,视图渲染后)************************ -->
     <mvc:interceptors>
+        <!-- 系统未登录拦截 -->
         <mvc:interceptor>
             <!-- 匹配的访问路径 -->
             <!-- 拦截所有路径 path="/"代表项目根目录的访问，只有**才代表模糊匹配-->
@@ -65,7 +66,23 @@
             <!-- 不拦截静态资源拦截 -->
             <mvc:exclude-mapping path="/static/**"/>
             <!-- 拦截器所在的项目位置 -->
-            <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptor">
+            <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptorForSysLogin">
+                <!-- 注入拦截器参数 -->
+                <!--<property name="exceptUrls">
+                    <list>
+                        <value>/outMutual</value>
+                    </list>
+                </property>-->
+            </bean>
+        </mvc:interceptor>
+        <!-- 第三方未登录拦截 -->
+        <mvc:interceptor>
+            <!-- 拦截第三方 -->
+            <mvc:mapping path="/**/outMutual/**"/>
+            <!-- 不拦截静态资源拦截 -->
+            <mvc:exclude-mapping path="/static/**"/>
+            <!-- 拦截器所在的项目位置 -->
+            <bean class="org.qizuo.cm.frame.filter_interceptor.springmvc.SpringmvcInterceptorForOtherLogin">
                 <!-- 注入拦截器参数 -->
                 <!--<property name="exceptUrls">
                     <list>

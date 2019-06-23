@@ -130,4 +130,10 @@ public class Global {
      */
     public static final String DATABASE_QUOTATION = "\'";
 
+    /** ****************************第三方接口********************** */
+    /**
+     * 第三方验证的key
+     */
+    public static final String OUTMUTUAL_KEY = "OUTMUTUALKEY";
+
 }

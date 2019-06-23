@@ -59,6 +59,10 @@ public class UserPoJo extends BasePoJo {
      * 登录时间
      */
     private String loginDate;
+    /**
+     * KEY(第三方)
+     */
+    private String outMutualKey;
 
     /** 其它 */
     /**
@@ -188,5 +192,13 @@ public class UserPoJo extends BasePoJo {
 
     public void setMenuPoJos(List<MenuPoJo> menuPoJos) {
         this.menuPoJos = menuPoJos;
+    }
+
+    public String getOutMutualKey() {
+        return outMutualKey;
+    }
+
+    public void setOutMutualKey(String outMutualKey) {
+        this.outMutualKey = outMutualKey;
     }
 }

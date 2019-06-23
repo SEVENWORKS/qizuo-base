@@ -1,5 +1,6 @@
 package org.qizuo.cm.utils;
 
+import org.qizuo.cm.GlobalInit;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -20,6 +21,10 @@ public final class SpringUtils implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         SpringUtils.beanFactory = beanFactory;
+
+        //初始化加载(基于spring容器的temlate加载)
+        //加载所有用户信息
+        GlobalInit.qUserPoJos();
     }
 
     /**

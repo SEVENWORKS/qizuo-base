@@ -15,7 +15,8 @@
         a.EMAIL as "email",
         a.PHOTO as "photo",
         a.ADDRESS as "address",
-        a.LOGIN_DATE as "loginDate"
+        a.LOGIN_DATE as "loginDate",
+        a.OUTMUTUAL_KEY as "outMutualKey"
     </sql>
     <!-- 插入 -->
     <insert id="insert">
@@ -38,7 +39,8 @@
                 EMAIL,
                 PHOTO,
                 ADDRESS,
-                LOGIN_DATE
+                LOGIN_DATE,
+                OUTMUTUAL_KEY
             )
         values
             (
@@ -59,7 +61,8 @@
                 #{email},
                 #{photo},
                 #{address},
-                #{loginDate}
+                #{loginDate},
+                #{outMutualKey}
             )
     </insert>
     <!-- 修改 -->
@@ -80,7 +83,8 @@
             EMAIL=#{email},
             PHOTO=#{photo},
             ADDRESS=#{address},
-            LOGIN_DATE=#{loginDate}
+            LOGIN_DATE=#{loginDate},
+            OUTMUTUAL_KEY=#{outMutualKey}
         where BASE_ID=#{baseId}
     </update>
     <!-- 删除 -->

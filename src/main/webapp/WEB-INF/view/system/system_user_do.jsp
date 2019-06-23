@@ -62,6 +62,11 @@
 
 		</select>
 	</div>
+
+	<div class="row m-b-10">
+		<h3 class="block-title m-b-5">qizuo</h3>
+		<input type="text" class="form-control" name="outMutualKey" value="{{outMutualKey==null?'':outMutualKey}}" placeholder="填写...">
+	</div>
 </script>
 <!-- 执行js -->
 <script>

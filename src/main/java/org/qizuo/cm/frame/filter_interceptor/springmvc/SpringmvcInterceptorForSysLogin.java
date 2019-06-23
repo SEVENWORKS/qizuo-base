@@ -15,11 +15,11 @@ import java.util.List;
 
 /**
  * @Author: fangl
- * @Description: springmvc未登录拦截器
+ * @Description: springmvc管理员未登录拦截器
  * @Date: 10:13 2018/11/19
  */
 @Controller
-public class SpringmvcInterceptor extends HandlerInterceptorAdapter {
+public class SpringmvcInterceptorForSysLogin extends HandlerInterceptorAdapter {
     /**
      * 不拦截url
      */
@@ -52,7 +52,7 @@ public class SpringmvcInterceptor extends HandlerInterceptorAdapter {
         //判断是否存在用户信息
         if (null == userPoJo) {
             //登录过，防止重复登录
-            if (requestUri.contains(Global.LOGIN_URL)||requestUri.contains(Global.LOGIN_CHECK)) {
+            if (requestUri.contains(Global.LOGIN_URL) || requestUri.contains(Global.LOGIN_CHECK)) {
                 return true;
             } else {
                 //未登录，跳转到登录页面
@@ -61,7 +61,7 @@ public class SpringmvcInterceptor extends HandlerInterceptorAdapter {
             }
         } else {
             //登录过，防止重复登录
-            if (requestUri.contains(Global.LOGIN_URL)||requestUri.contains(Global.LOGIN_CHECK)) {
+            if (requestUri.contains(Global.LOGIN_URL) || requestUri.contains(Global.LOGIN_CHECK)) {
                 //获取当前用户登陆后跳转的页面
                 String jumpUrl = Global.LOGIN_CHANGE_URL;
                 List<RolePoJo> rolePoJos = userPoJo.getRolePoJos();
